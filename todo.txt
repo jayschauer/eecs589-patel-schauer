@@ -13,5 +13,3 @@ Questions for headless browsing:
 Once we settle those questions:
 1) Obtain list of domains we want to capture dns queries to.
 2) Run this on the class server.
-
-username: aakashdp6548
