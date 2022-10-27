@@ -1,0 +1,9 @@
+Vagrant.configure("2") do |config|
+  (1..1).each do |i| 
+    config.vm.define "node#{i}" do |subconfig|
+      subconfig.vm.box = "ubuntu/focal64"
+      subconfig.vm.provision :shell, path: "bootstrap.sh", args: "#{i}"
+    end
+  end
+ 
+end

@@ -1,0 +1,18 @@
+Encrypted DNS Survey: https://dl.acm.org/doi/10.1145/3547331
+
+The survey mentions these two papers, which are exactly what we're trying to do just not with DNS over QUIC:
+1) An investigation on information leakage of DNS over TLS: https://dl.acm.org/doi/10.1145/3359989.3365429
+2) Encrypted DNS -> Privacy? A Traffic Analysis Perspective: https://www.ndss-symposium.org/ndss-paper/encrypted-dns-privacy-a-traffic-analysis-perspective/
+
+The second paper includes the code they used to collect / analyze traffic: https://github.com/spring-epfl/doh_traffic_analysis
+Here is the folder with code for collecting data: https://github.com/spring-epfl/doh_traffic_analysis/tree/master/code/collection
+
+DNS Proxy from adguard: https://github.com/AdguardTeam/dnsproxy
+
+Other random stuff:
+Selenium python api: https://www.selenium.dev/selenium/docs/api/py/api.html#
+Overview of current state of DNS over QUIC: https://dl.acm.org/doi/10.1007/978-3-030-98785-5_24
+    full paper: https://link.springer.com/chapter/10.1007/978-3-030-98785-5_24
+    paper slides: https://datatracker.ietf.org/meeting/113/materials/slides-113-maprg-one-to-rule-them-all-a-first-look-at-dns-over-quic
+    ^ That paper is useful for us because it basically says that DNS over QUIC is already superior to DoT and DoH,
+    which means that it will hopefully soon overtake the others as the dominant form of encrypted DNS, thus motivating our study.
