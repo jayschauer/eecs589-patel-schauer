@@ -12,4 +12,5 @@ Questions for headless browsing:
 
 Once we settle those questions:
 1) Obtain list of domains we want to capture dns queries to.
-2) Run this on the class server.
+2) Update collection script as needed
+3) Run this on the class server.
