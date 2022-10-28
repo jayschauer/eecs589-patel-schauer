@@ -3,6 +3,9 @@ Questions for DNS capture:
 What were those? Bootstrap messages? Don't want them to messup the data collection.
 2) Are we actually capturing what we need to be capturing?
 I.e. Aakash saw some other stuff in wireshark when he was looking at DNS over Quic that didn't show up in dnsproxy tcpdump.
+ some notes: 
+ - 1294 size packets seem to be for initial handshake, we should probably discard those (send a test query before starting collection?)
+ - traffic from firefox vs from chrome is very different
 3) If we can compare the tcpdump/wireshark of dnsproxy when browsing with some other dnsover quic method,
 that would help reassure we are capturing correctly.
 
