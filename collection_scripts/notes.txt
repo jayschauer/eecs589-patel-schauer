@@ -1,9 +1,0 @@
-1. bash data_collection.sh
-    - starts data collection from urls in short_list_test
-    - creates a new folder in data/pcaps and a new subfolder for each iteration
-    - new folder in logs contains one log file for dnsproxy and the output from the python script for each iteration
-2. bash preprocess.sh <input dir> <output dir>
-    - reads the pcaps, temporarily writes them to .txt, and saves the label, times, and sizes to a json file in the
-      output directory
-3. python3 plot_data.py --dir=<processed data dir> --filename=<output filename>
-    - Plots data from each label on a separate graph and saves it to filename
