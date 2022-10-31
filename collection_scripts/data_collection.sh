@@ -2,6 +2,7 @@
 
 # Set up environment
 sudo sysctl -w net.core.rmem_max=2500000 # increase buffer size to avoid quic warnings: https://github.com/lucas-clemente/quic-go/wiki/UDP-Receive-Buffer-Size
+sudo cp /etc/resolv.conf /etc/resolv.conf.copy
 sudo cp /vagrant/resolv.conf /etc/
 sudo timedatectl set-timezone America/Detroit
 
@@ -20,11 +21,11 @@ sudo pkill dnsproxy
 sudo dnsproxy -l 127.0.0.54 --quic-port=853 -u quic://94.140.14.14 -v > /vagrant/logs/$d/dnsproxy_log.txt 2>&1 &
 sleep 2
 # Send initial request so dnsproxy completes handshake
-curl https://google.com
+curl https://google.com > /dev/null 2>&1
 sleep 2
 
 # Start data collection
-N=100 # 100 samples per domain
+N=3 # 100 samples per domain
 for i in $(seq 1 $N)
 do
     echo "Starting iteration $i/$N"
@@ -35,3 +36,4 @@ done
 
 # Kill dnsproxy server
 sudo pkill dnsproxy
+sudo cp /etc/resolv.conf.copy /etc/resolv.conf
