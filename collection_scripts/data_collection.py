@@ -21,7 +21,7 @@ args = vars(parser.parse_args())
 
 # load urls from file
 urls= []
-fname = "/vagrant/repeat_test"
+fname = "/vagrant/top-100-2022-10-31"
 with open(fname) as f:
 	lines = f.readlines()
 	for line in lines:
@@ -44,7 +44,7 @@ def load_once():
 
     driver.quit()
 
-load_once()
+# load_once() # <-- doesn't seem to help really
 
 for i, base_url in enumerate(urls):
     start = time.time()

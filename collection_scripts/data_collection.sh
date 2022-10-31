@@ -20,6 +20,8 @@ sudo pkill dnsproxy
 # option --quic-port=853 will listen locally for DNS over QUIC requests on port 853
 sudo dnsproxy -l 127.0.0.54 --quic-port=853 -u quic://94.140.14.14 -v > /vagrant/logs/$d/dnsproxy_log.txt 2>&1 &
 sleep 2
+curl www.google.com > /dev/null 2>&1 # send one requests so dnsproxy initiates quic tunnel
+sleep 2
 
 # Start data collection
 N=1 # 100 samples per domain
