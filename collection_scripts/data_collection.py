@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import TimeoutException
 
 # Constants
-INTERVAL_TIME = 10  # Interval time between queries
+INTERVAL_TIME = 5  # Interval time between queries
 PORT = 853
 INTERFACE = 'enp0s3'
 
@@ -21,15 +21,34 @@ args = vars(parser.parse_args())
 
 # load urls from file
 urls= []
-fname = "/vagrant/short_list_test"
+fname = "/vagrant/repeat_test"
 with open(fname) as f:
 	lines = f.readlines()
 	for line in lines:
 		urls.append(line.strip())
 
+def load_once():
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    
+    service = Service(executable_path='/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.set_page_load_timeout(30)
+    driver.execute_cdp_cmd('Network.setCacheDisabled', {'cacheDisabled': True})
+    try:
+        driver.get('http://google.com')
+        time.sleep(INTERVAL_TIME)
+    except TimeoutException as ex:
+        print(ex, flush=True)
+
+    driver.quit()
+
+load_once()
+
 for i, base_url in enumerate(urls):
     start = time.time()
-    url = 'http://www.' + base_url
+    url = 'http://' + base_url
     print(f'URL: {url}', flush=True)
 
     # Start capture via tcpdump
