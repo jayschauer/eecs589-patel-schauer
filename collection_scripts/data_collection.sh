@@ -15,12 +15,16 @@ sudo pkill tcpdump
 sudo pkill dnsproxy
 
 # Start dnsproxy server
+# 94.140.14.14 is adguard QUIC server: quic://dns.adguard.com
+# option --quic-port=853 will listen locally for DNS over QUIC requests on port 853
 sudo dnsproxy -l 127.0.0.54 --quic-port=853 -u quic://94.140.14.14 -v > /vagrant/logs/$d/dnsproxy_log.txt 2>&1 &
-
+sleep 2
+# Send initial request so dnsproxy completes handshake
+curl https://google.com
 sleep 2
 
 # Start data collection
-N=100
+N=100 # 100 samples per domain
 for i in $(seq 1 $N)
 do
     echo "Starting iteration $i/$N"
