@@ -1,0 +1,30 @@
+URL: http://www.youtube.com
+/vagrant/data/pcaps/30-10-22-232850/iteration_5/youtube.com.pcap
+Started driver
+tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), capture size 262144 bytes
+53 packets captured
+63 packets received by filter
+0 packets dropped by kernel
+
+Time elapsed: 16.097123384475708
+
+URL: http://www.google.com
+/vagrant/data/pcaps/30-10-22-232850/iteration_5/google.com.pcap
+Started driver
+tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), capture size 262144 bytes
+52 packets captured
+52 packets received by filter
+0 packets dropped by kernel
+
+Time elapsed: 14.298961400985718
+
+URL: http://www.amazon.com
+/vagrant/data/pcaps/30-10-22-232850/iteration_5/amazon.com.pcap
+Started driver
+tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), capture size 262144 bytes
+16 packets captured
+16 packets received by filter
+0 packets dropped by kernel
+
+Time elapsed: 11.91940975189209
+

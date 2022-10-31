@@ -1,0 +1,3309 @@
+2022/10/30 23:28:50 51583#1 [info] Starting dnsproxy v0.46.2
+2022/10/30 23:28:50 51583#1 [debug] Upstream 0: quic://94.140.14.14:853
+2022/10/30 23:28:50 51583#1 [info] Starting the DNS proxy server
+2022/10/30 23:28:50 51583#1 [info] Creating the UDP server socket
+2022/10/30 23:28:50 51583#1 [info] Listening to udp://127.0.0.54:53
+2022/10/30 23:28:50 51583#1 [info] Creating a TCP server socket
+2022/10/30 23:28:50 51583#1 [info] Listening to tcp://127.0.0.54:53
+2022/10/30 23:28:50 51583#6 [info] Entering the UDP listener loop on 127.0.0.54:53
+2022/10/30 23:28:50 51583#7 [info] Entering the tcp listener loop on 127.0.0.54:53
+2022/10/30 23:28:55 51583#17 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:60058
+2022/10/30 23:28:55 51583#17 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 56542
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+2022/10/30 23:28:55 51583#17 [debug] github.com/AdguardTeam/dnsproxy/upstream.(*bootstrapper).createDialContext.func1(): Dialing to 94.140.14.14:853
+2022/10/30 23:28:55 51583#17 [debug] github.com/AdguardTeam/dnsproxy/upstream.(*bootstrapper).createDialContext.func1(): dialer has successfully initialized connection to 94.140.14.14:853 in 345.225µs
+2022/10/30 23:28:55 51583#17 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.youtube.com.	IN	 A. Elapsed 492.617621ms.
+2022/10/30 23:28:55 51583#17 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 493.28086ms
+2022/10/30 23:28:55 51583#17 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 56542
+;; flags: qr rd ra; QUERY: 1, ANSWER: 17, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+;; ANSWER SECTION:
+www.youtube.com.	40	IN	CNAME	youtube-ui.l.google.com.
+youtube-ui.l.google.com.	40	IN	A	64.233.177.136
+youtube-ui.l.google.com.	40	IN	A	64.233.177.190
+youtube-ui.l.google.com.	40	IN	A	64.233.177.93
+youtube-ui.l.google.com.	40	IN	A	173.194.219.93
+youtube-ui.l.google.com.	40	IN	A	64.233.185.136
+youtube-ui.l.google.com.	40	IN	A	64.233.185.93
+youtube-ui.l.google.com.	40	IN	A	64.233.185.190
+youtube-ui.l.google.com.	40	IN	A	64.233.185.91
+youtube-ui.l.google.com.	40	IN	A	74.125.138.91
+youtube-ui.l.google.com.	40	IN	A	74.125.138.190
+youtube-ui.l.google.com.	40	IN	A	74.125.138.136
+youtube-ui.l.google.com.	40	IN	A	142.251.45.238
+youtube-ui.l.google.com.	40	IN	A	142.251.15.190
+youtube-ui.l.google.com.	40	IN	A	142.251.15.136
+youtube-ui.l.google.com.	40	IN	A	142.251.15.91
+youtube-ui.l.google.com.	40	IN	A	108.177.122.91
+
+2022/10/30 23:28:56 51583#26 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:52554
+2022/10/30 23:28:56 51583#26 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 2463
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:28:56 51583#26 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 33.517876ms.
+2022/10/30 23:28:56 51583#26 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 34.521177ms
+2022/10/30 23:28:56 51583#26 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 2463
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	109	IN	A	64.233.185.95
+
+2022/10/30 23:28:56 51583#11 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:59023
+2022/10/30 23:28:56 51583#11 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 34736
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+2022/10/30 23:28:56 51583#12 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:51559
+2022/10/30 23:28:56 51583#12 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 20154
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+2022/10/30 23:28:56 51583#12 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;accounts.google.com.	IN	 A. Elapsed 22.354664ms.
+2022/10/30 23:28:56 51583#12 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.806707ms
+2022/10/30 23:28:56 51583#11 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;i.ytimg.com.	IN	 A. Elapsed 29.647869ms.
+2022/10/30 23:28:56 51583#11 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 30.646157ms
+2022/10/30 23:28:56 51583#12 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 20154
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+;; ANSWER SECTION:
+accounts.google.com.	46	IN	A	172.217.164.77
+
+2022/10/30 23:28:56 51583#11 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 34736
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+;; ANSWER SECTION:
+i.ytimg.com.	168	IN	A	142.250.176.86
+i.ytimg.com.	168	IN	A	64.233.177.119
+i.ytimg.com.	168	IN	A	64.233.185.119
+i.ytimg.com.	168	IN	A	74.125.138.119
+i.ytimg.com.	168	IN	A	142.251.45.246
+i.ytimg.com.	168	IN	A	142.251.15.119
+i.ytimg.com.	168	IN	A	108.177.122.119
+i.ytimg.com.	168	IN	A	142.250.9.119
+i.ytimg.com.	168	IN	A	172.253.124.119
+i.ytimg.com.	168	IN	A	172.217.10.118
+
+2022/10/30 23:28:56 51583#13 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:37201
+2022/10/30 23:28:56 51583#13 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 56372
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:28:56 51583#13 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 19.772345ms.
+2022/10/30 23:28:56 51583#13 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.000797ms
+2022/10/30 23:28:56 51583#13 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 56372
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	197	IN	A	172.217.10.195
+
+2022/10/30 23:29:00 51583#27 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:33320
+2022/10/30 23:29:00 51583#27 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 29552
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:29:00 51583#27 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 25.224592ms.
+2022/10/30 23:29:00 51583#27 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 25.885332ms
+2022/10/30 23:29:00 51583#27 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 29552
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	216	IN	A	64.233.177.94
+
+2022/10/30 23:29:02 51583#28 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:50571
+2022/10/30 23:29:02 51583#28 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 18127
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+2022/10/30 23:29:02 51583#28 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;googleads.g.doubleclick.net.	IN	 A. Elapsed 23.131911ms.
+2022/10/30 23:29:02 51583#28 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 23.654208ms
+2022/10/30 23:29:02 51583#28 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 18127
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+googleads.g.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:29:08 51583#14 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35633
+2022/10/30 23:29:08 51583#14 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 38507
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:29:08 51583#14 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 19.747243ms.
+2022/10/30 23:29:08 51583#14 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.360543ms
+2022/10/30 23:29:08 51583#14 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 38507
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	166	IN	A	108.177.122.106
+www.google.com.	166	IN	A	108.177.122.99
+www.google.com.	166	IN	A	108.177.122.103
+www.google.com.	166	IN	A	108.177.122.104
+www.google.com.	166	IN	A	108.177.122.105
+www.google.com.	166	IN	A	108.177.122.147
+
+2022/10/30 23:29:08 51583#15 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:52585
+2022/10/30 23:29:08 51583#15 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 46878
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+2022/10/30 23:29:08 51583#15 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;yt3.ggpht.com.	IN	 A. Elapsed 18.921185ms.
+2022/10/30 23:29:08 51583#15 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.726032ms
+2022/10/30 23:29:08 51583#15 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 46878
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+;; ANSWER SECTION:
+yt3.ggpht.com.	82	IN	CNAME	photos-ugc.l.googleusercontent.com.
+photos-ugc.l.googleusercontent.com.	82	IN	A	108.177.122.132
+
+2022/10/30 23:29:11 51583#16 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:56722
+2022/10/30 23:29:11 51583#16 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 33021
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+2022/10/30 23:29:11 51583#16 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;jnn-pa.googleapis.com.	IN	 A. Elapsed 19.828241ms.
+2022/10/30 23:29:11 51583#16 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.415428ms
+2022/10/30 23:29:11 51583#16 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 33021
+;; flags: qr rd ra; QUERY: 1, ANSWER: 8, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+jnn-pa.googleapis.com.	237	IN	A	64.233.177.95
+jnn-pa.googleapis.com.	237	IN	A	64.233.185.95
+jnn-pa.googleapis.com.	237	IN	A	74.125.138.95
+jnn-pa.googleapis.com.	237	IN	A	142.251.15.95
+jnn-pa.googleapis.com.	237	IN	A	108.177.122.95
+jnn-pa.googleapis.com.	237	IN	A	172.217.164.74
+jnn-pa.googleapis.com.	237	IN	A	172.217.10.106
+jnn-pa.googleapis.com.	237	IN	A	142.250.189.106
+
+2022/10/30 23:29:11 51583#29 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:58432
+2022/10/30 23:29:11 51583#29 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 14844
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+2022/10/30 23:29:11 51583#29 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;static.doubleclick.net.	IN	 A. Elapsed 23.965915ms.
+2022/10/30 23:29:11 51583#29 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 25.243119ms
+2022/10/30 23:29:11 51583#29 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 14844
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+static.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:29:15 51583#33 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:40128
+2022/10/30 23:29:15 51583#33 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 33942
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:29:15 51583#33 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 21.027005ms.
+2022/10/30 23:29:15 51583#33 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.719557ms
+2022/10/30 23:29:15 51583#33 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 33942
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	159	IN	A	108.177.122.106
+www.google.com.	159	IN	A	108.177.122.99
+www.google.com.	159	IN	A	108.177.122.103
+www.google.com.	159	IN	A	108.177.122.104
+www.google.com.	159	IN	A	108.177.122.105
+www.google.com.	159	IN	A	108.177.122.147
+
+2022/10/30 23:29:15 51583#34 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:49357
+2022/10/30 23:29:15 51583#34 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 50585
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:29:15 51583#34 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 19.872406ms.
+2022/10/30 23:29:15 51583#34 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.441372ms
+2022/10/30 23:29:15 51583#34 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 50585
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	158	IN	A	108.177.122.106
+www.google.com.	158	IN	A	108.177.122.99
+www.google.com.	158	IN	A	108.177.122.103
+www.google.com.	158	IN	A	108.177.122.104
+www.google.com.	158	IN	A	108.177.122.105
+www.google.com.	158	IN	A	108.177.122.147
+
+2022/10/30 23:29:16 51583#35 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:53265
+2022/10/30 23:29:16 51583#35 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 60145
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:29:16 51583#35 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 21.073165ms.
+2022/10/30 23:29:16 51583#35 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.034933ms
+2022/10/30 23:29:16 51583#35 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 60145
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	200	IN	A	64.233.177.94
+
+2022/10/30 23:29:16 51583#36 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:32879
+2022/10/30 23:29:16 51583#36 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 59847
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+2022/10/30 23:29:16 51583#36 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;apis.google.com.	IN	 A. Elapsed 21.077395ms.
+2022/10/30 23:29:16 51583#36 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.572493ms
+2022/10/30 23:29:16 51583#36 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 59847
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+;; ANSWER SECTION:
+apis.google.com.	128	IN	CNAME	plus.l.google.com.
+plus.l.google.com.	128	IN	A	142.250.189.110
+
+2022/10/30 23:29:16 51583#37 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:50832
+2022/10/30 23:29:16 51583#37 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 33359
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+2022/10/30 23:29:16 51583#37 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ogs.google.com.	IN	 A. Elapsed 29.782996ms.
+2022/10/30 23:29:16 51583#37 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 30.413339ms
+2022/10/30 23:29:16 51583#37 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 33359
+;; flags: qr rd ra; QUERY: 1, ANSWER: 7, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+;; ANSWER SECTION:
+ogs.google.com.	37	IN	CNAME	www3.l.google.com.
+www3.l.google.com.	37	IN	A	172.217.215.101
+www3.l.google.com.	37	IN	A	172.217.215.138
+www3.l.google.com.	37	IN	A	172.217.215.139
+www3.l.google.com.	37	IN	A	172.217.215.113
+www3.l.google.com.	37	IN	A	172.217.215.100
+www3.l.google.com.	37	IN	A	172.217.215.102
+
+2022/10/30 23:29:17 51583#38 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:33550
+2022/10/30 23:29:17 51583#38 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 44673
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:29:17 51583#38 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 24.224183ms.
+2022/10/30 23:29:17 51583#38 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 24.636967ms
+2022/10/30 23:29:17 51583#38 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 44673
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	177	IN	A	172.217.10.195
+
+2022/10/30 23:29:17 51583#39 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:52224
+2022/10/30 23:29:17 51583#39 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 36530
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+2022/10/30 23:29:17 51583#39 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ajax.googleapis.com.	IN	 A. Elapsed 20.687598ms.
+2022/10/30 23:29:17 51583#39 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.092029ms
+2022/10/30 23:29:17 51583#39 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 36530
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+ajax.googleapis.com.	61	IN	A	74.125.138.95
+
+2022/10/30 23:29:17 51583#40 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:36007
+2022/10/30 23:29:17 51583#40 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 45737
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+2022/10/30 23:29:17 51583#40 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;play.google.com.	IN	 A. Elapsed 21.298208ms.
+2022/10/30 23:29:17 51583#40 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.802909ms
+2022/10/30 23:29:17 51583#40 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 45737
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+;; ANSWER SECTION:
+play.google.com.	50	IN	A	142.250.9.113
+play.google.com.	50	IN	A	142.250.9.138
+play.google.com.	50	IN	A	142.250.9.100
+play.google.com.	50	IN	A	142.250.9.102
+play.google.com.	50	IN	A	142.250.9.101
+play.google.com.	50	IN	A	142.250.9.139
+
+2022/10/30 23:29:18 51583#30 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:55489
+2022/10/30 23:29:18 51583#30 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 51228
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:29:18 51583#30 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 21.584245ms.
+2022/10/30 23:29:18 51583#30 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.963025ms
+2022/10/30 23:29:18 51583#30 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 51228
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	87	IN	A	64.233.185.95
+
+2022/10/30 23:29:18 51583#31 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:44813
+2022/10/30 23:29:18 51583#31 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 19701
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+2022/10/30 23:29:18 51583#31 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;adservice.google.com.	IN	 A. Elapsed 20.865089ms.
+2022/10/30 23:29:18 51583#31 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.01417ms
+2022/10/30 23:29:18 51583#31 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 19701
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+;; ANSWER SECTION:
+adservice.google.com.	98	IN	A	142.250.9.154
+adservice.google.com.	98	IN	A	142.250.9.157
+adservice.google.com.	98	IN	A	142.250.9.156
+adservice.google.com.	98	IN	A	142.250.9.155
+
+2022/10/30 23:29:31 51583#32 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:44025
+2022/10/30 23:29:31 51583#32 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 51418
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+2022/10/30 23:29:31 51583#32 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.amazon.com.	IN	 A. Elapsed 19.933252ms.
+2022/10/30 23:29:31 51583#32 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.636762ms
+2022/10/30 23:29:31 51583#32 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 51418
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+www.amazon.com.	45	IN	CNAME	tp.47cf2c8c9-frontier.amazon.com.
+tp.47cf2c8c9-frontier.amazon.com.	45	IN	CNAME	d3ag4hukkh62yn.cloudfront.net.
+d3ag4hukkh62yn.cloudfront.net.	45	IN	A	54.192.31.209
+
+2022/10/30 23:29:31 51583#41 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:38414
+2022/10/30 23:29:31 51583#41 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 65090
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+2022/10/30 23:29:31 51583#41 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;images-na.ssl-images-amazon.com.	IN	 A. Elapsed 96.049919ms.
+2022/10/30 23:29:31 51583#41 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 96.539679ms
+2022/10/30 23:29:31 51583#41 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 65090
+;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+images-na.ssl-images-amazon.com.	86400	IN	CNAME	m.media-amazon.com.
+m.media-amazon.com.	60	IN	CNAME	tp.c47710ee9-frontier.media-amazon.com.
+tp.c47710ee9-frontier.media-amazon.com.	60	IN	CNAME	f.media-amazon.com.
+f.media-amazon.com.	60	IN	CNAME	media.amazon.map.fastly.net.
+media.amazon.map.fastly.net.	60	IN	A	146.75.77.16
+
+2022/10/30 23:29:31 51583#49 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35918
+2022/10/30 23:29:31 51583#49 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 31799
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+2022/10/30 23:29:31 51583#49 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fls-na.amazon.com.	IN	 A. Elapsed 22.900866ms.
+2022/10/30 23:29:31 51583#49 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 23.538984ms
+2022/10/30 23:29:31 51583#49 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 31799
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+fls-na.amazon.com.	26	IN	CNAME	gateway.prod.us-east-1.forester.a2z.com.
+gateway.prod.us-east-1.forester.a2z.com.	26	IN	CNAME	endpoint.prod.us-east-1.forester.a2z.com.
+endpoint.prod.us-east-1.forester.a2z.com.	26	IN	A	3.220.86.172
+endpoint.prod.us-east-1.forester.a2z.com.	26	IN	A	52.21.125.178
+endpoint.prod.us-east-1.forester.a2z.com.	26	IN	A	34.194.244.247
+endpoint.prod.us-east-1.forester.a2z.com.	26	IN	A	3.233.176.104
+endpoint.prod.us-east-1.forester.a2z.com.	26	IN	A	52.202.200.254
+endpoint.prod.us-east-1.forester.a2z.com.	26	IN	A	34.239.3.205
+endpoint.prod.us-east-1.forester.a2z.com.	26	IN	A	107.21.46.232
+endpoint.prod.us-east-1.forester.a2z.com.	26	IN	A	35.170.227.48
+
+2022/10/30 23:29:46 51583#42 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:54862
+2022/10/30 23:29:46 51583#42 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 29563
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+2022/10/30 23:29:47 51583#42 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.youtube.com.	IN	 A. Elapsed 23.677856ms.
+2022/10/30 23:29:47 51583#42 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 24.196551ms
+2022/10/30 23:29:47 51583#42 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 29563
+;; flags: qr rd ra; QUERY: 1, ANSWER: 17, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+;; ANSWER SECTION:
+www.youtube.com.	289	IN	CNAME	youtube-ui.l.google.com.
+youtube-ui.l.google.com.	289	IN	A	64.233.177.91
+youtube-ui.l.google.com.	289	IN	A	173.194.219.93
+youtube-ui.l.google.com.	289	IN	A	64.233.185.91
+youtube-ui.l.google.com.	289	IN	A	64.233.185.136
+youtube-ui.l.google.com.	289	IN	A	64.233.185.93
+youtube-ui.l.google.com.	289	IN	A	64.233.185.190
+youtube-ui.l.google.com.	289	IN	A	74.125.138.190
+youtube-ui.l.google.com.	289	IN	A	74.125.138.93
+youtube-ui.l.google.com.	289	IN	A	74.125.138.136
+youtube-ui.l.google.com.	289	IN	A	142.251.45.238
+youtube-ui.l.google.com.	289	IN	A	142.251.15.136
+youtube-ui.l.google.com.	289	IN	A	142.251.15.91
+youtube-ui.l.google.com.	289	IN	A	142.251.15.190
+youtube-ui.l.google.com.	289	IN	A	108.177.122.93
+youtube-ui.l.google.com.	289	IN	A	64.233.177.93
+youtube-ui.l.google.com.	289	IN	A	64.233.177.136
+
+2022/10/30 23:29:47 51583#50 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:44210
+2022/10/30 23:29:47 51583#50 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 5612
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:29:47 51583#50 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 22.142098ms.
+2022/10/30 23:29:47 51583#50 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.906275ms
+2022/10/30 23:29:47 51583#50 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 5612
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	58	IN	A	64.233.185.95
+
+2022/10/30 23:29:47 51583#51 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:39798
+2022/10/30 23:29:47 51583#51 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 13822
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+2022/10/30 23:29:47 51583#51 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;i.ytimg.com.	IN	 A. Elapsed 23.210574ms.
+2022/10/30 23:29:47 51583#51 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 24.030843ms
+2022/10/30 23:29:47 51583#51 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 13822
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+;; ANSWER SECTION:
+i.ytimg.com.	117	IN	A	142.250.176.86
+i.ytimg.com.	117	IN	A	64.233.177.119
+i.ytimg.com.	117	IN	A	64.233.185.119
+i.ytimg.com.	117	IN	A	74.125.138.119
+i.ytimg.com.	117	IN	A	142.251.45.246
+i.ytimg.com.	117	IN	A	142.251.15.119
+i.ytimg.com.	117	IN	A	108.177.122.119
+i.ytimg.com.	117	IN	A	142.250.9.119
+i.ytimg.com.	117	IN	A	172.253.124.119
+i.ytimg.com.	117	IN	A	172.217.10.118
+
+2022/10/30 23:29:47 51583#43 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:53187
+2022/10/30 23:29:47 51583#43 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 19150
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+2022/10/30 23:29:47 51583#43 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;accounts.google.com.	IN	 A. Elapsed 19.96592ms.
+2022/10/30 23:29:47 51583#43 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.039837ms
+2022/10/30 23:29:47 51583#43 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 19150
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+;; ANSWER SECTION:
+accounts.google.com.	296	IN	A	172.217.164.77
+
+2022/10/30 23:29:47 51583#52 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:53873
+2022/10/30 23:29:47 51583#52 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 15044
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:29:47 51583#52 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 26.164073ms.
+2022/10/30 23:29:47 51583#52 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 27.063982ms
+2022/10/30 23:29:47 51583#52 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 15044
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	146	IN	A	172.217.10.195
+
+2022/10/30 23:29:50 51583#44 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:38448
+2022/10/30 23:29:50 51583#44 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 63153
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:29:50 51583#44 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 19.621723ms.
+2022/10/30 23:29:50 51583#44 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 23.281263ms
+2022/10/30 23:29:50 51583#44 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 63153
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	166	IN	A	64.233.177.94
+
+2022/10/30 23:29:51 51583#45 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:40875
+2022/10/30 23:29:51 51583#45 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 2866
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+2022/10/30 23:29:51 51583#45 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;googleads.g.doubleclick.net.	IN	 A. Elapsed 20.687767ms.
+2022/10/30 23:29:51 51583#45 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.058697ms
+2022/10/30 23:29:51 51583#45 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 2866
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+googleads.g.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:29:55 51583#46 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:50869
+2022/10/30 23:29:55 51583#46 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 64651
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:29:55 51583#46 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 20.465253ms.
+2022/10/30 23:29:55 51583#46 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.924812ms
+2022/10/30 23:29:55 51583#46 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 64651
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	119	IN	A	108.177.122.106
+www.google.com.	119	IN	A	108.177.122.99
+www.google.com.	119	IN	A	108.177.122.103
+www.google.com.	119	IN	A	108.177.122.104
+www.google.com.	119	IN	A	108.177.122.105
+www.google.com.	119	IN	A	108.177.122.147
+
+2022/10/30 23:29:55 51583#53 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:54782
+2022/10/30 23:29:55 51583#53 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 27668
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+2022/10/30 23:29:55 51583#53 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;yt3.ggpht.com.	IN	 A. Elapsed 20.338306ms.
+2022/10/30 23:29:55 51583#53 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.813003ms
+2022/10/30 23:29:55 51583#53 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 27668
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+;; ANSWER SECTION:
+yt3.ggpht.com.	35	IN	CNAME	photos-ugc.l.googleusercontent.com.
+photos-ugc.l.googleusercontent.com.	35	IN	A	108.177.122.132
+
+2022/10/30 23:29:57 51583#47 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35874
+2022/10/30 23:29:57 51583#47 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 62481
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+2022/10/30 23:29:57 51583#54 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:38520
+2022/10/30 23:29:57 51583#54 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 16353
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+2022/10/30 23:29:57 51583#47 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;jnn-pa.googleapis.com.	IN	 A. Elapsed 18.948471ms.
+2022/10/30 23:29:57 51583#47 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.995766ms
+2022/10/30 23:29:57 51583#47 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 62481
+;; flags: qr rd ra; QUERY: 1, ANSWER: 8, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+jnn-pa.googleapis.com.	191	IN	A	64.233.177.95
+jnn-pa.googleapis.com.	191	IN	A	64.233.185.95
+jnn-pa.googleapis.com.	191	IN	A	74.125.138.95
+jnn-pa.googleapis.com.	191	IN	A	142.251.15.95
+jnn-pa.googleapis.com.	191	IN	A	108.177.122.95
+jnn-pa.googleapis.com.	191	IN	A	172.217.164.74
+jnn-pa.googleapis.com.	191	IN	A	172.217.10.106
+jnn-pa.googleapis.com.	191	IN	A	142.250.189.106
+
+2022/10/30 23:29:57 51583#54 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;static.doubleclick.net.	IN	 A. Elapsed 18.437787ms.
+2022/10/30 23:29:57 51583#54 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.012894ms
+2022/10/30 23:29:57 51583#54 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 16353
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+static.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:30:04 51583#48 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:36998
+2022/10/30 23:30:04 51583#48 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 33486
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:30:04 51583#48 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 18.854575ms.
+2022/10/30 23:30:04 51583#48 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.140105ms
+2022/10/30 23:30:04 51583#48 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 33486
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	109	IN	A	108.177.122.106
+www.google.com.	109	IN	A	108.177.122.99
+www.google.com.	109	IN	A	108.177.122.103
+www.google.com.	109	IN	A	108.177.122.104
+www.google.com.	109	IN	A	108.177.122.105
+www.google.com.	109	IN	A	108.177.122.147
+
+2022/10/30 23:30:05 51583#65 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:38025
+2022/10/30 23:30:05 51583#65 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 34226
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:30:05 51583#65 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 18.956205ms.
+2022/10/30 23:30:05 51583#65 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.480782ms
+2022/10/30 23:30:05 51583#65 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 34226
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	109	IN	A	108.177.122.106
+www.google.com.	109	IN	A	108.177.122.99
+www.google.com.	109	IN	A	108.177.122.103
+www.google.com.	109	IN	A	108.177.122.104
+www.google.com.	109	IN	A	108.177.122.105
+www.google.com.	109	IN	A	108.177.122.147
+
+2022/10/30 23:30:05 51583#55 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:45225
+2022/10/30 23:30:05 51583#55 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 52751
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:30:05 51583#55 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 22.626233ms.
+2022/10/30 23:30:05 51583#55 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 23.124352ms
+2022/10/30 23:30:05 51583#55 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 52751
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	151	IN	A	64.233.177.94
+
+2022/10/30 23:30:05 51583#56 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:48609
+2022/10/30 23:30:05 51583#56 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 4280
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+2022/10/30 23:30:05 51583#56 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;apis.google.com.	IN	 A. Elapsed 24.93845ms.
+2022/10/30 23:30:05 51583#56 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 25.547935ms
+2022/10/30 23:30:05 51583#56 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 4280
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+;; ANSWER SECTION:
+apis.google.com.	79	IN	CNAME	plus.l.google.com.
+plus.l.google.com.	79	IN	A	142.250.189.110
+
+2022/10/30 23:30:05 51583#66 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:42938
+2022/10/30 23:30:05 51583#66 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 33996
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+2022/10/30 23:30:06 51583#66 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ogs.google.com.	IN	 A. Elapsed 19.755793ms.
+2022/10/30 23:30:06 51583#66 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.491361ms
+2022/10/30 23:30:06 51583#66 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 33996
+;; flags: qr rd ra; QUERY: 1, ANSWER: 7, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+;; ANSWER SECTION:
+ogs.google.com.	293	IN	CNAME	www3.l.google.com.
+www3.l.google.com.	293	IN	A	172.217.215.100
+www3.l.google.com.	293	IN	A	172.217.215.102
+www3.l.google.com.	293	IN	A	172.217.215.138
+www3.l.google.com.	293	IN	A	172.217.215.139
+www3.l.google.com.	293	IN	A	172.217.215.101
+www3.l.google.com.	293	IN	A	172.217.215.113
+
+2022/10/30 23:30:06 51583#67 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:58296
+2022/10/30 23:30:06 51583#67 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 40932
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:30:07 51583#67 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 28.005509ms.
+2022/10/30 23:30:07 51583#67 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 28.493555ms
+2022/10/30 23:30:07 51583#67 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 40932
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	127	IN	A	172.217.10.195
+
+2022/10/30 23:30:07 51583#57 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:42160
+2022/10/30 23:30:07 51583#57 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 6206
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+2022/10/30 23:30:07 51583#57 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;play.google.com.	IN	 A. Elapsed 23.350663ms.
+2022/10/30 23:30:07 51583#57 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 24.632219ms
+2022/10/30 23:30:07 51583#57 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 6206
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+;; ANSWER SECTION:
+play.google.com.	1	IN	A	142.250.9.113
+play.google.com.	1	IN	A	142.250.9.138
+play.google.com.	1	IN	A	142.250.9.100
+play.google.com.	1	IN	A	142.250.9.102
+play.google.com.	1	IN	A	142.250.9.101
+play.google.com.	1	IN	A	142.250.9.139
+
+2022/10/30 23:30:07 51583#68 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:45227
+2022/10/30 23:30:07 51583#68 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 63234
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+2022/10/30 23:30:07 51583#68 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ajax.googleapis.com.	IN	 A. Elapsed 74.914024ms.
+2022/10/30 23:30:07 51583#68 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 75.55029ms
+2022/10/30 23:30:07 51583#68 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 63234
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+ajax.googleapis.com.	12	IN	A	74.125.138.95
+
+2022/10/30 23:30:07 51583#69 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:51020
+2022/10/30 23:30:07 51583#69 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 1291
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:30:07 51583#69 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 19.674934ms.
+2022/10/30 23:30:07 51583#69 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.244624ms
+2022/10/30 23:30:07 51583#69 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 1291
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	38	IN	A	64.233.185.95
+
+2022/10/30 23:30:08 51583#70 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:55439
+2022/10/30 23:30:08 51583#70 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 48991
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+2022/10/30 23:30:08 51583#70 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;adservice.google.com.	IN	 A. Elapsed 19.959954ms.
+2022/10/30 23:30:08 51583#70 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 23.351689ms
+2022/10/30 23:30:08 51583#70 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 48991
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+;; ANSWER SECTION:
+adservice.google.com.	48	IN	A	142.250.9.154
+adservice.google.com.	48	IN	A	142.250.9.157
+adservice.google.com.	48	IN	A	142.250.9.156
+adservice.google.com.	48	IN	A	142.250.9.155
+
+2022/10/30 23:30:21 51583#71 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:49505
+2022/10/30 23:30:21 51583#71 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 50178
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+2022/10/30 23:30:21 51583#71 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.amazon.com.	IN	 A. Elapsed 19.682771ms.
+2022/10/30 23:30:21 51583#71 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.361638ms
+2022/10/30 23:30:21 51583#71 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 50178
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+www.amazon.com.	56	IN	CNAME	tp.47cf2c8c9-frontier.amazon.com.
+tp.47cf2c8c9-frontier.amazon.com.	56	IN	CNAME	d3ag4hukkh62yn.cloudfront.net.
+d3ag4hukkh62yn.cloudfront.net.	56	IN	A	54.192.31.209
+
+2022/10/30 23:30:21 51583#58 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:54746
+2022/10/30 23:30:21 51583#58 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 59951
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+2022/10/30 23:30:21 51583#58 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;images-na.ssl-images-amazon.com.	IN	 A. Elapsed 20.372923ms.
+2022/10/30 23:30:21 51583#58 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.154607ms
+2022/10/30 23:30:21 51583#58 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 59951
+;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+images-na.ssl-images-amazon.com.	10	IN	CNAME	m.media-amazon.com.
+m.media-amazon.com.	10	IN	CNAME	tp.c47710ee9-frontier.media-amazon.com.
+tp.c47710ee9-frontier.media-amazon.com.	10	IN	CNAME	f.media-amazon.com.
+f.media-amazon.com.	10	IN	CNAME	media.amazon.map.fastly.net.
+media.amazon.map.fastly.net.	10	IN	A	146.75.77.16
+
+2022/10/30 23:30:21 51583#59 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:36477
+2022/10/30 23:30:21 51583#59 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 62921
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+2022/10/30 23:30:21 51583#59 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fls-na.amazon.com.	IN	 A. Elapsed 19.236539ms.
+2022/10/30 23:30:21 51583#59 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.960828ms
+2022/10/30 23:30:21 51583#59 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 62921
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+fls-na.amazon.com.	37	IN	CNAME	gateway.prod.us-east-1.forester.a2z.com.
+gateway.prod.us-east-1.forester.a2z.com.	37	IN	CNAME	endpoint.prod.us-east-1.forester.a2z.com.
+endpoint.prod.us-east-1.forester.a2z.com.	37	IN	A	34.202.171.58
+endpoint.prod.us-east-1.forester.a2z.com.	37	IN	A	3.212.141.88
+endpoint.prod.us-east-1.forester.a2z.com.	37	IN	A	44.195.14.235
+endpoint.prod.us-east-1.forester.a2z.com.	37	IN	A	52.7.98.248
+endpoint.prod.us-east-1.forester.a2z.com.	37	IN	A	34.234.159.129
+endpoint.prod.us-east-1.forester.a2z.com.	37	IN	A	54.174.156.7
+endpoint.prod.us-east-1.forester.a2z.com.	37	IN	A	54.156.197.243
+endpoint.prod.us-east-1.forester.a2z.com.	37	IN	A	52.86.138.231
+
+2022/10/30 23:30:36 51583#60 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:48411
+2022/10/30 23:30:36 51583#60 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 8693
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+2022/10/30 23:30:36 51583#60 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.youtube.com.	IN	 A. Elapsed 20.677591ms.
+2022/10/30 23:30:36 51583#60 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.407367ms
+2022/10/30 23:30:36 51583#60 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 8693
+;; flags: qr rd ra; QUERY: 1, ANSWER: 17, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+;; ANSWER SECTION:
+www.youtube.com.	239	IN	CNAME	youtube-ui.l.google.com.
+youtube-ui.l.google.com.	239	IN	A	64.233.177.91
+youtube-ui.l.google.com.	239	IN	A	173.194.219.93
+youtube-ui.l.google.com.	239	IN	A	64.233.185.91
+youtube-ui.l.google.com.	239	IN	A	64.233.185.136
+youtube-ui.l.google.com.	239	IN	A	64.233.185.93
+youtube-ui.l.google.com.	239	IN	A	64.233.185.190
+youtube-ui.l.google.com.	239	IN	A	74.125.138.190
+youtube-ui.l.google.com.	239	IN	A	74.125.138.93
+youtube-ui.l.google.com.	239	IN	A	74.125.138.136
+youtube-ui.l.google.com.	239	IN	A	142.251.45.238
+youtube-ui.l.google.com.	239	IN	A	142.251.15.136
+youtube-ui.l.google.com.	239	IN	A	142.251.15.91
+youtube-ui.l.google.com.	239	IN	A	142.251.15.190
+youtube-ui.l.google.com.	239	IN	A	108.177.122.93
+youtube-ui.l.google.com.	239	IN	A	64.233.177.93
+youtube-ui.l.google.com.	239	IN	A	64.233.177.136
+
+2022/10/30 23:30:37 51583#72 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:59225
+2022/10/30 23:30:37 51583#72 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 28795
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:30:37 51583#72 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 20.648413ms.
+2022/10/30 23:30:37 51583#72 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.450305ms
+2022/10/30 23:30:37 51583#72 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 28795
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	9	IN	A	64.233.185.95
+
+2022/10/30 23:30:37 51583#73 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:40658
+2022/10/30 23:30:37 51583#73 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 33873
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+2022/10/30 23:30:37 51583#73 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;i.ytimg.com.	IN	 A. Elapsed 18.949295ms.
+2022/10/30 23:30:37 51583#73 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.60519ms
+2022/10/30 23:30:37 51583#73 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 33873
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+;; ANSWER SECTION:
+i.ytimg.com.	67	IN	A	142.250.176.86
+i.ytimg.com.	67	IN	A	64.233.177.119
+i.ytimg.com.	67	IN	A	64.233.185.119
+i.ytimg.com.	67	IN	A	74.125.138.119
+i.ytimg.com.	67	IN	A	142.251.45.246
+i.ytimg.com.	67	IN	A	142.251.15.119
+i.ytimg.com.	67	IN	A	108.177.122.119
+i.ytimg.com.	67	IN	A	142.250.9.119
+i.ytimg.com.	67	IN	A	172.253.124.119
+i.ytimg.com.	67	IN	A	172.217.10.118
+
+2022/10/30 23:30:37 51583#61 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:54186
+2022/10/30 23:30:37 51583#61 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 35430
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+2022/10/30 23:30:37 51583#61 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;accounts.google.com.	IN	 A. Elapsed 23.180076ms.
+2022/10/30 23:30:37 51583#61 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 24.109762ms
+2022/10/30 23:30:37 51583#61 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 35430
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+;; ANSWER SECTION:
+accounts.google.com.	247	IN	A	172.217.164.77
+
+2022/10/30 23:30:37 51583#74 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:51080
+2022/10/30 23:30:37 51583#74 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 5681
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:30:37 51583#74 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 22.382885ms.
+2022/10/30 23:30:37 51583#74 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 23.060872ms
+2022/10/30 23:30:37 51583#74 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 5681
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	97	IN	A	172.217.10.195
+
+2022/10/30 23:30:40 51583#75 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:47288
+2022/10/30 23:30:40 51583#75 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 22547
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:30:40 51583#75 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 20.27656ms.
+2022/10/30 23:30:40 51583#75 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.796419ms
+2022/10/30 23:30:40 51583#75 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 22547
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	116	IN	A	64.233.177.94
+
+2022/10/30 23:30:41 51583#76 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:60037
+2022/10/30 23:30:41 51583#76 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 5761
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+2022/10/30 23:30:41 51583#76 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;googleads.g.doubleclick.net.	IN	 A. Elapsed 19.614037ms.
+2022/10/30 23:30:41 51583#76 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.980518ms
+2022/10/30 23:30:41 51583#76 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 5761
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+googleads.g.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:30:47 51583#77 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35491
+2022/10/30 23:30:47 51583#77 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 61270
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:30:47 51583#77 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 21.529013ms.
+2022/10/30 23:30:47 51583#77 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.25184ms
+2022/10/30 23:30:47 51583#77 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 61270
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	67	IN	A	108.177.122.106
+www.google.com.	67	IN	A	108.177.122.99
+www.google.com.	67	IN	A	108.177.122.103
+www.google.com.	67	IN	A	108.177.122.104
+www.google.com.	67	IN	A	108.177.122.105
+www.google.com.	67	IN	A	108.177.122.147
+
+2022/10/30 23:30:47 51583#78 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:44900
+2022/10/30 23:30:47 51583#78 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 13583
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+2022/10/30 23:30:47 51583#78 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;yt3.ggpht.com.	IN	 A. Elapsed 19.215265ms.
+2022/10/30 23:30:47 51583#78 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.966652ms
+2022/10/30 23:30:47 51583#78 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 13583
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+;; ANSWER SECTION:
+yt3.ggpht.com.	283	IN	CNAME	photos-ugc.l.googleusercontent.com.
+photos-ugc.l.googleusercontent.com.	283	IN	A	108.177.122.132
+
+2022/10/30 23:30:50 51583#62 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:39253
+2022/10/30 23:30:50 51583#62 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 36569
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+2022/10/30 23:30:50 51583#62 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;jnn-pa.googleapis.com.	IN	 A. Elapsed 20.638474ms.
+2022/10/30 23:30:50 51583#62 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.030816ms
+2022/10/30 23:30:50 51583#62 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 36569
+;; flags: qr rd ra; QUERY: 1, ANSWER: 8, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+jnn-pa.googleapis.com.	138	IN	A	64.233.177.95
+jnn-pa.googleapis.com.	138	IN	A	64.233.185.95
+jnn-pa.googleapis.com.	138	IN	A	74.125.138.95
+jnn-pa.googleapis.com.	138	IN	A	142.251.15.95
+jnn-pa.googleapis.com.	138	IN	A	108.177.122.95
+jnn-pa.googleapis.com.	138	IN	A	172.217.164.74
+jnn-pa.googleapis.com.	138	IN	A	172.217.10.106
+jnn-pa.googleapis.com.	138	IN	A	142.250.189.106
+
+2022/10/30 23:30:50 51583#63 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:44363
+2022/10/30 23:30:50 51583#63 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 38644
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+2022/10/30 23:30:50 51583#63 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;static.doubleclick.net.	IN	 A. Elapsed 19.73082ms.
+2022/10/30 23:30:50 51583#63 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.594437ms
+2022/10/30 23:30:50 51583#63 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 38644
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+static.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:30:55 51583#79 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35673
+2022/10/30 23:30:55 51583#79 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 57339
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:30:55 51583#79 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 19.48299ms.
+2022/10/30 23:30:55 51583#79 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.948581ms
+2022/10/30 23:30:55 51583#79 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 57339
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	59	IN	A	108.177.122.106
+www.google.com.	59	IN	A	108.177.122.99
+www.google.com.	59	IN	A	108.177.122.103
+www.google.com.	59	IN	A	108.177.122.104
+www.google.com.	59	IN	A	108.177.122.105
+www.google.com.	59	IN	A	108.177.122.147
+
+2022/10/30 23:30:55 51583#80 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:49070
+2022/10/30 23:30:55 51583#80 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 58412
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:30:55 51583#80 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 20.340814ms.
+2022/10/30 23:30:55 51583#80 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.796783ms
+2022/10/30 23:30:55 51583#80 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 58412
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	59	IN	A	108.177.122.106
+www.google.com.	59	IN	A	108.177.122.99
+www.google.com.	59	IN	A	108.177.122.103
+www.google.com.	59	IN	A	108.177.122.104
+www.google.com.	59	IN	A	108.177.122.105
+www.google.com.	59	IN	A	108.177.122.147
+
+2022/10/30 23:30:55 51583#64 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:43702
+2022/10/30 23:30:55 51583#64 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 61498
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:30:55 51583#64 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 27.534508ms.
+2022/10/30 23:30:55 51583#64 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 29.673798ms
+2022/10/30 23:30:55 51583#64 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 61498
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	100	IN	A	64.233.177.94
+
+2022/10/30 23:30:56 51583#81 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35588
+2022/10/30 23:30:56 51583#81 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 4459
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+2022/10/30 23:30:56 51583#81 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;apis.google.com.	IN	 A. Elapsed 55.823244ms.
+2022/10/30 23:30:56 51583#81 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 56.535366ms
+2022/10/30 23:30:56 51583#81 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 4459
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+;; ANSWER SECTION:
+apis.google.com.	28	IN	CNAME	plus.l.google.com.
+plus.l.google.com.	28	IN	A	142.250.189.110
+
+2022/10/30 23:30:56 51583#82 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:50135
+2022/10/30 23:30:56 51583#82 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 18139
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+2022/10/30 23:30:56 51583#82 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ogs.google.com.	IN	 A. Elapsed 18.678815ms.
+2022/10/30 23:30:56 51583#82 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.145195ms
+2022/10/30 23:30:56 51583#82 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 18139
+;; flags: qr rd ra; QUERY: 1, ANSWER: 7, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+;; ANSWER SECTION:
+ogs.google.com.	243	IN	CNAME	www3.l.google.com.
+www3.l.google.com.	243	IN	A	172.217.215.100
+www3.l.google.com.	243	IN	A	172.217.215.102
+www3.l.google.com.	243	IN	A	172.217.215.138
+www3.l.google.com.	243	IN	A	172.217.215.139
+www3.l.google.com.	243	IN	A	172.217.215.101
+www3.l.google.com.	243	IN	A	172.217.215.113
+
+2022/10/30 23:30:57 51583#97 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:58249
+2022/10/30 23:30:57 51583#97 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 8309
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:30:57 51583#97 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 18.648414ms.
+2022/10/30 23:30:57 51583#97 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.176393ms
+2022/10/30 23:30:57 51583#97 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 8309
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	77	IN	A	172.217.10.195
+
+2022/10/30 23:30:57 51583#83 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:51468
+2022/10/30 23:30:57 51583#83 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 35675
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+2022/10/30 23:30:57 51583#83 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ajax.googleapis.com.	IN	 A. Elapsed 18.836267ms.
+2022/10/30 23:30:57 51583#83 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.33895ms
+2022/10/30 23:30:57 51583#83 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 35675
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+ajax.googleapis.com.	267	IN	A	64.233.185.95
+
+2022/10/30 23:30:57 51583#84 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:55321
+2022/10/30 23:30:57 51583#84 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 55104
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+2022/10/30 23:30:57 51583#84 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;play.google.com.	IN	 A. Elapsed 20.118439ms.
+2022/10/30 23:30:57 51583#84 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.837764ms
+2022/10/30 23:30:57 51583#84 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 55104
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+;; ANSWER SECTION:
+play.google.com.	251	IN	A	142.250.9.102
+play.google.com.	251	IN	A	142.250.9.138
+play.google.com.	251	IN	A	142.250.9.100
+play.google.com.	251	IN	A	142.250.9.113
+play.google.com.	251	IN	A	142.250.9.139
+play.google.com.	251	IN	A	142.250.9.101
+
+2022/10/30 23:30:58 51583#85 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:59311
+2022/10/30 23:30:58 51583#85 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 63797
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:30:58 51583#85 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 21.655462ms.
+2022/10/30 23:30:58 51583#85 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.391092ms
+2022/10/30 23:30:58 51583#85 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 63797
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	289	IN	A	64.233.185.95
+
+2022/10/30 23:30:58 51583#86 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:46265
+2022/10/30 23:30:58 51583#86 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 348
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+2022/10/30 23:30:58 51583#86 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;adservice.google.com.	IN	 A. Elapsed 20.32042ms.
+2022/10/30 23:30:58 51583#86 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.983433ms
+2022/10/30 23:30:58 51583#86 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 348
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+;; ANSWER SECTION:
+adservice.google.com.	299	IN	A	64.233.177.157
+adservice.google.com.	299	IN	A	64.233.177.155
+adservice.google.com.	299	IN	A	64.233.177.154
+adservice.google.com.	299	IN	A	64.233.177.156
+
+2022/10/30 23:31:11 51583#87 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:43788
+2022/10/30 23:31:11 51583#87 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 46922
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+2022/10/30 23:31:11 51583#87 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.amazon.com.	IN	 A. Elapsed 19.448951ms.
+2022/10/30 23:31:11 51583#87 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.058378ms
+2022/10/30 23:31:11 51583#87 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 46922
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+www.amazon.com.	6	IN	CNAME	tp.47cf2c8c9-frontier.amazon.com.
+tp.47cf2c8c9-frontier.amazon.com.	6	IN	CNAME	d3ag4hukkh62yn.cloudfront.net.
+d3ag4hukkh62yn.cloudfront.net.	6	IN	A	54.192.31.209
+
+2022/10/30 23:31:11 51583#98 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:52149
+2022/10/30 23:31:11 51583#98 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 43208
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+2022/10/30 23:31:11 51583#98 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;images-na.ssl-images-amazon.com.	IN	 A. Elapsed 18.497095ms.
+2022/10/30 23:31:11 51583#98 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 18.931168ms
+2022/10/30 23:31:11 51583#98 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 43208
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+images-na.ssl-images-amazon.com.	23	IN	CNAME	m.media-amazon.com.
+m.media-amazon.com.	23	IN	CNAME	tp.c47710ee9-frontier.media-amazon.com.
+tp.c47710ee9-frontier.media-amazon.com.	23	IN	CNAME	c.media-amazon.com.
+c.media-amazon.com.	23	IN	A	13.227.33.133
+
+2022/10/30 23:31:11 51583#88 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:33807
+2022/10/30 23:31:11 51583#88 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 21732
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+2022/10/30 23:31:11 51583#88 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fls-na.amazon.com.	IN	 A. Elapsed 20.013652ms.
+2022/10/30 23:31:11 51583#88 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.46605ms
+2022/10/30 23:31:11 51583#88 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 21732
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+fls-na.amazon.com.	49	IN	CNAME	gateway.prod.us-east-1.forester.a2z.com.
+gateway.prod.us-east-1.forester.a2z.com.	49	IN	CNAME	endpoint.prod.us-east-1.forester.a2z.com.
+endpoint.prod.us-east-1.forester.a2z.com.	49	IN	A	52.3.115.44
+endpoint.prod.us-east-1.forester.a2z.com.	49	IN	A	54.175.222.117
+endpoint.prod.us-east-1.forester.a2z.com.	49	IN	A	52.20.230.69
+endpoint.prod.us-east-1.forester.a2z.com.	49	IN	A	18.205.44.146
+endpoint.prod.us-east-1.forester.a2z.com.	49	IN	A	35.175.25.241
+endpoint.prod.us-east-1.forester.a2z.com.	49	IN	A	54.85.120.73
+endpoint.prod.us-east-1.forester.a2z.com.	49	IN	A	107.20.135.134
+endpoint.prod.us-east-1.forester.a2z.com.	49	IN	A	52.5.116.197
+
+2022/10/30 23:31:26 51583#89 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:48997
+2022/10/30 23:31:26 51583#89 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 24185
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+2022/10/30 23:31:26 51583#89 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.youtube.com.	IN	 A. Elapsed 23.770359ms.
+2022/10/30 23:31:26 51583#89 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 24.219714ms
+2022/10/30 23:31:26 51583#89 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 24185
+;; flags: qr rd ra; QUERY: 1, ANSWER: 17, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+;; ANSWER SECTION:
+www.youtube.com.	189	IN	CNAME	youtube-ui.l.google.com.
+youtube-ui.l.google.com.	189	IN	A	64.233.177.91
+youtube-ui.l.google.com.	189	IN	A	173.194.219.93
+youtube-ui.l.google.com.	189	IN	A	64.233.185.91
+youtube-ui.l.google.com.	189	IN	A	64.233.185.136
+youtube-ui.l.google.com.	189	IN	A	64.233.185.93
+youtube-ui.l.google.com.	189	IN	A	64.233.185.190
+youtube-ui.l.google.com.	189	IN	A	74.125.138.190
+youtube-ui.l.google.com.	189	IN	A	74.125.138.93
+youtube-ui.l.google.com.	189	IN	A	74.125.138.136
+youtube-ui.l.google.com.	189	IN	A	142.251.45.238
+youtube-ui.l.google.com.	189	IN	A	142.251.15.136
+youtube-ui.l.google.com.	189	IN	A	142.251.15.91
+youtube-ui.l.google.com.	189	IN	A	142.251.15.190
+youtube-ui.l.google.com.	189	IN	A	108.177.122.93
+youtube-ui.l.google.com.	189	IN	A	64.233.177.93
+youtube-ui.l.google.com.	189	IN	A	64.233.177.136
+
+2022/10/30 23:31:27 51583#90 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:47300
+2022/10/30 23:31:27 51583#90 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 47369
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:31:27 51583#90 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 18.46906ms.
+2022/10/30 23:31:27 51583#90 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 18.996603ms
+2022/10/30 23:31:27 51583#90 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 47369
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	260	IN	A	64.233.185.95
+
+2022/10/30 23:31:27 51583#91 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:60023
+2022/10/30 23:31:27 51583#91 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 27943
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+2022/10/30 23:31:27 51583#91 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;i.ytimg.com.	IN	 A. Elapsed 22.943587ms.
+2022/10/30 23:31:27 51583#91 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 23.665741ms
+2022/10/30 23:31:27 51583#91 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 27943
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+;; ANSWER SECTION:
+i.ytimg.com.	17	IN	A	142.250.176.86
+i.ytimg.com.	17	IN	A	64.233.177.119
+i.ytimg.com.	17	IN	A	64.233.185.119
+i.ytimg.com.	17	IN	A	74.125.138.119
+i.ytimg.com.	17	IN	A	142.251.45.246
+i.ytimg.com.	17	IN	A	142.251.15.119
+i.ytimg.com.	17	IN	A	108.177.122.119
+i.ytimg.com.	17	IN	A	142.250.9.119
+i.ytimg.com.	17	IN	A	172.253.124.119
+i.ytimg.com.	17	IN	A	172.217.10.118
+
+2022/10/30 23:31:27 51583#92 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:51522
+2022/10/30 23:31:27 51583#92 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 13127
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+2022/10/30 23:31:27 51583#92 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;accounts.google.com.	IN	 A. Elapsed 23.492902ms.
+2022/10/30 23:31:27 51583#92 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 24.297901ms
+2022/10/30 23:31:27 51583#92 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 13127
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+;; ANSWER SECTION:
+accounts.google.com.	197	IN	A	172.217.164.77
+
+2022/10/30 23:31:27 51583#93 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:50801
+2022/10/30 23:31:27 51583#93 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 13654
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:31:27 51583#93 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 23.219897ms.
+2022/10/30 23:31:27 51583#93 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 24.11468ms
+2022/10/30 23:31:27 51583#93 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 13654
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	47	IN	A	172.217.10.195
+
+2022/10/30 23:31:29 51583#99 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:55028
+2022/10/30 23:31:29 51583#99 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 12399
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:31:30 51583#99 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 53.037097ms.
+2022/10/30 23:31:30 51583#99 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 53.485325ms
+2022/10/30 23:31:30 51583#99 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 12399
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	66	IN	A	64.233.177.94
+
+2022/10/30 23:31:31 51583#100 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:38680
+2022/10/30 23:31:31 51583#100 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 65397
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+2022/10/30 23:31:31 51583#100 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;googleads.g.doubleclick.net.	IN	 A. Elapsed 19.381765ms.
+2022/10/30 23:31:31 51583#100 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.784313ms
+2022/10/30 23:31:31 51583#100 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 65397
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+googleads.g.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:31:34 51583#101 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35341
+2022/10/30 23:31:34 51583#101 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 1711
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:31:34 51583#101 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 19.291551ms.
+2022/10/30 23:31:34 51583#101 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.713174ms
+2022/10/30 23:31:34 51583#101 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 1711
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	19	IN	A	108.177.122.106
+www.google.com.	19	IN	A	108.177.122.99
+www.google.com.	19	IN	A	108.177.122.103
+www.google.com.	19	IN	A	108.177.122.104
+www.google.com.	19	IN	A	108.177.122.105
+www.google.com.	19	IN	A	108.177.122.147
+
+2022/10/30 23:31:34 51583#102 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:44361
+2022/10/30 23:31:34 51583#102 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 13311
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+2022/10/30 23:31:34 51583#102 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;yt3.ggpht.com.	IN	 A. Elapsed 19.99133ms.
+2022/10/30 23:31:34 51583#102 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.528597ms
+2022/10/30 23:31:34 51583#102 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 13311
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+;; ANSWER SECTION:
+yt3.ggpht.com.	236	IN	CNAME	photos-ugc.l.googleusercontent.com.
+photos-ugc.l.googleusercontent.com.	236	IN	A	108.177.122.132
+
+2022/10/30 23:31:37 51583#94 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35204
+2022/10/30 23:31:37 51583#94 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 37446
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+2022/10/30 23:31:37 51583#103 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:42908
+2022/10/30 23:31:37 51583#103 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 20775
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+2022/10/30 23:31:37 51583#94 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;jnn-pa.googleapis.com.	IN	 A. Elapsed 19.636832ms.
+2022/10/30 23:31:37 51583#94 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.976541ms
+2022/10/30 23:31:37 51583#94 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 37446
+;; flags: qr rd ra; QUERY: 1, ANSWER: 8, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+jnn-pa.googleapis.com.	91	IN	A	64.233.177.95
+jnn-pa.googleapis.com.	91	IN	A	64.233.185.95
+jnn-pa.googleapis.com.	91	IN	A	74.125.138.95
+jnn-pa.googleapis.com.	91	IN	A	142.251.15.95
+jnn-pa.googleapis.com.	91	IN	A	108.177.122.95
+jnn-pa.googleapis.com.	91	IN	A	172.217.164.74
+jnn-pa.googleapis.com.	91	IN	A	172.217.10.106
+jnn-pa.googleapis.com.	91	IN	A	142.250.189.106
+
+2022/10/30 23:31:37 51583#103 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;static.doubleclick.net.	IN	 A. Elapsed 19.089593ms.
+2022/10/30 23:31:37 51583#103 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.192136ms
+2022/10/30 23:31:37 51583#103 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 20775
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+static.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:31:44 51583#104 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:45635
+2022/10/30 23:31:44 51583#104 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 64014
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:31:44 51583#104 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 20.662158ms.
+2022/10/30 23:31:44 51583#104 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.223408ms
+2022/10/30 23:31:44 51583#104 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 64014
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	10	IN	A	108.177.122.106
+www.google.com.	10	IN	A	108.177.122.99
+www.google.com.	10	IN	A	108.177.122.103
+www.google.com.	10	IN	A	108.177.122.104
+www.google.com.	10	IN	A	108.177.122.105
+www.google.com.	10	IN	A	108.177.122.147
+
+2022/10/30 23:31:44 51583#105 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:33510
+2022/10/30 23:31:44 51583#105 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 10809
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:31:44 51583#105 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 48.086315ms.
+2022/10/30 23:31:44 51583#105 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 48.662213ms
+2022/10/30 23:31:44 51583#105 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 10809
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	10	IN	A	108.177.122.106
+www.google.com.	10	IN	A	108.177.122.99
+www.google.com.	10	IN	A	108.177.122.103
+www.google.com.	10	IN	A	108.177.122.104
+www.google.com.	10	IN	A	108.177.122.105
+www.google.com.	10	IN	A	108.177.122.147
+
+2022/10/30 23:31:44 51583#95 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:46429
+2022/10/30 23:31:44 51583#95 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 21018
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:31:44 51583#95 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 22.144802ms.
+2022/10/30 23:31:44 51583#95 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.615266ms
+2022/10/30 23:31:44 51583#95 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 21018
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	51	IN	A	64.233.177.94
+
+2022/10/30 23:31:45 51583#96 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:56658
+2022/10/30 23:31:45 51583#96 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 31037
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+2022/10/30 23:31:45 51583#96 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;apis.google.com.	IN	 A. Elapsed 24.859072ms.
+2022/10/30 23:31:45 51583#96 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 25.320445ms
+2022/10/30 23:31:45 51583#96 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 31037
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+;; ANSWER SECTION:
+apis.google.com.	292	IN	CNAME	plus.l.google.com.
+plus.l.google.com.	292	IN	A	142.250.189.110
+
+2022/10/30 23:31:45 51583#106 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:55359
+2022/10/30 23:31:45 51583#106 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 56245
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+2022/10/30 23:31:45 51583#106 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ogs.google.com.	IN	 A. Elapsed 20.394036ms.
+2022/10/30 23:31:45 51583#106 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.857946ms
+2022/10/30 23:31:45 51583#106 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 56245
+;; flags: qr rd ra; QUERY: 1, ANSWER: 7, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+;; ANSWER SECTION:
+ogs.google.com.	194	IN	CNAME	www3.l.google.com.
+www3.l.google.com.	194	IN	A	172.217.215.100
+www3.l.google.com.	194	IN	A	172.217.215.102
+www3.l.google.com.	194	IN	A	172.217.215.138
+www3.l.google.com.	194	IN	A	172.217.215.139
+www3.l.google.com.	194	IN	A	172.217.215.101
+www3.l.google.com.	194	IN	A	172.217.215.113
+
+2022/10/30 23:31:46 51583#113 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:59794
+2022/10/30 23:31:46 51583#113 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 51246
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:31:46 51583#113 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 19.71251ms.
+2022/10/30 23:31:46 51583#113 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.166962ms
+2022/10/30 23:31:46 51583#113 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 51246
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	28	IN	A	172.217.10.195
+
+2022/10/30 23:31:46 51583#114 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:40038
+2022/10/30 23:31:46 51583#114 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 29856
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+2022/10/30 23:31:46 51583#114 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ajax.googleapis.com.	IN	 A. Elapsed 20.322467ms.
+2022/10/30 23:31:46 51583#114 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.759203ms
+2022/10/30 23:31:46 51583#114 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 29856
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+ajax.googleapis.com.	218	IN	A	64.233.185.95
+
+2022/10/30 23:31:46 51583#107 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:50527
+2022/10/30 23:31:46 51583#107 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 59987
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+2022/10/30 23:31:46 51583#107 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;play.google.com.	IN	 A. Elapsed 19.210169ms.
+2022/10/30 23:31:46 51583#107 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.80489ms
+2022/10/30 23:31:46 51583#107 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 59987
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+;; ANSWER SECTION:
+play.google.com.	202	IN	A	142.250.9.102
+play.google.com.	202	IN	A	142.250.9.138
+play.google.com.	202	IN	A	142.250.9.100
+play.google.com.	202	IN	A	142.250.9.113
+play.google.com.	202	IN	A	142.250.9.139
+play.google.com.	202	IN	A	142.250.9.101
+
+2022/10/30 23:31:47 51583#115 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:42445
+2022/10/30 23:31:47 51583#115 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 10993
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:31:47 51583#115 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 19.34378ms.
+2022/10/30 23:31:47 51583#115 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.911083ms
+2022/10/30 23:31:47 51583#115 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 10993
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	240	IN	A	64.233.185.95
+
+2022/10/30 23:31:47 51583#108 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:40416
+2022/10/30 23:31:47 51583#108 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 46846
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+2022/10/30 23:31:47 51583#108 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;adservice.google.com.	IN	 A. Elapsed 21.269345ms.
+2022/10/30 23:31:47 51583#108 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.297838ms
+2022/10/30 23:31:47 51583#108 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 46846
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+;; ANSWER SECTION:
+adservice.google.com.	251	IN	A	64.233.177.157
+adservice.google.com.	251	IN	A	64.233.177.155
+adservice.google.com.	251	IN	A	64.233.177.154
+adservice.google.com.	251	IN	A	64.233.177.156
+
+2022/10/30 23:31:59 51583#116 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:39124
+2022/10/30 23:31:59 51583#116 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 19964
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+2022/10/30 23:31:59 51583#116 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.amazon.com.	IN	 A. Elapsed 18.783208ms.
+2022/10/30 23:31:59 51583#116 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.292905ms
+2022/10/30 23:31:59 51583#116 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 19964
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+www.amazon.com.	19	IN	CNAME	tp.47cf2c8c9-frontier.amazon.com.
+tp.47cf2c8c9-frontier.amazon.com.	19	IN	CNAME	d3ag4hukkh62yn.cloudfront.net.
+d3ag4hukkh62yn.cloudfront.net.	19	IN	A	54.192.31.209
+
+2022/10/30 23:31:59 51583#109 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:53677
+2022/10/30 23:31:59 51583#109 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 42773
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+2022/10/30 23:31:59 51583#109 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;images-na.ssl-images-amazon.com.	IN	 A. Elapsed 22.851672ms.
+2022/10/30 23:31:59 51583#109 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 23.362228ms
+2022/10/30 23:31:59 51583#109 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 42773
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+images-na.ssl-images-amazon.com.	38	IN	CNAME	m.media-amazon.com.
+m.media-amazon.com.	38	IN	CNAME	tp.c47710ee9-frontier.media-amazon.com.
+tp.c47710ee9-frontier.media-amazon.com.	38	IN	CNAME	c.media-amazon.com.
+c.media-amazon.com.	38	IN	A	52.85.146.128
+
+2022/10/30 23:32:00 51583#110 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35256
+2022/10/30 23:32:00 51583#110 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 60220
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+2022/10/30 23:32:00 51583#110 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fls-na.amazon.com.	IN	 A. Elapsed 20.738219ms.
+2022/10/30 23:32:00 51583#110 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.853733ms
+2022/10/30 23:32:00 51583#110 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 60220
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+fls-na.amazon.com.	0	IN	CNAME	gateway.prod.us-east-1.forester.a2z.com.
+gateway.prod.us-east-1.forester.a2z.com.	0	IN	CNAME	endpoint.prod.us-east-1.forester.a2z.com.
+endpoint.prod.us-east-1.forester.a2z.com.	0	IN	A	52.3.115.44
+endpoint.prod.us-east-1.forester.a2z.com.	0	IN	A	54.175.222.117
+endpoint.prod.us-east-1.forester.a2z.com.	0	IN	A	52.20.230.69
+endpoint.prod.us-east-1.forester.a2z.com.	0	IN	A	18.205.44.146
+endpoint.prod.us-east-1.forester.a2z.com.	0	IN	A	35.175.25.241
+endpoint.prod.us-east-1.forester.a2z.com.	0	IN	A	54.85.120.73
+endpoint.prod.us-east-1.forester.a2z.com.	0	IN	A	107.20.135.134
+endpoint.prod.us-east-1.forester.a2z.com.	0	IN	A	52.5.116.197
+
+2022/10/30 23:32:15 51583#111 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:55930
+2022/10/30 23:32:15 51583#111 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 34503
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+2022/10/30 23:32:15 51583#111 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.youtube.com.	IN	 A. Elapsed 20.002271ms.
+2022/10/30 23:32:15 51583#111 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.764951ms
+2022/10/30 23:32:15 51583#111 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 34503
+;; flags: qr rd ra; QUERY: 1, ANSWER: 17, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.youtube.com.	IN	 A
+
+;; ANSWER SECTION:
+www.youtube.com.	141	IN	CNAME	youtube-ui.l.google.com.
+youtube-ui.l.google.com.	141	IN	A	64.233.177.91
+youtube-ui.l.google.com.	141	IN	A	173.194.219.93
+youtube-ui.l.google.com.	141	IN	A	64.233.185.91
+youtube-ui.l.google.com.	141	IN	A	64.233.185.136
+youtube-ui.l.google.com.	141	IN	A	64.233.185.93
+youtube-ui.l.google.com.	141	IN	A	64.233.185.190
+youtube-ui.l.google.com.	141	IN	A	74.125.138.190
+youtube-ui.l.google.com.	141	IN	A	74.125.138.93
+youtube-ui.l.google.com.	141	IN	A	74.125.138.136
+youtube-ui.l.google.com.	141	IN	A	142.251.45.238
+youtube-ui.l.google.com.	141	IN	A	142.251.15.136
+youtube-ui.l.google.com.	141	IN	A	142.251.15.91
+youtube-ui.l.google.com.	141	IN	A	142.251.15.190
+youtube-ui.l.google.com.	141	IN	A	108.177.122.93
+youtube-ui.l.google.com.	141	IN	A	64.233.177.93
+youtube-ui.l.google.com.	141	IN	A	64.233.177.136
+
+2022/10/30 23:32:15 51583#117 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:36054
+2022/10/30 23:32:15 51583#117 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 38942
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:32:15 51583#117 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 18.720283ms.
+2022/10/30 23:32:15 51583#117 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.265961ms
+2022/10/30 23:32:15 51583#117 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 38942
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	212	IN	A	64.233.185.95
+
+2022/10/30 23:32:15 51583#118 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:36308
+2022/10/30 23:32:15 51583#118 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 20158
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+2022/10/30 23:32:15 51583#118 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;i.ytimg.com.	IN	 A. Elapsed 22.404826ms.
+2022/10/30 23:32:15 51583#118 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 25.868139ms
+2022/10/30 23:32:15 51583#118 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 20158
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;i.ytimg.com.	IN	 A
+
+;; ANSWER SECTION:
+i.ytimg.com.	270	IN	A	64.233.185.119
+i.ytimg.com.	270	IN	A	74.125.138.119
+i.ytimg.com.	270	IN	A	142.251.45.246
+i.ytimg.com.	270	IN	A	142.251.15.119
+i.ytimg.com.	270	IN	A	108.177.122.119
+i.ytimg.com.	270	IN	A	142.250.9.119
+i.ytimg.com.	270	IN	A	172.253.124.119
+i.ytimg.com.	270	IN	A	172.217.10.118
+i.ytimg.com.	270	IN	A	142.250.176.86
+i.ytimg.com.	270	IN	A	64.233.177.119
+
+2022/10/30 23:32:15 51583#119 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:36837
+2022/10/30 23:32:15 51583#119 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 48727
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+2022/10/30 23:32:16 51583#119 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;accounts.google.com.	IN	 A. Elapsed 24.594306ms.
+2022/10/30 23:32:16 51583#119 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 25.175421ms
+2022/10/30 23:32:16 51583#119 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 48727
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;accounts.google.com.	IN	 A
+
+;; ANSWER SECTION:
+accounts.google.com.	148	IN	A	172.217.164.77
+
+2022/10/30 23:32:16 51583#120 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:33356
+2022/10/30 23:32:16 51583#120 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 40327
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:32:16 51583#120 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 22.111304ms.
+2022/10/30 23:32:16 51583#120 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.603326ms
+2022/10/30 23:32:16 51583#120 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 40327
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	299	IN	A	172.217.10.195
+
+2022/10/30 23:32:18 51583#112 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:53577
+2022/10/30 23:32:18 51583#112 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 53988
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:32:18 51583#112 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 19.101806ms.
+2022/10/30 23:32:18 51583#112 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.530949ms
+2022/10/30 23:32:18 51583#112 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 53988
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	18	IN	A	64.233.177.94
+
+2022/10/30 23:32:19 51583#121 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:59050
+2022/10/30 23:32:19 51583#121 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 32248
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+2022/10/30 23:32:19 51583#121 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;googleads.g.doubleclick.net.	IN	 A. Elapsed 19.273213ms.
+2022/10/30 23:32:19 51583#121 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.703606ms
+2022/10/30 23:32:19 51583#121 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 32248
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;googleads.g.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+googleads.g.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:32:23 51583#122 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:37863
+2022/10/30 23:32:23 51583#122 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 11701
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:32:23 51583#122 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 29.39106ms.
+2022/10/30 23:32:23 51583#122 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 30.003508ms
+2022/10/30 23:32:23 51583#122 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 11701
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	273	IN	A	108.177.122.104
+www.google.com.	273	IN	A	108.177.122.147
+www.google.com.	273	IN	A	108.177.122.106
+www.google.com.	273	IN	A	108.177.122.99
+www.google.com.	273	IN	A	108.177.122.103
+www.google.com.	273	IN	A	108.177.122.105
+
+2022/10/30 23:32:23 51583#129 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:47105
+2022/10/30 23:32:23 51583#129 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 24486
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+2022/10/30 23:32:23 51583#129 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;yt3.ggpht.com.	IN	 A. Elapsed 20.452065ms.
+2022/10/30 23:32:23 51583#129 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.954732ms
+2022/10/30 23:32:23 51583#129 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 24486
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;yt3.ggpht.com.	IN	 A
+
+;; ANSWER SECTION:
+yt3.ggpht.com.	188	IN	CNAME	photos-ugc.l.googleusercontent.com.
+photos-ugc.l.googleusercontent.com.	188	IN	A	108.177.122.132
+
+2022/10/30 23:32:25 51583#123 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:35502
+2022/10/30 23:32:25 51583#123 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 34004
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+2022/10/30 23:32:25 51583#123 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;jnn-pa.googleapis.com.	IN	 A. Elapsed 20.01933ms.
+2022/10/30 23:32:25 51583#123 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.982583ms
+2022/10/30 23:32:25 51583#123 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 34004
+;; flags: qr rd ra; QUERY: 1, ANSWER: 8, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;jnn-pa.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+jnn-pa.googleapis.com.	43	IN	A	64.233.177.95
+jnn-pa.googleapis.com.	43	IN	A	64.233.185.95
+jnn-pa.googleapis.com.	43	IN	A	74.125.138.95
+jnn-pa.googleapis.com.	43	IN	A	142.251.15.95
+jnn-pa.googleapis.com.	43	IN	A	108.177.122.95
+jnn-pa.googleapis.com.	43	IN	A	172.217.164.74
+jnn-pa.googleapis.com.	43	IN	A	172.217.10.106
+jnn-pa.googleapis.com.	43	IN	A	142.250.189.106
+
+2022/10/30 23:32:25 51583#124 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:57522
+2022/10/30 23:32:25 51583#124 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 65248
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+2022/10/30 23:32:25 51583#124 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;static.doubleclick.net.	IN	 A. Elapsed 22.257947ms.
+2022/10/30 23:32:25 51583#124 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 22.998146ms
+2022/10/30 23:32:25 51583#124 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 65248
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;static.doubleclick.net.	IN	 A
+
+;; ANSWER SECTION:
+static.doubleclick.net.	3600	IN	A	0.0.0.0
+
+2022/10/30 23:32:30 51583#125 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:58350
+2022/10/30 23:32:30 51583#125 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 49916
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;youtube.com.	IN	 A
+
+2022/10/30 23:32:30 51583#125 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;youtube.com.	IN	 A. Elapsed 105.931606ms.
+2022/10/30 23:32:30 51583#125 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 106.441141ms
+2022/10/30 23:32:30 51583#125 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 49916
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;youtube.com.	IN	 A
+
+;; ANSWER SECTION:
+youtube.com.	300	IN	A	64.233.185.93
+youtube.com.	300	IN	A	64.233.185.136
+youtube.com.	300	IN	A	64.233.185.91
+youtube.com.	300	IN	A	64.233.185.190
+
+2022/10/30 23:32:32 51583#126 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:49492
+2022/10/30 23:32:32 51583#126 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 42733
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:32:32 51583#126 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 19.515951ms.
+2022/10/30 23:32:32 51583#126 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.944051ms
+2022/10/30 23:32:32 51583#126 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 42733
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	264	IN	A	108.177.122.104
+www.google.com.	264	IN	A	108.177.122.147
+www.google.com.	264	IN	A	108.177.122.106
+www.google.com.	264	IN	A	108.177.122.99
+www.google.com.	264	IN	A	108.177.122.103
+www.google.com.	264	IN	A	108.177.122.105
+
+2022/10/30 23:32:32 51583#130 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:48594
+2022/10/30 23:32:32 51583#130 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 12917
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+2022/10/30 23:32:32 51583#130 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.google.com.	IN	 A. Elapsed 20.120943ms.
+2022/10/30 23:32:32 51583#130 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.779005ms
+2022/10/30 23:32:32 51583#130 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 12917
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.google.com.	IN	 A
+
+;; ANSWER SECTION:
+www.google.com.	263	IN	A	108.177.122.104
+www.google.com.	263	IN	A	108.177.122.147
+www.google.com.	263	IN	A	108.177.122.106
+www.google.com.	263	IN	A	108.177.122.99
+www.google.com.	263	IN	A	108.177.122.103
+www.google.com.	263	IN	A	108.177.122.105
+
+2022/10/30 23:32:32 51583#131 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:41745
+2022/10/30 23:32:32 51583#131 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 29037
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+2022/10/30 23:32:32 51583#131 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.gstatic.com.	IN	 A. Elapsed 20.720055ms.
+2022/10/30 23:32:32 51583#131 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.87234ms
+2022/10/30 23:32:32 51583#131 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 29037
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+www.gstatic.com.	3	IN	A	64.233.177.94
+
+2022/10/30 23:32:33 51583#127 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:38010
+2022/10/30 23:32:33 51583#127 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 63690
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+2022/10/30 23:32:33 51583#127 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;apis.google.com.	IN	 A. Elapsed 19.464032ms.
+2022/10/30 23:32:33 51583#127 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 19.926355ms
+2022/10/30 23:32:33 51583#127 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 63690
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;apis.google.com.	IN	 A
+
+;; ANSWER SECTION:
+apis.google.com.	244	IN	CNAME	plus.l.google.com.
+plus.l.google.com.	244	IN	A	142.250.189.110
+
+2022/10/30 23:32:33 51583#132 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:45868
+2022/10/30 23:32:33 51583#132 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 2149
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+2022/10/30 23:32:33 51583#132 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ogs.google.com.	IN	 A. Elapsed 20.11111ms.
+2022/10/30 23:32:33 51583#132 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.705482ms
+2022/10/30 23:32:33 51583#132 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 2149
+;; flags: qr rd ra; QUERY: 1, ANSWER: 7, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ogs.google.com.	IN	 A
+
+;; ANSWER SECTION:
+ogs.google.com.	146	IN	CNAME	www3.l.google.com.
+www3.l.google.com.	146	IN	A	172.217.215.100
+www3.l.google.com.	146	IN	A	172.217.215.102
+www3.l.google.com.	146	IN	A	172.217.215.138
+www3.l.google.com.	146	IN	A	172.217.215.139
+www3.l.google.com.	146	IN	A	172.217.215.101
+www3.l.google.com.	146	IN	A	172.217.215.113
+
+2022/10/30 23:32:34 51583#128 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:45203
+2022/10/30 23:32:34 51583#128 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 57078
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+2022/10/30 23:32:34 51583#128 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.gstatic.com.	IN	 A. Elapsed 19.578918ms.
+2022/10/30 23:32:34 51583#128 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.092331ms
+2022/10/30 23:32:34 51583#128 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 57078
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.gstatic.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.gstatic.com.	281	IN	A	172.217.10.195
+
+2022/10/30 23:32:34 51583#145 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:59157
+2022/10/30 23:32:34 51583#145 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 25771
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+2022/10/30 23:32:34 51583#145 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;ajax.googleapis.com.	IN	 A. Elapsed 23.262111ms.
+2022/10/30 23:32:34 51583#145 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 24.074509ms
+2022/10/30 23:32:34 51583#145 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 25771
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;ajax.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+ajax.googleapis.com.	170	IN	A	64.233.185.95
+
+2022/10/30 23:32:34 51583#133 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:59309
+2022/10/30 23:32:34 51583#133 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 46761
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+2022/10/30 23:32:34 51583#133 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;play.google.com.	IN	 A. Elapsed 27.058121ms.
+2022/10/30 23:32:34 51583#133 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 27.510763ms
+2022/10/30 23:32:34 51583#133 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 46761
+;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;play.google.com.	IN	 A
+
+;; ANSWER SECTION:
+play.google.com.	154	IN	A	142.250.9.102
+play.google.com.	154	IN	A	142.250.9.138
+play.google.com.	154	IN	A	142.250.9.100
+play.google.com.	154	IN	A	142.250.9.113
+play.google.com.	154	IN	A	142.250.9.139
+play.google.com.	154	IN	A	142.250.9.101
+
+2022/10/30 23:32:34 51583#146 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:36619
+2022/10/30 23:32:34 51583#146 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 43113
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+2022/10/30 23:32:34 51583#146 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fonts.googleapis.com.	IN	 A. Elapsed 20.354551ms.
+2022/10/30 23:32:34 51583#146 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.867691ms
+2022/10/30 23:32:34 51583#146 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 43113
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fonts.googleapis.com.	IN	 A
+
+;; ANSWER SECTION:
+fonts.googleapis.com.	193	IN	A	64.233.185.95
+
+2022/10/30 23:32:35 51583#134 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:38562
+2022/10/30 23:32:35 51583#134 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 50697
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+2022/10/30 23:32:35 51583#134 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;adservice.google.com.	IN	 A. Elapsed 20.852355ms.
+2022/10/30 23:32:35 51583#134 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 21.636982ms
+2022/10/30 23:32:35 51583#134 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 50697
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;adservice.google.com.	IN	 A
+
+;; ANSWER SECTION:
+adservice.google.com.	203	IN	A	64.233.177.157
+adservice.google.com.	203	IN	A	64.233.177.155
+adservice.google.com.	203	IN	A	64.233.177.154
+adservice.google.com.	203	IN	A	64.233.177.156
+
+2022/10/30 23:32:47 51583#135 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:32782
+2022/10/30 23:32:47 51583#135 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 47977
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+2022/10/30 23:32:47 51583#135 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;www.amazon.com.	IN	 A. Elapsed 19.544021ms.
+2022/10/30 23:32:47 51583#135 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.011836ms
+2022/10/30 23:32:47 51583#135 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 47977
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;www.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+www.amazon.com.	37	IN	CNAME	tp.47cf2c8c9-frontier.amazon.com.
+tp.47cf2c8c9-frontier.amazon.com.	37	IN	CNAME	d3ag4hukkh62yn.cloudfront.net.
+d3ag4hukkh62yn.cloudfront.net.	37	IN	A	54.192.31.209
+
+2022/10/30 23:32:47 51583#136 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:41375
+2022/10/30 23:32:47 51583#136 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 35406
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+2022/10/30 23:32:47 51583#136 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;images-na.ssl-images-amazon.com.	IN	 A. Elapsed 111.656364ms.
+2022/10/30 23:32:47 51583#136 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 112.155563ms
+2022/10/30 23:32:47 51583#136 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 35406
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;images-na.ssl-images-amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+images-na.ssl-images-amazon.com.	86400	IN	CNAME	m.media-amazon.com.
+m.media-amazon.com.	60	IN	CNAME	tp.c47710ee9-frontier.media-amazon.com.
+tp.c47710ee9-frontier.media-amazon.com.	60	IN	CNAME	c.media-amazon.com.
+c.media-amazon.com.	60	IN	A	52.85.146.128
+
+2022/10/30 23:32:48 51583#147 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).udpHandlePacket(): Start handling new UDP packet from 127.0.0.1:57187
+2022/10/30 23:32:48 51583#147 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): IN: ;; opcode: QUERY, status: NOERROR, id: 18879
+;; flags: rd ad; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+2022/10/30 23:32:48 51583#147 [debug] time.Duration.Milliseconds(): upstream quic://94.140.14.14:853 successfully finished exchange of ;fls-na.amazon.com.	IN	 A. Elapsed 19.549197ms.
+2022/10/30 23:32:48 51583#147 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).replyFromUpstream(): RTT: 20.023979ms
+2022/10/30 23:32:48 51583#147 [debug] github.com/AdguardTeam/dnsproxy/proxy.(*Proxy).logDNSMessage(): OUT: ;; opcode: QUERY, status: NOERROR, id: 18879
+;; flags: qr rd ra; QUERY: 1, ANSWER: 10, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version 0; flags: ; udp: 1200
+
+;; QUESTION SECTION:
+;fls-na.amazon.com.	IN	 A
+
+;; ANSWER SECTION:
+fls-na.amazon.com.	13	IN	CNAME	gateway.prod.us-east-1.forester.a2z.com.
+gateway.prod.us-east-1.forester.a2z.com.	13	IN	CNAME	endpoint.prod.us-east-1.forester.a2z.com.
+endpoint.prod.us-east-1.forester.a2z.com.	13	IN	A	44.208.196.49
+endpoint.prod.us-east-1.forester.a2z.com.	13	IN	A	3.225.57.138
+endpoint.prod.us-east-1.forester.a2z.com.	13	IN	A	3.213.116.55
+endpoint.prod.us-east-1.forester.a2z.com.	13	IN	A	3.233.111.158
+endpoint.prod.us-east-1.forester.a2z.com.	13	IN	A	34.192.74.211
+endpoint.prod.us-east-1.forester.a2z.com.	13	IN	A	23.22.116.171
+endpoint.prod.us-east-1.forester.a2z.com.	13	IN	A	52.3.22.189
+endpoint.prod.us-east-1.forester.a2z.com.	13	IN	A	35.170.30.224
+
+2022/10/30 23:33:01 51583#1 [info] Stopping the DNS proxy server
+2022/10/30 23:33:01 51583#7 [debug] tcpPacketLoop: connection closed: accept tcp 127.0.0.54:53: use of closed network connection
+2022/10/30 23:33:01 51583#6 [debug] udpPacketLoop: connection closed
+2022/10/30 23:33:01 51583#1 [info] Stopped the DNS proxy server
