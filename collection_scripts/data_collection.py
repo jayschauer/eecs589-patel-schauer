@@ -22,7 +22,7 @@ args = vars(parser.parse_args())
 
 # load urls from file
 urls= []
-fname = "/vagrant/top-100-2022-10-31"
+fname = args.list
 with open(fname) as f:
 	lines = f.readlines()
 	for line in lines:
