@@ -25,5 +25,5 @@ This does the following
 # Data Plots
 1. `vagrant ssh node1`
 2. Make sure numpy and matplotlib are installed: `sudo pip install numpy matplotlib`
-3. `python3 /vagrant/plot_data.py --dir=<processed data dir> --filename=<output filename>`
+3. `python3 /vagrant/analysis/plot_data.py --dir=<processed data dir> --filename=<output filename>`
    - Plots data from each label on a separate graph and saves it to filename
