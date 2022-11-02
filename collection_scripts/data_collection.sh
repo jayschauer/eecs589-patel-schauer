@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# command line args
+url_list=$1
+
 # Set up environment
 sudo sysctl -w net.core.rmem_max=2500000 # increase buffer size to avoid quic warnings: https://github.com/lucas-clemente/quic-go/wiki/UDP-Receive-Buffer-Size
 sudo cp /etc/resolv.conf /vagrant/original_resolv.conf
@@ -29,7 +32,7 @@ for i in $(seq 1 $N)
 do
     echo "Starting iteration $i/$N"
     mkdir -p /vagrant/data/pcaps/$d/iteration_$i
-	sudo python3 /vagrant/data_collection.py --dir=/vagrant/data/pcaps/$d/iteration_$i --iter=$i > /vagrant/logs/$d/collection_$i.txt 2>&1
+	sudo python3 /vagrant/data_collection.py --list=$url_list --dir=/vagrant/data/pcaps/$d/iteration_$i --iter=$i > /vagrant/logs/$d/collection_$i.txt 2>&1
 	sleep 2
 done
 

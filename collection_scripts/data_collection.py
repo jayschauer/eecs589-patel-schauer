@@ -15,6 +15,7 @@ PORT = 853
 INTERFACE = 'enp0s3'
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--list', type=str, required=True)
 parser.add_argument('--dir', type=str, required=True)
 parser.add_argument('--iter', type=int, required=True)
 args = vars(parser.parse_args())
