@@ -11,7 +11,7 @@ from selenium.common.exceptions import TimeoutException
 
 # Constants
 PORT = 853
-INTERFACE = 'enp0s3'
+INTERFACE = 'ens3'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--list', type=str, required=True)
@@ -33,6 +33,10 @@ with open(fname) as f:
 start_line = args['start_line']
 end_line = args['end_line']
 urls = [urls[i] for i in range(start_line, end_line+1)]
+
+def delete_file(file):
+    if os.path.isfile(file):
+        os.remove(file)
 
 for i, base_url in enumerate(urls):
     start = time.time()
@@ -63,8 +67,11 @@ for i, base_url in enumerate(urls):
             time.sleep(5)
         except TimeoutException as ex:
             print(ex, flush=True)
-    except:
+            delete_file(capture_file)
+    except Exception as ex:
         print('Unexpected exception!!')
+        print(ex)
+        delete_file(capture_file)
     finally:
         # Cleanup driver, tcpdump process
         try:
