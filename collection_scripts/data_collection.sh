@@ -10,7 +10,7 @@ iterations=$4
 # Set up environment
 sudo sysctl -w net.core.rmem_max=2500000 # increase buffer size to avoid quic warnings: https://github.com/lucas-clemente/quic-go/wiki/UDP-Receive-Buffer-Size
 #sudo cp /etc/resolv.conf ./original_resolv.conf
-sudo cp ./resolv.conf /etc/
+#sudo cp ./resolv.conf /etc/
 sudo timedatectl set-timezone America/Detroit
 
 # Create required directories
