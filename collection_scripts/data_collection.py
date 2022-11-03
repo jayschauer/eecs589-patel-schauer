@@ -68,7 +68,7 @@ for i, base_url in enumerate(urls):
         except TimeoutException as ex:
             print(ex, flush=True)
             delete_file(capture_file)
-    except Exception as e:
+    except Exception as ex:
         print('Unexpected exception!!')
         print(ex)
         delete_file(capture_file)
