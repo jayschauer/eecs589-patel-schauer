@@ -7,15 +7,15 @@ sudo apt-get install -y python3-pip xvfb libnss3-dev
 # chrome package and driver both downloaded on 2022-10-31
 # driver download: https://chromedriver.chromium.org/downloads --> version ChromeDriver 107.0.5304.62
 # chrome download: https://www.google.com/chrome/ --> amd64, version 107.0.5304.87-1
-if [ ! -e "/vagrant/google-chrome-stable_amd64.deb" ]; then
+if [ ! -e "./google-chrome-stable_amd64.deb" ]; then
     echo "Downloading chrome"
-    wget -P /vagrant https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 else
     echo "Chrome already downloaded"
 fi
-sudo apt install -y /vagrant/google-chrome-stable_amd64.deb
+sudo apt install -y ./google-chrome-stable_amd64.deb
 
 sudo pip install selenium
 
-sudo cp /vagrant/dnsproxy-linux-amd64-v0.46.2 /usr/local/bin/dnsproxy
-sudo cp /vagrant/chromedriver /usr/local/bin/chromedriver
+sudo cp ./dnsproxy-linux-amd64-v0.46.2 /usr/local/bin/dnsproxy
+sudo cp ./chromedriver /usr/local/bin/chromedriver

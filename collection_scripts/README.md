@@ -1,14 +1,17 @@
 # Data collection 
 
-We use Vagrant + VirtualBox to set up the data collection. 
+We run the data collection in an ubuntu 20.04 docker image.
 
 In order to collect data, perform the following steps:
+1. After setting up the vm appropriately, run `bash bootstrap.sh` to install the necessary packages.
+2. Run `bash data_collection.sh <url list> <start line> <end_line> <number of iterations>` to start data collection. end line inclusive.
+   - E.g. `bash data_collection.sh top-1k-2022-10-31 200 299 50` will collect data for domains 200-299 in the list from top-1k-2022-10-31 for 50 iterations.
 
-1. Install VirtualBox.
-2. Install Vagrant.
-3. Run the command `vagrant up` (should be run from inside the vagrant folder).
-4. Log into the VM with the command `vagrant ssh node1`.
-5. Run the following command to kick off the experiment: `bash /vagrant/data_collection.sh`.
+<!--1. Install VirtualBox.
+1. Install Vagrant.
+2. Run the command `vagrant up` (should be run from inside the vagrant folder).
+3. Log into the VM with the command `vagrant ssh node1`.
+4. Run the following command to kick off the experiment: `bash /vagrant/data_collection.sh`.-->
 
 This does the following
 - starts data collection from urls in short_list_test
