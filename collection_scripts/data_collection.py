@@ -34,6 +34,10 @@ start_line = args['start_line']
 end_line = args['end_line']
 urls = [urls[i] for i in range(start_line, end_line+1)]
 
+def delete_file(file):
+    if os.path.isfile(file):
+        os.remove(file)
+
 for i, base_url in enumerate(urls):
     start = time.time()
     url = 'http://' + base_url
@@ -63,8 +67,11 @@ for i, base_url in enumerate(urls):
             time.sleep(5)
         except TimeoutException as ex:
             print(ex, flush=True)
-    except:
+            delete_file(capture_file)
+    except Exception as e:
         print('Unexpected exception!!')
+        print(ex)
+        delete_file(capture_file)
     finally:
         # Cleanup driver, tcpdump process
         try:
