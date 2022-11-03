@@ -11,7 +11,7 @@ from selenium.common.exceptions import TimeoutException
 
 # Constants
 PORT = 853
-INTERFACE = 'enp0s3'
+INTERFACE = 'ens3'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--list', type=str, required=True)
