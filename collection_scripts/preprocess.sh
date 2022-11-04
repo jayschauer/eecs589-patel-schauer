@@ -18,8 +18,8 @@ do
     filename_without_ext="${filename%.*}"
     
     # Use tshark to read pcap and write to a temporary text file
-    tshark -r $file > /vagrant/data/tmp/temp.txt
+    tshark -r $file > data/tmp/temp.txt
 
     # Process temporary file and save it to output dir
-    python3 /vagrant/preprocess.py --file=/vagrant/data/tmp/temp.txt --dir=$2 --label=$filename_without_ext
+    python3 preprocess.py --file=data/tmp/temp.txt --dir=$2 --label=$filename_without_ext
 done
