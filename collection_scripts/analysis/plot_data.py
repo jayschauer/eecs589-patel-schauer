@@ -42,11 +42,12 @@ def plot_data(data, output='./test.png'):
 
         color = color=get_color(i)
         for j, (time, size) in enumerate(zip(time_list, size_list)):
-            ax[i].scatter(time, size, color=get_color(j), label=j)
-            ax[i].set_title(domain)
-            ax[i].set_xlabel('time (s)')
-            ax[i].set_ylabel('packet size (bytes)')
-            ax[i].legend()
+            axes = ax[i] if i > 1 else ax
+            axes.scatter(time, size, color=get_color(j), label=j)
+            axes.set_title(domain)
+            axes.set_xlabel('time (s)')
+            axes.set_ylabel('packet size (bytes)')
+            axes.legend()
 
     plt.savefig(output)
     plt.show()
