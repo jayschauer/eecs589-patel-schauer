@@ -92,11 +92,11 @@ def make_dataframe(data):
 
 # Loads data and trains classifier
 def classify():
-    data_dir = './collection_scripts/data/processed_half/data.pkl'
+    data_path = './collection_scripts/data/processed_half/data.pkl'
     url_file = './top-1k-curated'
 
     print('Loading data...')
-    data, labels = load_data(data_dir, url_file)
+    data, labels = load_data(data_path, url_file)
     X_train, X_test, y_train, y_test = train_test_split(
         data, labels, random_state=589, test_size=0.25, shuffle=True
     )
@@ -112,6 +112,10 @@ def classify():
     acc = accuracy_score(pred, y_test)
 
     print(f'Accuracy: {acc}')
+
+    with open('./classification/predictions.pkl', 'wb') as pred_file:
+        d = {'pred': pred, 'gt': y_test}
+        pickle.dump(d, pred_file)
 
 
 classify()
