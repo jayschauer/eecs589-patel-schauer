@@ -5,6 +5,7 @@ import pickle
 
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import accuracy_score, f1_score
 from tabulate import tabulate
 
 parser = argparse.ArgumentParser()
@@ -26,6 +27,12 @@ if args['show_plot']:
     matrix_plot.ax_.set_xticks([i*10 for i in range(10)])
     matrix_plot.ax_.set_yticks([i*10 for i in range(10)])
     plt.show()
+
+
+# Print metrics
+print(f'Accuracy: {accuracy_score(y_true, y_pred)}')
+print(f"F1-score: {f1_score(y_true, y_pred, average='weighted')}")
+print()
 
 # Print incorrect combinations
 nonzero = np.where(c_mat > 0)

@@ -16,3 +16,6 @@ Overview of current state of DNS over QUIC: https://dl.acm.org/doi/10.1007/978-3
     paper slides: https://datatracker.ietf.org/meeting/113/materials/slides-113-maprg-one-to-rule-them-all-a-first-look-at-dns-over-quic
     ^ That paper is useful for us because it basically says that DNS over QUIC is already superior to DoT and DoH,
     which means that it will hopefully soon overtake the others as the dominant form of encrypted DNS, thus motivating our study.
+
+
+ROCKET time series classification: https://arxiv.org/abs/1910.13051

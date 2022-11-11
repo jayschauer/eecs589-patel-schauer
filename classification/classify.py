@@ -1,8 +1,8 @@
+import argparse
 import os
-import glob
-import json
 import pandas as pd
 import pickle
+import sys
 
 import sktime.datatypes as datatypes
 from sktime.transformations.panel.padder import PaddingTransformer
@@ -13,64 +13,10 @@ from sktime.classification.kernel_based import RocketClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
-# Loads the url file to use indices as labels
-def get_label_dict(path):
-    label_dict = {}
-    with open(path) as label_file:
-        lines = label_file.readlines()
-        for i, line in enumerate(lines):
-            label_dict[line.strip()] = i
-
-# Loads the data from the specified path. If it's a pickle file it will load that,
-# otherwise load data from json files in directory and save as pickle
-# Returns:  data - list of samples where each sample is a dictionary of (time: size) values
-#           labels - list of labels where the label is the value of the url from the dictionary
-def load_data(data_path, label_dict):
-    data = []
-    labels = []
-
-    # If it's a pickled file, unpickle it
-    if os.path.isfile(data_path):
-        print('Loading from pickle file')
-        with open(data_path, 'rb') as data_file:
-            d = pickle.load(data_file)
-            data = d['data']
-            labels = d['labels']
-
-    else:
-        print('Loading from json files')
-        path = os.path.join(data_path, '**/*.json')
-        for filename in glob.glob(path, recursive=True):
-            with open(filename, 'r') as infile:
-                file_data = json.load(infile)
-
-                label = file_data['label']
-                times = file_data['time']
-                sizes = file_data['size']
-                
-                series = dict(zip(times, sizes))
-                data.append(series)
-                labels.append(label_dict.get(label, -1))  # index of url in list, -1 if not present
-
-        # Save data as pickle for future use
-        pickle_path = os.path.join(data_path, 'data.pkl')
-        with open(pickle_path, 'wb') as pickle_file:
-            d = {'data': data, 'labels': labels}
-            pickle.dump(d, pickle_file)
-
-    
-    return data, labels
-
-# Gets the list of urls
-def get_label_dict(path):
-    # Get labels from file
-    label_dict = {}
-    with open(path) as label_file:
-        lines = label_file.readlines()
-        for i, line in enumerate(lines):
-            label_dict[line.strip()] = i
-
-    return label_dict
+# Add collection_scripts folder to path to import from dataset_utils
+collection_path = os.path.join(os.path.dirname(__file__), '../collection_scripts')
+sys.path.append(collection_path)
+from dataset_utils import load_data
 
 # Converts the data list returned by load_data to a dataframe format recognized by sktime classifiers
 # Returns:  multi-index panel of mtype 'pd-multiindex'
@@ -91,20 +37,21 @@ def make_dataframe(data):
     return X
 
 # Loads data and trains classifier
-def classify():
-    data_path = './collection_scripts/data/processed_half/data.pkl'
-    url_file = './top-1k-curated'
-
+def classify(args):
     print('Loading data...')
-    data, labels = load_data(data_path, url_file)
+    data, labels = load_data(args['data'])
+    
     X_train, X_test, y_train, y_test = train_test_split(
-        data, labels, random_state=589, test_size=0.25, shuffle=True
+        data, labels, random_state=589, test_size=args['test_size'], shuffle=True
     )
     X_train, X_test = make_dataframe(X_train), make_dataframe(X_test)
     y_train = pd.Series(y_train)
 
+    # get maximum series length for padder
+    max_length = max(map(lambda sample: len(sample), data))
+
     print('Starting training...')
-    clf = PaddingTransformer() * RocketClassifier()
+    clf = PaddingTransformer(pad_length=max_length) * RocketClassifier()
     clf.fit(X_train, y_train)
 
     print('Making predictions...')
@@ -113,9 +60,17 @@ def classify():
 
     print(f'Accuracy: {acc}')
 
-    with open('./classification/predictions.pkl', 'wb') as pred_file:
+    predictions_file = args['filename']
+    with open(predictions_file, 'wb') as pred_file:
         d = {'pred': pred, 'gt': y_test}
         pickle.dump(d, pred_file)
 
 
-classify()
+if __name__=='__main__':
+    parser = argparse.ArgumentParser()    
+    parser.add_argument('--data', type=str, required=True, help='Pickle file containing the data')
+    parser.add_argument('--filename', type=str, required=False, default='predictions.pkl', help='Path to save predictions to. Default is predictions.pkl in current directory')
+    parser.add_argument('--test_size', type=float, required=False, default=0.25, help='Size of test split. Default is 0.25')
+    args = vars(parser.parse_args())
+
+    classify(args)
