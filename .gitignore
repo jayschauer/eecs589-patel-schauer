@@ -1,4 +1,8 @@
+env
+
 collection_scripts/.vagrant
 collection_scripts/data
 collection_scripts/logs
 collection_scripts/google-chrome-stable_amd64.deb
+
+*.ipynb
