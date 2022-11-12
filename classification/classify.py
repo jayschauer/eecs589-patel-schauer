@@ -7,7 +7,7 @@ import sys
 import sktime.datatypes as datatypes
 from sktime.transformations.panel.padder import PaddingTransformer
 # from sktime.classification.interval_based import SupervisedTimeSeriesForest
-# from sktime.classification.distance_based import KNeighborsTimeSeriesClassifier
+# from sktime.classification.distance_based import KNeighborsTimeSeriesClassifier   # TODO: doesn't work with unequal length data, need to try https://github.com/sktime/sktime/issues/3649
 from sktime.classification.kernel_based import RocketClassifier
 
 from sklearn.metrics import accuracy_score

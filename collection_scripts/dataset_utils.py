@@ -5,8 +5,14 @@ import argparse
 import shutil
 import pickle
 
-# Get dictionary of label to list of data files with that label
 def get_label_to_files_dict(input_dir):
+    '''
+    Gets dictionary mapping labels to a list of data files with that label.
+    
+    input_dir: Directory containing the .json data files. May have subdirectories.
+
+    Returns: dictionary with label as key and a list of filenames as value.
+    '''
     data = {}
     path = os.path.join(input_dir, '**/*.json')
     for filename in glob.glob(path, recursive=True):
@@ -22,28 +28,45 @@ def get_label_to_files_dict(input_dir):
 
     return data
 
-# Copy files for a label to a single directory
-def copy_to_new_dir(data, output_dir):
-    for label in data:
+def copy_to_new_dir(label_dict, output_dir):
+    '''
+    Copy data files for a label into a single directory. Useful for merging
+    subdirectories that all have the same filenames for a label.
+
+    label_dict: dictionary with label as key and a list of filenames as value.
+    output_dir: directory to copy files to. A single subdirectory for each label
+        will be created inside output_dir.
+    '''
+    for label in label_dict:
         # Make a new directory for label in output_dir
         path = os.path.join(output_dir, label)
         os.makedirs(path)
 
         # Copy all files to new directory
-        for i, filename in enumerate(data[label]):
+        for i, filename in enumerate(label_dict[label]):
             output_file = os.path.join(path, f'{i}.json')
             shutil.copyfile(filename, output_file)
 
-# Merges directories to a new directory
 def merge_directories(args):
+    '''
+    Copies files for a label from multiple locations to single directory.
+
+    args: parsed command line arguments.
+    '''
     input_dir = args['input_dir']
     output_dir = args['output_dir']
 
     data = get_label_to_files_dict(input_dir)
     copy_to_new_dir(data, output_dir)
 
-# Gets the list of urls
 def get_label_dict(path):
+    '''
+    Get a dictionary mapping a label to its position in a list.
+
+    path: path to url list file.
+
+    Returns: a dictionary with the label as key and index as value.
+    '''
     # Get labels from file
     label_dict = {}
     with open(path) as label_file:
@@ -53,8 +76,14 @@ def get_label_dict(path):
 
     return label_dict
 
-# Load json data and save as pickle
 def pickle_data(args):
+    '''
+    Loads json data files and saves them as a pickle.
+
+    args: command line arguments
+
+    Returns: None (saves a dictionary as a pickle with two keys, 'data' and 'labels').
+    '''
     input_dir = args['input_dir']
     filename = args['filename']
     label_filename = args['label_file']
@@ -90,8 +119,14 @@ def pickle_data(args):
         d = {'data': data, 'labels': labels}
         pickle.dump(d, pickle_file)
 
-# Loads data from pickle file
 def load_data(path):
+    '''
+    Loads data from the pickle file.
+
+    path: path to the file to load.
+
+    Returns: data, labels as lists.
+    '''
     data, labels = [], []
     with open(path, 'rb') as data_file:
         d = pickle.load(data_file)
