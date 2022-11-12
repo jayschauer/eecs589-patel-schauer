@@ -73,8 +73,7 @@ def main(args):
     # Print metrics
     print(f'Accuracy: {accuracy_score(y_true, y_pred)}')
     print(f"F1-score: {f1_score(y_true, y_pred, average='weighted')}")
-    if (args['show_adjusted']):            
-        print(f'Modified accuracy: {modified_accuracy_score(y_true, y_pred, labels)}')
+    print(f'Modified accuracy: {modified_accuracy_score(y_true, y_pred, labels)}')
     print()
 
     # Print incorrect combinations
@@ -93,7 +92,6 @@ if __name__=='__main__':
     parser.add_argument('--file', type=str, required=True, help='predictions file to load')
     parser.add_argument('--show_plot', default=False, action='store_true', help='show confusion matrix')
     parser.add_argument('--label_file', type=str, required=('--show_adjusted' in sys.argv), help='file containing list of labels')  
-    parser.add_argument('--show_adjusted', default=False, action='store_true', help='show adjusted accuracy score with similar domains combined') 
     args = vars(parser.parse_args())
 
     main(args)
