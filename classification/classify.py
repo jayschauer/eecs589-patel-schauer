@@ -6,9 +6,7 @@ import sys
 
 import sktime.datatypes as datatypes
 from sktime.transformations.panel.padder import PaddingTransformer
-# from sktime.classification.interval_based import SupervisedTimeSeriesForest
-# from sktime.classification.distance_based import KNeighborsTimeSeriesClassifier   # TODO: doesn't work with unequal length data, need to try https://github.com/sktime/sktime/issues/3649
-from sktime.classification.kernel_based import RocketClassifier
+# sktime classifiers are lazy loaded when used to reduce overhead
 
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -18,19 +16,28 @@ collection_path = os.path.join(os.path.dirname(__file__), '../collection_scripts
 sys.path.append(collection_path)
 from dataset_utils import load_data
 
-# Converts the data list returned by load_data to a dataframe format recognized by sktime classifiers
-# Returns:  multi-index panel of mtype 'pd-multiindex'
+CLASSIFIER_TYPES = ['rocket', 'knn', 'summary', 'catch22']
+
 def make_dataframe(data):
-    cols = ['instances', 'timepoints', 'packet_size']
+    '''
+    Convert the data from the list of time/series representation to a multiindex dataframe.
+
+    data: list of samples where each sample is a dictionary of time: size pairs
+
+    Returns: multiindex dataframe where first index is instance and second index is time point.
+                Specifically, sktime mtype is pd-multiindex.
+     
+    '''
+    cols = ['timepoints', 'packet_size']
     
     # make a list of dataframes where each frame has rows (index, time, size) for row index in data
     Xlist = [
         pd.DataFrame(
-            [ [i, time, size] for time, size in series.items() ],
+            [ [time, size] for time, size in series.items() ],
             columns=cols
-        ) for i, series in enumerate(data)
+        ) for series in data
     ]
-    
+
     # convert to sktime panel mtype
     X = datatypes.convert_to(Xlist, to_type='pd-multiindex')
     
@@ -38,6 +45,12 @@ def make_dataframe(data):
 
 # Loads data and trains classifier
 def classify(args):
+    '''
+    Loads data and trains classifier, and saves predictions to specified file.
+    Classifier used is determined by command line arguments.
+
+    args: parsed dictionary of command line arguments.
+    '''
     print('Loading data...')
     data, labels = load_data(args['data'])
     
@@ -47,11 +60,36 @@ def classify(args):
     X_train, X_test = make_dataframe(X_train), make_dataframe(X_test)
     y_train = pd.Series(y_train)
 
-    # get maximum series length for padder
+    # maximum-length padding
     max_length = max(map(lambda sample: len(sample), data))
+    padder = PaddingTransformer(pad_length=max_length)
 
+    # Select classifier based on command line argument
+    if args['method'] == 'rocket':
+        print('Using ROCKET classifier.')
+        from sktime.classification.kernel_based import RocketClassifier
+        clf = padder * RocketClassifier()
+
+    elif args['method'] == 'knn':
+        print('Using KNN time series classifier.')
+        from sktime.classification.distance_based import KNeighborsTimeSeriesClassifier   # TODO: doesn't work with unequal length data, need to try https://github.com/sktime/sktime/issues/3649
+        from sktime.alignment.dtw_python import AlignerDTW
+        from sktime.dists_kernels.compose_from_align import DistFromAligner
+
+        dtw_dist = DistFromAligner(AlignerDTW())
+        clf = KNeighborsTimeSeriesClassifier(distance=dtw_dist)
+
+    elif args['method'] == 'summary':
+        print('Using Summary classifier.')
+        from sktime.classification.feature_based import SummaryClassifier
+        clf = padder * SummaryClassifier()
+
+    elif args['method'] == 'catch22':
+        print('Using Catch22 classifier.')
+        from sktime.classification.feature_based import Catch22Classifier
+        clf = padder * Catch22Classifier()
+    
     print('Starting training...')
-    clf = PaddingTransformer(pad_length=max_length) * RocketClassifier()
     clf.fit(X_train, y_train)
 
     print('Making predictions...')
@@ -60,17 +98,21 @@ def classify(args):
 
     print(f'Accuracy: {acc}')
 
+    # Save predictions to file
     predictions_file = args['filename']
-    with open(predictions_file, 'wb') as pred_file:
-        d = {'pred': pred, 'gt': y_test}
-        pickle.dump(d, pred_file)
+    if predictions_file is not None:
+        with open(predictions_file, 'wb') as pred_file:
+            d = {'pred': pred, 'gt': y_test}
+            pickle.dump(d, pred_file)
 
+    return acc
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser()    
     parser.add_argument('--data', type=str, required=True, help='Pickle file containing the data')
-    parser.add_argument('--filename', type=str, required=False, default='predictions.pkl', help='Path to save predictions to. Default is predictions.pkl in current directory')
+    parser.add_argument('--filename', type=str, required=False, default='predictions.pkl', help='Path to save predictions to. Default is to not save.')
     parser.add_argument('--test_size', type=float, required=False, default=0.25, help='Size of test split. Default is 0.25')
+    parser.add_argument('--method', type=str, choices=CLASSIFIER_TYPES, required=False, default='rocket', help='Which classifier to use. Default is rocket')
     args = vars(parser.parse_args())
 
     classify(args)
