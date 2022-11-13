@@ -24,13 +24,11 @@ def make_dataframe(data):
 
     data: list of samples where each sample is a dictionary of time: size pairs
 
-    Returns: multiindex dataframe where first index is instance and second index is time point.
-                Specifically, sktime mtype is pd-multiindex.
-     
+    Returns: pd-multiindex dataframe where first index is instance and second index is time point.     
     '''
     cols = ['timepoints', 'packet_size']
     
-    # make a list of dataframes where each frame has rows (index, time, size) for row index in data
+    # make a list of dataframes where each frame has rows (time, size) for row index in data
     Xlist = [
         pd.DataFrame(
             [ [time, size] for time, size in series.items() ],
@@ -38,8 +36,8 @@ def make_dataframe(data):
         ) for series in data
     ]
 
-    # convert to sktime panel mtype
-    X = datatypes.convert_to(Xlist, to_type='pd-multiindex')
+    # convert to sktime panel
+    X = datatypes.convert_to(Xlist, to_type='pd-multiindex') # X = pd.concat(obj, axis=0, keys=range(len(Xlist)), names=["instances", "timepoints"])
     
     return X
 
@@ -50,6 +48,8 @@ def classify(args):
     Classifier used is determined by command line arguments.
 
     args: parsed dictionary of command line arguments.
+
+    Returns: accuracy
     '''
     print('Loading data...')
     data, labels = load_data(args['data'])
@@ -110,7 +110,7 @@ def classify(args):
 if __name__=='__main__':
     parser = argparse.ArgumentParser()    
     parser.add_argument('--data', type=str, required=True, help='Pickle file containing the data')
-    parser.add_argument('--filename', type=str, required=False, default='predictions.pkl', help='Path to save predictions to. Default is to not save.')
+    parser.add_argument('--filename', type=str, required=False, help='Path to save predictions to. Default is to not save.')
     parser.add_argument('--test_size', type=float, required=False, default=0.25, help='Size of test split. Default is 0.25')
     parser.add_argument('--method', type=str, choices=CLASSIFIER_TYPES, required=False, default='rocket', help='Which classifier to use. Default is rocket')
     args = vars(parser.parse_args())
