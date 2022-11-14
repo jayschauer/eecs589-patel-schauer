@@ -4,8 +4,8 @@ We run the data collection in an ubuntu 20.04 docker image.
 
 In order to collect data, perform the following steps:
 1. After setting up the vm appropriately, run `bash bootstrap.sh` to install the necessary packages.
-2. Run `sudo bash data_collection.sh <url list> <start line> <end_line> <number of iterations>` to start data collection. end line inclusive.
-   - E.g. `sudo bash data_collection.sh top-1k-2022-10-31 200 299 50` will collect data for domains 200-299 in the list from top-1k-2022-10-31 for 50 iterations.
+2. Run `sudo bash data_collection.sh <url list> <start index> <end index> <number of iterations>` to start data collection. end line exclusive, zero-indexed.
+   - E.g. `sudo bash data_collection.sh top-1k-2022-10-31 0 100 50` will collect data for domains 0, 1, 2, ..., 99 in the list from top-1k-2022-10-31 for 50 iterations.
 
 <!--1. Install VirtualBox.
 1. Install Vagrant.

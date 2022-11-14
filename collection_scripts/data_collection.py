@@ -16,7 +16,7 @@ INTERFACE = 'ens3'
 parser = argparse.ArgumentParser()
 parser.add_argument('--list', type=str, required=True)
 parser.add_argument('--start_line', type=int, required=True)
-# end line is inclusive
+# end line is exclusive
 parser.add_argument('--end_line', type=int, required=True)
 parser.add_argument('--dir', type=str, required=True)
 parser.add_argument('--iter', type=int, required=True)
@@ -32,7 +32,7 @@ with open(fname) as f:
 
 start_line = args['start_line']
 end_line = args['end_line']
-urls = [urls[i] for i in range(start_line, end_line+1)]
+urls = [urls[i] for i in range(start_line, end_line)]
 
 def delete_file(file):
     if os.path.isfile(file):

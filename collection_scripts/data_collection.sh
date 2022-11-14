@@ -3,8 +3,8 @@
 # command line args
 # bash data_collection.sh top-1k-2022-10-31 200 299 50`
 url_list=$1
-start_line=$2
-end_line=$3 # end line inclusive
+start_line=$2 # start line inclusive, zero-indexed
+end_line=$3 # end line exclusive,
 iterations=$4
 
 # Set up environment
