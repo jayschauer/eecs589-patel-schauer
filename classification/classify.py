@@ -82,7 +82,8 @@ def classify(args):
     elif args['method'] == 'summary':
         print('Using Summary classifier.')
         from sktime.classification.feature_based import SummaryClassifier
-        clf = padder * SummaryClassifier()
+        from sklearn.ensemble import RandomForestClassifier
+        clf = padder * SummaryClassifier(estimator=RandomForestClassifier(n_estimators=5))
 
     elif args['method'] == 'catch22':
         print('Using Catch22 classifier.')

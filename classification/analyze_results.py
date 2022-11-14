@@ -91,7 +91,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--file', type=str, required=True, help='predictions file to load')
     parser.add_argument('--show_plot', default=False, action='store_true', help='show confusion matrix')
-    parser.add_argument('--label_file', type=str, required=('--show_adjusted' in sys.argv), help='file containing list of labels')  
+    parser.add_argument('--label_file', type=str, required=True, help='file containing list of labels')
     args = vars(parser.parse_args())
 
     main(args)
