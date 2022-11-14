@@ -14,3 +14,5 @@ collection_scripts/google-chrome-stable_amd64.deb
 .idea/modules.xml
 .idea/vcs.xml
 .idea/inspectionProfiles/profiles_settings.xml
+/datasets/pcaps/
+/datasets/pcaps.zip

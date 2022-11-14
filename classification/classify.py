@@ -39,6 +39,7 @@ def make_dataframe(data):
     # convert to sktime panel
     X = datatypes.convert_to(Xlist, to_type='pd-multiindex') # X = pd.concat(obj, axis=0, keys=range(len(Xlist)), names=["instances", "timepoints"])
     
+    #pd_multi-index support not great in skitime code, even though it is the recommended way to format data
     return X
 
 # Loads data and trains classifier

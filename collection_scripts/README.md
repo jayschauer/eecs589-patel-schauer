@@ -18,6 +18,8 @@ This does the following
 - creates a new folder in data/pcaps and a new subfolder for each iteration
 - new folder in logs contains one log file for dnsproxy and the output from the python script for each iteration
 
+Domains mostly recorded during the week of November 6th. Alexa list pulled on October 31st.
+
 # Data processing
 1. `vagrant ssh node1`
 2. Make sure tshark is installed: `sudo apt-get install tshark`

@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import TimeoutException
 
 # Constants
+DNS_HOST = '94.140.14.14'
 PORT = 853
 INTERFACE = 'ens3'
 
@@ -46,7 +47,7 @@ for i, base_url in enumerate(urls):
     # Start capture via tcpdump
     capture_file = os.path.join(args['dir'], f'{base_url}.pcap')
     print(capture_file)
-    cmd = f'sudo tcpdump -i {INTERFACE} port {PORT} -w {capture_file}'.split()
+    cmd = f'sudo tcpdump host {DNS_HOST} and port {PORT} -n -i {INTERFACE} -w {capture_file}'.split()
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
     # Create chrome driver instance
