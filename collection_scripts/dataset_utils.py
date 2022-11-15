@@ -5,6 +5,7 @@ import argparse
 import shutil
 import pickle
 
+
 def get_label_to_files_dict(input_dir):
     '''
     Gets dictionary mapping labels to a list of data files with that label.
@@ -19,14 +20,15 @@ def get_label_to_files_dict(input_dir):
         # get the label from the json
         with open(filename, 'r') as infile:
             file_data = json.load(infile)
-        
+
         label = file_data['label']
         if label not in data:
             data[label] = []
 
-        data[label].append(filename) # add filename to list for label
+        data[label].append(filename)  # add filename to list for label
 
     return data
+
 
 def copy_to_new_dir(label_dict, output_dir):
     '''
@@ -47,6 +49,7 @@ def copy_to_new_dir(label_dict, output_dir):
             output_file = os.path.join(path, f'{i}.json')
             shutil.copyfile(filename, output_file)
 
+
 def merge_directories(args):
     '''
     Copies files for a label from multiple locations to single directory.
@@ -58,6 +61,7 @@ def merge_directories(args):
 
     data = get_label_to_files_dict(input_dir)
     copy_to_new_dir(data, output_dir)
+
 
 def get_label_dict(path):
     '''
@@ -75,6 +79,7 @@ def get_label_dict(path):
             label_dict[line.strip()] = i
 
     return label_dict
+
 
 def pickle_data(args):
     '''
@@ -108,8 +113,9 @@ def pickle_data(args):
             label = file_data['label']
             times = file_data['time']
             sizes = file_data['size']
-            
-            series = dict(zip(times, sizes))  # store as dictionary of (time: size) pairs
+            directions = file_data['direction']
+
+            series = dict(zip(times, zip(sizes, directions)))  # store as dictionary of (time: (size, direction)) pairs
             data.append(series)
             labels.append(label_dict.get(label, -1))  # index of url in list, -1 if not present
 
@@ -118,6 +124,7 @@ def pickle_data(args):
     with open(output_path, 'wb') as pickle_file:
         d = {'data': data, 'labels': labels}
         pickle.dump(d, pickle_file)
+
 
 def load_data(path):
     '''
@@ -132,23 +139,28 @@ def load_data(path):
         d = pickle.load(data_file)
         data = d['data']
         labels = d['labels']
-    
+
     return data, labels
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(help='execution mode', dest='mode')
-    
+
     merge_parser = subparsers.add_parser('merge')
-    merge_parser.add_argument('--input_dir', type=str, required=True, help='directory containing subdirectories to merge')
-    merge_parser.add_argument('--output_dir', type=str, required=True, help='directory to copy merged subdirectories to')
+    merge_parser.add_argument('--input_dir', type=str, required=True,
+                              help='directory containing subdirectories to merge')
+    merge_parser.add_argument('--output_dir', type=str, required=True,
+                              help='directory to copy merged subdirectories to')
     merge_parser.set_defaults(func=merge_directories)
 
     pickle_parser = subparsers.add_parser('pickle')
     pickle_parser.add_argument('--input_dir', type=str, required=True, help='directory containing data files')
     pickle_parser.add_argument('--filename', type=str, required=True, help='file in INPUT_DIR to write to')
     pickle_parser.add_argument('--label_file', type=str, required=True, help='file containing list of urls')
-    pickle_parser.add_argument('--num_samples', type=int, required=False, help='if specified, the number of samples for each label to include (useful for making limited dataset)')
+    pickle_parser.add_argument('--num_samples', type=int, required=False,
+                               help='if specified, the number of samples for each label to include (useful for making '
+                                    'limited dataset)')
     pickle_parser.set_defaults(func=pickle_data)
 
     # Get args and call the function associated with the execution mode
