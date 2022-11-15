@@ -119,12 +119,13 @@ def classify(args):
 
     print(f'Accuracy: {acc}')
 
-    # Save predictions to file
-    predictions_file = args['filename']
-    if predictions_file is not None:
-        with open(predictions_file, 'wb') as pred_file:
-            d = {'pred': pred, 'gt': y_test}
-            pickle.dump(d, pred_file)
+    # Save model and predictions to file
+    output_dir = args['output_dir']
+    os.makedirs(output_dir, exist_ok=True)  # create output directory
+    with open(os.path.join(output_dir, 'predictions.pkl'), 'wb') as pred_file:
+        d = {'pred': pred, 'gt': y_test}
+        pickle.dump(d, pred_file)
+    clf.save(os.path.join(output_dir, 'model'))  # saves output_dir/model.zip
 
     return acc
 
@@ -132,8 +133,8 @@ def classify(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--data', type=str, required=True, help='Pickle file containing the data')
-    parser.add_argument('--filename', type=str, required=False,
-                        help='Path to save predictions to. Default is to not save.')
+    parser.add_argument('--output_dir', type=str, required=True,
+                        help="Directory to save model and predictions to. Will create the directory if it doesn't exist.")
     parser.add_argument('--test_size', type=float, required=False, default=0.25,
                         help='Size of test split. Default is 0.25')
     parser.add_argument('--method', type=str, choices=CLASSIFIER_TYPES, required=False, default='rocket',
