@@ -17,3 +17,4 @@ collection_scripts/google-chrome-stable_amd64.deb
 /datasets/pcaps/
 /datasets/all_data.zip
 /datasets/processed
+/.idea/other.xml
