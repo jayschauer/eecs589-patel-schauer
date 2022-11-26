@@ -3,12 +3,13 @@ import os
 import pandas as pd
 import pickle
 import sys
-import math
+import numpy as np
 
 import sktime.datatypes as datatypes
 from sktime.transformations.panel.padder import PaddingTransformer
 # sktime classifiers are lazy loaded when used to reduce overhead
 
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
@@ -17,7 +18,7 @@ collection_path = os.path.join(os.path.dirname(__file__), '../collection_scripts
 sys.path.append(collection_path)
 from dataset_utils import load_data
 
-CLASSIFIER_TYPES = ['rocket', 'knn', 'summary', 'catch22']
+CLASSIFIER_TYPES = ['rocket', 'minirocket', 'knn', 'summary', 'catch22']
 
 
 def make_dataframe(data):
@@ -60,15 +61,59 @@ def make_directional_dataframe(data):
     return datatypes.convert_to(Xlist, to_type='pd-multiindex')
 
 
-# Loads data and trains classifier
+def get_classifier(method, max_length):
+    '''
+    Selects classifier to use based on command line arguments.
+
+    method: method from command line arguments
+    max_length: length of longest sequence in input data (used to construct padder)
+
+    Returns: classification pipeline
+    '''
+    padder = PaddingTransformer(pad_length=max_length)
+
+    if method == 'rocket':
+        print('Using ROCKET classifier.')
+        from sktime.classification.kernel_based import RocketClassifier
+        clf = padder * RocketClassifier()
+
+    elif method == 'minirocket':
+        print('Using MINIROCKET transformer with LogisticRegression classifier.')
+        from sktime.transformations.panel.rocket import MiniRocketMultivariate
+        from sklearn.linear_model import LogisticRegressionCV
+        clf = padder * MiniRocketMultivariate(n_jobs=-1) * StandardScaler() \
+            * LogisticRegressionCV(n_jobs=-1, multi_class='ovr', tol=0.005, verbose=1)
+
+    elif method == 'knn':
+        print('Using KNN time series classifier.')
+        from sktime.classification.distance_based import \
+            KNeighborsTimeSeriesClassifier
+        from sktime.alignment.dtw_python import AlignerDTW
+        from sktime.dists_kernels.compose_from_align import DistFromAligner
+
+        dtw_dist = DistFromAligner(AlignerDTW())
+        clf = KNeighborsTimeSeriesClassifier(distance=dtw_dist)
+
+    elif method == 'summary':
+        print('Using Summary classifier.')
+        from sktime.classification.feature_based import SummaryClassifier
+        from sklearn.ensemble import RandomForestClassifier
+        clf = padder * SummaryClassifier(estimator=RandomForestClassifier(n_estimators=5))
+
+    elif method == 'catch22':
+        print('Using Catch22 classifier.')
+        from sktime.classification.feature_based import Catch22Classifier
+        clf = padder * Catch22Classifier()
+
+    return clf
+
+
 def classify(args):
     '''
     Loads data and trains classifier, and saves predictions to specified file.
     Classifier used is determined by command line arguments.
 
     args: parsed dictionary of command line arguments.
-
-    Returns: accuracy
     '''
     print('Loading data...')
     data, labels = load_data(args['data'])
@@ -81,34 +126,9 @@ def classify(args):
 
     # maximum-length padding
     max_length = max(map(lambda sample: len(sample), data))
-    padder = PaddingTransformer(pad_length=max_length)
 
-    # Select classifier based on command line argument
-    if args['method'] == 'rocket':
-        print('Using ROCKET classifier.')
-        from sktime.classification.kernel_based import RocketClassifier
-        clf = padder * RocketClassifier()
-
-    elif args['method'] == 'knn':
-        print('Using KNN time series classifier.')
-        from sktime.classification.distance_based import \
-            KNeighborsTimeSeriesClassifier  # TODO: doesn't work with unequal length data, need to try https://github.com/sktime/sktime/issues/3649
-        from sktime.alignment.dtw_python import AlignerDTW
-        from sktime.dists_kernels.compose_from_align import DistFromAligner
-
-        dtw_dist = DistFromAligner(AlignerDTW())
-        clf = KNeighborsTimeSeriesClassifier(distance=dtw_dist)
-
-    elif args['method'] == 'summary':
-        print('Using Summary classifier.')
-        from sktime.classification.feature_based import SummaryClassifier
-        from sklearn.ensemble import RandomForestClassifier
-        clf = padder * SummaryClassifier(estimator=RandomForestClassifier(n_estimators=5))
-
-    elif args['method'] == 'catch22':
-        print('Using Catch22 classifier.')
-        from sktime.classification.feature_based import Catch22Classifier
-        clf = padder * Catch22Classifier()
+    # Create classifier pipeline based on selected method
+    clf = get_classifier(args['method'], max_length)
 
     print('Starting training...')
     clf.fit(X_train, y_train)
@@ -121,13 +141,12 @@ def classify(args):
 
     # Save model and predictions to file
     output_dir = args['output_dir']
+    print(f'Saving model and predictions to {output_dir}...')
     os.makedirs(output_dir, exist_ok=True)  # create output directory
     with open(os.path.join(output_dir, 'predictions.pkl'), 'wb') as pred_file:
         d = {'pred': pred, 'gt': y_test}
         pickle.dump(d, pred_file)
     clf.save(os.path.join(output_dir, 'model'))  # saves output_dir/model.zip
-
-    return acc
 
 
 if __name__ == '__main__':
