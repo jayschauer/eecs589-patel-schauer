@@ -22,14 +22,14 @@ CLASSIFIER_TYPES = ['rocket', 'minirocket', 'knn', 'summary', 'catch22']
 
 
 def make_dataframe(data):
-    '''
+    """
     Convert the data from the list of time/series representation to a multiindex dataframe.
 
     data: list of samples where each sample is a dictionary of time: size pairs
 
-    Returns: pd-multiindex dataframe where first index is instance and second index is time point.     
-    '''
-    cols = ['timepoints', 'packet_size']
+    Returns: pd-multiindex dataframe where first index is instance and second index is time point.
+    """
+    cols = ['time', 'packet_size']
 
     # make a list of dataframes where each frame has rows (time, size) for row index in data
     Xlist = [
@@ -48,10 +48,10 @@ def make_dataframe(data):
 
 
 def make_directional_dataframe(data):
-    '''
+    """
     Same as above, but uses the direction. Outgoing is 1, incoming is -1
-    '''
-    cols = ['timepoints', 'packet_size', 'direction']
+    """
+    cols = ['time', 'packet_size', 'direction']
     Xlist = [
         pd.DataFrame(
             [[time, datum[0], datum[1]] for time, datum in series.items()],
@@ -139,12 +139,12 @@ def classify(args):
 
     print(f'Accuracy: {acc}')
 
-    # Save model and predictions to file
+    # Save model, predictions, test data to file
     output_dir = args['output_dir']
     print(f'Saving model and predictions to {output_dir}...')
     os.makedirs(output_dir, exist_ok=True)  # create output directory
     with open(os.path.join(output_dir, 'predictions.pkl'), 'wb') as pred_file:
-        d = {'pred': pred, 'gt': y_test}
+        d = {'X': X_test, 'pred': pred, 'gt': y_test}
         pickle.dump(d, pred_file)
     clf.save(os.path.join(output_dir, 'model'))  # saves output_dir/model.zip
 
