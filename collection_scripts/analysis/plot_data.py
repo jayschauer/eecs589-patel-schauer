@@ -9,11 +9,12 @@ import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import random
 from statsmodels import robust
 from statsmodels.distributions.empirical_distribution import ECDF
 
 # Add collection_scripts folder to path to import from dataset_utils
-collection_path = os.path.join(os.path.dirname(__file__), '../collection_scripts')
+collection_path = os.path.join(os.path.dirname(__file__), '..')
 sys.path.append(collection_path)
 import dataset_utils
 
@@ -183,8 +184,56 @@ def sizes_cdf(data, filename):
     plt.savefig(filename)
     plt.show()
 
+def times_cdf(data, filename, max_delay=0.1):
+    '''
+    Computes the cumulative density function (CDF) for the total times.
+
+    data: data dictionary from load_data
+    filename: file to save plot to
+    max_delay: maximum delay in seconds to add to each packet
+    '''
+    fig, ax = plt.subplots(1, 2, figsize=(14, 6))
+    base_times, delayed_times = [], []  # need list to plot, so can't just keep running sum
+    for sample in data:
+        times = list(sample.keys())
+        
+        base_times.append(times[-1]) # final timepoint = total time elapsed
+
+        # [0, max_delay) second delay for all but first packet (first always at 0)
+        total_delay = sum([random.random() * max_delay for _ in range(len(times) - 1)])
+        delayed_time = times[-1] + total_delay
+        delayed_times.append(delayed_time)
+
+    ax[0].hist(base_times, bins=500, color='b', label='base')
+    ax[0].hist(delayed_times, bins=500, color='r', alpha=0.6, label=f'{max_delay}s delay')
+    ax[0].set_xlabel('time (seconds)')
+    ax[0].set_ylabel('count')
+    ax[0].legend()
+
+    base_cdf = ECDF(base_times)
+    base_x = np.arange(max(delayed_times))
+    base_y = base_cdf(base_x)
+
+    delayed_cdf = ECDF(delayed_times)
+    delayed_x = np.arange(max(delayed_times))
+    delayed_y = delayed_cdf(delayed_x)
+
+    ax[1].plot(base_x, base_y, color='b', label='base')
+    ax[1].plot(delayed_x, delayed_y, color='r', label=f'{max_delay}s delay')
+    ax[1].set_xlabel('time (seconds)')
+    ax[1].set_ylabel('cdf')
+    ax[1].legend()
+
+    plt.savefig(filename)
+    plt.show()
+
+    base_sum, delay_sum = sum(base_times), sum(delayed_times)
+    latency = (delay_sum - base_sum) / base_sum
+    print(f'Latency increase from base: {latency * 100:.2f}%')
+
 
 if __name__=='__main__':
+
 
     # labels = ['google.com', 'amazon.com', 'youtube.com']
     # data = {}
@@ -192,7 +241,9 @@ if __name__=='__main__':
     #     data[label] = load_data(f'collection_scripts/data/processed/processed_full/{label}')[label]
     # align_with_dtw(data, labels)
 
-    #lengths_cdf(data, 'plots/sizes_cdf.png')
-
+    # plot cdfs of sequence length, packet sizes, and total time
     data, labels = dataset_utils.load_data('datasets/data_directional_200-class_100-samples.pkl')
-    sizes_cdf(data, 'plot/sizes_cdf.png')
+
+    #lengths_cdf(data, 'collection_scripts/analysis/lengths_cdf.png')
+    #sizes_cdf(data, 'collection_scripts/analysis/sizes_cdf.png')
+    times_cdf(data, 'collection_scripts/analysis/times_cdf.png')
