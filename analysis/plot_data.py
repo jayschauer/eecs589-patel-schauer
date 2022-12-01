@@ -1,7 +1,9 @@
 import argparse
 import glob
 import json
+import math
 import os
+import random
 import sys
 
 import dtw
@@ -9,15 +11,13 @@ import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import random
 from statsmodels import robust
 from statsmodels.distributions.empirical_distribution import ECDF
 
 # Add collection_scripts folder to path to import from dataset_utils
-collection_path = os.path.join(os.path.dirname(__file__), '..')
+collection_path = os.path.join(os.path.dirname(__file__), '../collection_scripts')
 sys.path.append(collection_path)
-import dataset_utils
-
+from dataset_utils import load_data
 
 def get_color(i):
     colors = list(mcolors.TABLEAU_COLORS.values())
@@ -62,12 +62,18 @@ def plot_data(data, output='./test.png'):
     plt.savefig(output)
     plt.show()
 
-def align_with_dtw(data, labels=['google.com', 'amazon.com', 'youtube.com']):
+def align_with_dtw(data, filename, labels=['google.com', 'amazon.com', 'youtube.com']):
     columns = ['time', 'size']
 
-    fig, ax = plt.subplots(1, 3)
+    num_cols = 3
+    num_rows = math.ceil(len(labels) / 3)
+    fig, axes = plt.subplots(num_rows, num_cols, squeeze=False)
 
     for label_idx, label in enumerate(labels):
+
+        row = label_idx // num_cols
+        col = label_idx % num_cols
+        ax = axes[row, col]
 
         sample_list = data[label]
 
@@ -78,7 +84,7 @@ def align_with_dtw(data, labels=['google.com', 'amazon.com', 'youtube.com']):
         )
 
         # plot reference frame
-        ax[label_idx].plot(reference_df['time'], reference_df['size'], alpha=0.1, color=get_color(label_idx))
+        ax.plot(reference_df['time'], reference_df['size'], alpha=0.1, color=get_color(label_idx))
 
         # keep track of values for each index in reference frame to calculate average
         values_by_index = { i: [size] for i, size in enumerate(reference_df['size']) }
@@ -96,7 +102,7 @@ def align_with_dtw(data, labels=['google.com', 'amazon.com', 'youtube.com']):
             query_values = query_df['size'][alignment.index1]
 
             # plot aligned query against reference indices
-            ax[label_idx].plot(ref_times, query_values, alpha=0.1, color=get_color(label_idx))
+            ax.plot(ref_times, query_values, alpha=0.1, color=get_color(label_idx))
 
             # for each index in reference alignment, save value from query to average later
             for i, index in enumerate(alignment.index2):
@@ -105,16 +111,17 @@ def align_with_dtw(data, labels=['google.com', 'amazon.com', 'youtube.com']):
         medians = np.array([ np.median(values_by_index[i]) for i in values_by_index ])
         mad = 2 * np.array([ robust.mad(values_by_index[i]) for i in values_by_index ])
 
-        ax[label_idx].plot(reference_df['time'], medians, alpha=1, linewidth=1, color=get_color(label_idx))
+        ax.plot(reference_df['time'], medians, alpha=1, linewidth=1, color=get_color(label_idx))
 
         under_line, over_line = medians - mad, medians + mad
 
-        ax[label_idx].fill_between(reference_df['time'], under_line, over_line, alpha=0.125, color=get_color(label_idx))
+        ax.fill_between(reference_df['time'], under_line, over_line, alpha=0.125, color=get_color(label_idx))
 
-        ax[label_idx].set_title(label)
-        ax[label_idx].set_xlabel('time (s)')
-        ax[label_idx].set_ylabel('packet size (bytes)')
+        ax.set_title(label)
+        ax.set_xlabel('time (s)')
+        ax.set_ylabel('packet size (bytes)')
 
+    plt.savefig(filename)
     plt.show()
 
 def lengths_cdf(data, filename):
@@ -235,15 +242,15 @@ def times_cdf(data, filename, max_delay=0.1):
 if __name__=='__main__':
 
 
-    # labels = ['google.com', 'amazon.com', 'youtube.com']
-    # data = {}
-    # for label in labels:
-    #     data[label] = load_data(f'collection_scripts/data/processed/processed_full/{label}')[label]
-    # align_with_dtw(data, labels)
+    labels = ['google.com', 'youtube.com', 'baidu.com', 'bilibili.com', 'facebook.com', 'instagram.com']
+    data = {}
+    for label in labels:
+        data[label] = load_data(f'collection_scripts/data/processed/processed_full/{label}')[label]
+    align_with_dtw(data, 'analysis/average_traces.png', labels)
 
-    # plot cdfs of sequence length, packet sizes, and total time
-    data, labels = dataset_utils.load_data('datasets/data_directional_200-class_100-samples.pkl')
+    # # plot cdfs of sequence length, packet sizes, and total time
+    # data, labels = dataset_utils.load_data('datasets/data_directional_200-class_100-samples.pkl')
 
-    #lengths_cdf(data, 'collection_scripts/analysis/lengths_cdf.png')
-    #sizes_cdf(data, 'collection_scripts/analysis/sizes_cdf.png')
-    times_cdf(data, 'collection_scripts/analysis/times_cdf.png')
+    # #lengths_cdf(data, 'analysis/lengths_cdf.png')
+    # #sizes_cdf(data, 'analysis/sizes_cdf.png')
+    # times_cdf(data, 'analysis/times_cdf.png')

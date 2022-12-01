@@ -3,6 +3,7 @@ import os
 import sys
 
 import math
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import random
@@ -100,27 +101,33 @@ def add_time_delay(data, max_delay, direction=None):
     base_time, delayed_time = 0, 0
     Xlist = []
 
+    base_times, delayed_times = [], []
+
     for series in data:
         val_list = []
 
-        # create list of cumulative delays for efficiency
-        delays = [ 0 ]  # first time point always arrives at time 0
-        for i in range(1, len(series)):
-            delays.append(delays[i - 1] + (random.random() * max_delay))
-    
+        delays = [ 0 ]  
         # construct dataframe with new times
         for i, (time, datum) in enumerate(series.items()):
-            val_list.append([time + delays[i], datum[0]])
+            delay = 0
+            if i > 0: # no delay since first time point always arrives at time 0
+                if direction is None or int(args['direction']) == int(datum[1]):
+                    delay = delays[-1] + random.random() * max_delay
+                    delays.append(delay)
+            val_list.append([time + delay, datum[0]])
+            base_times.append(time)
+            delayed_times.append(time + delay)
 
-        final_time = list(series.keys())[-1]
-        base_time += final_time
-        delayed_time += final_time + delays[-1]
+        if direction is None:
+            final_time = list(series.keys())[-1]
+            base_time += final_time
+            delayed_time += final_time + delays[-1]
 
         Xlist.append(pd.DataFrame(val_list, columns=cols))
 
 
-    overhead = (delayed_time - base_time) / base_time
-    return datatypes.convert_to(Xlist, to_type='pd-multiindex'), overhead
+    overhead = None if direction else (delayed_time - base_time) / base_time
+    return datatypes.convert_to(Xlist, to_type='pd-multiindex'), overhead, base_times, delayed_times
 
 def predict(args):
     '''
@@ -142,7 +149,7 @@ def max_padded_predictions(args):
 
     args: command line arguments
     '''
-    X, y, model = load_data_and_model(args)
+    data, labels, model = load_data_and_model(args)
 
     # get sizes to determine percentiles
     full_df = make_dataframe(data)
@@ -157,10 +164,10 @@ def max_padded_predictions(args):
 
     for ptile, value in zip(percentiles, values):
         print(f'Making predictions for {int(ptile * 100)}th percentile...')
-        X, overhead = pad_sizes(X, 'max', value)
+        X, overhead = pad_sizes(data, 'max', value)
 
         pred = model.predict(X) 
-        acc = accuracy_score(pred, y)
+        acc = accuracy_score(pred, labels)
 
         # add values to output dataframe
         df.loc[len(df)] = [int(ptile * 100), value, acc, overhead]
@@ -190,7 +197,7 @@ def rounded_predictions(args):
 def time_delay_predictions(args):
     data, labels, model = load_data_and_model(args)
 
-    X, overhead = add_time_delay(data, args['delay'])
+    X, overhead, base_times, delayed_times = add_time_delay(data, args['delay'], args['direction'])
 
     print('Making predictions...')
     pred = model.predict(X)
@@ -198,7 +205,16 @@ def time_delay_predictions(args):
     acc = accuracy_score(labels, pred)
     print(f'Accuracy: {acc}')
 
-    print(f'Latency increase from base: {overhead * 100:.2f}%')
+    if overhead:
+        print(f'Latency increase from base: {overhead * 100:.2f}%')
+
+    fig, ax = plt.subplots()
+    ax.hist(base_times, bins=500, color='b')
+    ax.hist(delayed_times, bins=500, color='r', alpha=0.6)
+    ax.set_xlabel('time (seconds)')
+    ax.set_ylabel('count')
+
+    plt.show()
 
 
 if __name__ == '__main__':
@@ -210,6 +226,8 @@ if __name__ == '__main__':
         help='Padding strategy for padding size. Default is no padding')
     parser.add_argument('--delay', type=float, default=None,
         help='Maximum delay (in seconds) to add to each packet. Default is no delay')
+    parser.add_argument('--direction', type=int, choices=[1, -1], default=None,
+        help='Packet direction to apply transformations to. -1 is incoming, 1 is outgoing. Default is both')
     args = vars(parser.parse_args())
 
     if args['padding'] == 'max':
