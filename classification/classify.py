@@ -19,6 +19,7 @@ sys.path.append(collection_path)
 from dataset_utils import load_data
 
 CLASSIFIER_TYPES = ['rocket', 'minirocket', 'knn', 'summary', 'catch22']
+ESTIMATOR_TYPES = ['logreg', 'ridge', 'sgd']
 
 
 def make_dataframe(data):
@@ -78,11 +79,21 @@ def get_classifier(method, max_length):
         clf = padder * RocketClassifier()
 
     elif method == 'minirocket':
-        print('Using MINIROCKET transformer with LogisticRegression classifier.')
+        estimator = args['estimator']
+        print(f'Using MINIROCKET transformer with {estimator} estimator.')
         from sktime.transformations.panel.rocket import MiniRocketMultivariate
-        from sklearn.linear_model import LogisticRegressionCV
+        if estimator == 'logreg':
+            from sklearn.linear_model import LogisticRegression
+            est = LogisticRegression(verbose=1)
+        elif estimator == 'ridge':
+            from sklearn.linear_model import RidgeClassifier
+            est = RidgeClassifier()
+        elif estimator == 'sgd':
+            from sklearn.linear_model import SGDClassifier
+            est = SGDClassifier(verbose=1)
+
         clf = padder * MiniRocketMultivariate(n_jobs=-1) * StandardScaler() \
-            * LogisticRegressionCV(n_jobs=-1, multi_class='ovr', tol=0.005, verbose=1)
+            * est
 
     elif method == 'knn':
         print('Using KNN time series classifier.')
@@ -158,6 +169,8 @@ if __name__ == '__main__':
                         help='Size of test split. Default is 0.25')
     parser.add_argument('--method', type=str, choices=CLASSIFIER_TYPES, required=False, default='rocket',
                         help='Which classifier to use. Default is rocket')
+    parser.add_argument('--estimator', type=str, choices=ESTIMATOR_TYPES, required=False, default='logreg',
+                        help='Which estimator to use. Default is logistic regression. Currently only implemented with `minirocket` classifier.')
     args = vars(parser.parse_args())
 
     classify(args)

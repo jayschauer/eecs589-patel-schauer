@@ -1,8 +1,10 @@
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import pickle
-import sys
+import seaborn as sns
+import os
 
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
@@ -60,10 +62,13 @@ def main(args):
     c_mat = confusion_matrix(y_true, y_pred)
 
     if args['show_plot']:
-        matrix_plot = ConfusionMatrixDisplay.from_predictions(y_true, y_pred, include_values=False, cmap='cividis')
+        fig, ax = plt.subplots(figsize=(10, 8))
+        matrix_plot = ConfusionMatrixDisplay.from_predictions(
+            y_true, y_pred, include_values=False, cmap='cividis', ax=ax)
         ticks = [i*10 for i in range(c_mat.shape[0] // 10 + 1)]
-        matrix_plot.ax_.set_xticks(ticks)
-        matrix_plot.ax_.set_yticks(ticks)
+        ax.set_xticks(ticks)
+        ax.set_yticks(ticks)
+        plt.savefig(os.path.join(os.path.dirname(args['file']), 'confusion_matrix.png'))
         plt.show()
 
     # Get list of labels
@@ -91,7 +96,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--file', type=str, required=True, help='predictions file to load')
     parser.add_argument('--show_plot', default=False, action='store_true', help='show confusion matrix')
-    parser.add_argument('--label_file', type=str, required=True, help='file containing list of labels')
+    parser.add_argument('--label_file', type=str, required=False, default='collection_scripts/top-1k-curated', help='file containing list of labels')
     args = vars(parser.parse_args())
 
     main(args)
