@@ -4,10 +4,10 @@ import json
 import math
 import os
 import random
+import seaborn as sns
 import sys
 
 import dtw
-import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -17,10 +17,10 @@ from statsmodels.distributions.empirical_distribution import ECDF
 # Add collection_scripts folder to path to import from dataset_utils
 collection_path = os.path.join(os.path.dirname(__file__), '../collection_scripts')
 sys.path.append(collection_path)
-from dataset_utils import load_data
+import dataset_utils
 
 def get_color(i):
-    colors = list(mcolors.TABLEAU_COLORS.values())
+    colors = list(sns.color_palette('deep'))
     return colors[i % len(colors)]
 
 def load_data(data_dir):
@@ -42,49 +42,32 @@ def load_data(data_dir):
 
     return data
 
-def plot_data(data, output='./test.png'):
-    domains = data.keys()
-    fig, ax = plt.subplots(1, len(domains), figsize=(22, 5))
-
-    for i, domain in enumerate(domains):
-        time_list = data[domain]['times']
-        size_list = data[domain]['sizes']
-
-        color = color=get_color(i)
-        for j, (time, size) in enumerate(zip(time_list, size_list)):
-            axes = ax[i] if i > 1 else ax
-            axes.scatter(time, size, color=get_color(j), label=j)
-            axes.set_title(domain)
-            axes.set_xlabel('time (s)')
-            axes.set_ylabel('packet size (bytes)')
-            axes.legend()
-
-    plt.savefig(output)
-    plt.show()
-
 def align_with_dtw(data, filename, labels=['google.com', 'amazon.com', 'youtube.com']):
-    columns = ['time', 'size']
+    sns.set_theme(style='darkgrid')
 
+    # create figure and subplots
     num_cols = 3
     num_rows = math.ceil(len(labels) / 3)
-    fig, axes = plt.subplots(num_rows, num_cols, squeeze=False)
+    fig, axes = plt.subplots(num_rows, num_cols, squeeze=False, figsize=(num_cols * 6, num_rows * 4))
 
     for label_idx, label in enumerate(labels):
-
+        # get axes for index
         row = label_idx // num_cols
         col = label_idx % num_cols
         ax = axes[row, col]
 
         sample_list = data[label]
 
-        # create reference frame 
+        # create reference frame
+        columns = ['time', 'size']
         reference_df = pd.DataFrame(
             [[time, size] for time, size in sample_list[0]],
             columns=columns
         )
 
         # plot reference frame
-        ax.plot(reference_df['time'], reference_df['size'], alpha=0.1, color=get_color(label_idx))
+        color = get_color(label_idx)
+        ax.plot(reference_df['time'], reference_df['size'], alpha=0.1, color=color)
 
         # keep track of values for each index in reference frame to calculate average
         values_by_index = { i: [size] for i, size in enumerate(reference_df['size']) }
@@ -102,7 +85,7 @@ def align_with_dtw(data, filename, labels=['google.com', 'amazon.com', 'youtube.
             query_values = query_df['size'][alignment.index1]
 
             # plot aligned query against reference indices
-            ax.plot(ref_times, query_values, alpha=0.1, color=get_color(label_idx))
+            ax.plot(ref_times, query_values, alpha=0.1, color=color)
 
             # for each index in reference alignment, save value from query to average later
             for i, index in enumerate(alignment.index2):
@@ -110,16 +93,15 @@ def align_with_dtw(data, filename, labels=['google.com', 'amazon.com', 'youtube.
 
         medians = np.array([ np.median(values_by_index[i]) for i in values_by_index ])
         mad = 2 * np.array([ robust.mad(values_by_index[i]) for i in values_by_index ])
-
-        ax.plot(reference_df['time'], medians, alpha=1, linewidth=1, color=get_color(label_idx))
+        
+        ax.plot(reference_df['time'], medians, alpha=1, linewidth=1, color=color)
 
         under_line, over_line = medians - mad, medians + mad
-
-        ax.fill_between(reference_df['time'], under_line, over_line, alpha=0.125, color=get_color(label_idx))
+        ax.fill_between(reference_df['time'], under_line, over_line, alpha=0.125, color=color)
 
         ax.set_title(label)
-        ax.set_xlabel('time (s)')
-        ax.set_ylabel('packet size (bytes)')
+        ax.set_xlabel('time (s)', fontsize=8)
+        ax.set_ylabel('packet size (bytes)', fontsize=8)
 
     plt.savefig(filename)
     plt.show()
@@ -237,20 +219,36 @@ def times_cdf(data, filename, max_delay=0.1):
     base_sum, delay_sum = sum(base_times), sum(delayed_times)
     latency = (delay_sum - base_sum) / base_sum
     print(f'Latency increase from base: {latency * 100:.2f}%')
-
-
+    
 if __name__=='__main__':
 
+    parser = argparse.ArgumentParser()
+    choices = ['compare_traces', 'compare_google', 'length_cdf', 'sizes_cdf', 'times_cdf']
+    parser.add_argument('mode', type=str, required=True, choices=choices)
+    args = parser.parse_args()
 
-    labels = ['google.com', 'youtube.com', 'baidu.com', 'bilibili.com', 'facebook.com', 'instagram.com']
-    data = {}
-    for label in labels:
-        data[label] = load_data(f'collection_scripts/data/processed/processed_full/{label}')[label]
-    align_with_dtw(data, 'analysis/average_traces.png', labels)
+    # Plot average traces for different classes
+    if args.mode == 'compare_traces' or args.mode == 'compare_google':
+        if args.mode == 'compare_traces':
+            labels = ['google.com', 'youtube.com', 'baidu.com', 'bilibili.com', 'facebook.com', 'instagram.com']
+            filename = 'figs/average_traces.png'
+        else:
+            labels = ['google.com', 'google.co.uk', 'google.co.in']
+            filename = 'figs/average_traces_google.png'
 
-    # # plot cdfs of sequence length, packet sizes, and total time
-    # data, labels = dataset_utils.load_data('datasets/data_directional_200-class_100-samples.pkl')
+        data = {}
+        for label in labels:
+            data[label] = load_data(f'collection_scripts/data/processed/processed_full/{label}')[label]
+        align_with_dtw(data, filename, labels)
 
-    # #lengths_cdf(data, 'analysis/lengths_cdf.png')
-    # #sizes_cdf(data, 'analysis/sizes_cdf.png')
-    # times_cdf(data, 'analysis/times_cdf.png')
+    elif args.mode == 'length_cdf':
+        data, labels = dataset_utils.load_data('datasets/data_directional_200-class_100-samples.pkl')
+        lengths_cdf(data, 'figs/lengths_cdf.png')
+
+    elif args.mode == 'sizes_cdf':
+        data, labels = dataset_utils.load_data('datasets/data_directional_200-class_100-samples.pkl')
+        sizes_cdf(data, 'figs/sizes_cdf.png')
+
+    elif args.mode == 'times_cdf':
+        data, labels = dataset_utils.load_data('datasets/data_directional_200-class_100-samples.pkl')
+        times_cdf(data, 'figs/times_cdf.png')
