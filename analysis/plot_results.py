@@ -184,25 +184,25 @@ def plot_feature_comparison_by_direction():
     # features/direction/accuracy
     data = {
         'time, size': {
-            'both': 0.928,
-            'outgoing': 0.913,
-            'incoming': 0.932,
-            'none': 0.943,
+            'both': 0.962,
+            'outgoing': 0.942,
+            'incoming': 0.960,
+            'none': 0.971,
         },
         'time': {
-            'both': 0.876,
-            'outgoing': 0.869,
-            'incoming': 0.842,
-            'none': 0.889,
+            'both': 0.910,
+            'outgoing': 0.899,
+            'incoming': 0.873,
+            'none': 0.919,
         },
         'size': {
-            'both': 0.906,
-            'outgoing': 0.849,
-            'incoming': 0.901,
-            'none': 0.922,
+            'both': 0.945,
+            'outgoing': 0.887,
+            'incoming': 0.937,
+            'none': 0.960,
         },
         'direction': {
-            'both': 0.673,
+            'both': 0.707,
         },
     }
     data_lists = []
