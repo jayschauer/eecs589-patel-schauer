@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import random
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, f1_score
 from sklearn.model_selection import train_test_split
 from sktime.base import load
 from sktime import datatypes
@@ -15,6 +15,7 @@ from statsmodels.distributions.empirical_distribution import ECDF
 from tabulate import tabulate
 
 from classify import make_dataframe
+from analyze_results import modified_accuracy_score
 
 # Add collection_scripts folder to path to import from dataset_utils
 collection_path = os.path.join(os.path.dirname(__file__), '../collection_scripts')
@@ -40,7 +41,10 @@ def load_data_and_model(args):
     y = np.array(y_test)
 
     print('Loading model...')
-    model = load(args['model'])
+    model = args['model']
+    if os.path.isdir(model):  # if directory provided, use model.zip in that directory
+        model = os.path.join(args['model'], 'model')
+    model = load(model)
 
     return X_test, y, model
 
@@ -91,7 +95,7 @@ def add_time_delay(data, max_delay, direction=None):
     length: delay (in seconds) to add to each packet. The delay for each packet
             will be added on to each subsequent packet as well.
     direction: direction of packets to modify. If None, modifies both incoming and
-            outgoing packets (not implemented yet)
+            outgoing packets
 
     Returns: (df, overhead) - df is pd-multiindex dataframe, overhead is percent
     overhead compared to base
@@ -111,7 +115,7 @@ def add_time_delay(data, max_delay, direction=None):
         for i, (time, datum) in enumerate(series.items()):
             delay = 0
             if i > 0: # no delay since first time point always arrives at time 0
-                if direction is None or int(args['direction']) == int(datum[1]):
+                if direction is None or direction == int(datum[1]):
                     delay = delays[-1] + random.random() * max_delay
                     delays.append(delay)
             val_list.append([time + delay, datum[0]])
@@ -139,8 +143,16 @@ def predict(args):
     print('Making predictions...')
     pred = model.predict(X)
 
-    acc = accuracy_score(pred, y)
+    with open(args['label_file'], 'r') as fh:
+        labels = [line.strip() for line in fh.readlines()]
+
+    acc = accuracy_score(y, pred)
+    f1 = f1_score(y, pred, average='weighted')
+    modified_acc = modified_accuracy_score(y, pred, labels)
+
     print(f'Accuracy: {acc}')
+    print(f'F1-Score: {f1}')
+    print(f'Modified Accuracy: {modified_acc}')
 
 def max_padded_predictions(args):
     '''
@@ -148,8 +160,10 @@ def max_padded_predictions(args):
     of sizes in data.
 
     args: command line arguments
+
+    Returns: df - dataframe with percentile, size padded to, eval metrics, and % overhead
     '''
-    data, labels, model = load_data_and_model(args)
+    data, y, model = load_data_and_model(args)
 
     # get sizes to determine percentiles
     full_df = make_dataframe(data)
@@ -160,50 +174,85 @@ def max_padded_predictions(args):
     values = [ np.where(cdf > ptile)[0][0] for ptile in percentiles ]
 
     # dataframe to store output info
-    df = pd.DataFrame([], columns=['percentile', 'size', 'accuracy', 'overhead'])
+    df = pd.DataFrame([], columns=['percentile', 'size', 'accuracy', 'f1-score', 'modified_acc', 'overhead'])
 
     for ptile, value in zip(percentiles, values):
         print(f'Making predictions for {int(ptile * 100)}th percentile...')
         X, overhead = pad_sizes(data, 'max', value)
 
         pred = model.predict(X) 
-        acc = accuracy_score(pred, labels)
+
+        with open(args['label_file'], 'r') as fh:
+            labels = [line.strip() for line in fh.readlines()]
+
+        acc = accuracy_score(y, pred)
+        f1 = f1_score(y, pred, average='weighted')
+        modified_acc = modified_accuracy_score(y, pred, labels)
 
         # add values to output dataframe
-        df.loc[len(df)] = [int(ptile * 100), value, acc, overhead]
+        df.loc[len(df)] = [int(ptile * 100), value, acc, f1, modified_acc, overhead]
 
     print(tabulate(df, headers=df.columns))
+    return df
 
 def rounded_predictions(args):
+    '''
+    Makes predictions with sizes rounded up to multiples of various powers of 2.
+    of sizes in data.
+
+    args: command line arguments
+
+    Returns: df - dataframe with size padded to, eval metrics, and % overhead
+    '''
     X, y, model = load_data_and_model(args)
 
     pad_multiple_of = [1, 16, 32, 48, 64, 96, 128]
 
     # dataframe to store output info
-    df = pd.DataFrame([], columns=['multiple', 'accuracy', 'overhead'])
+    df = pd.DataFrame([], columns=['multiple', 'accuracy', 'f1-score', 'modified_accuracy', 'overhead'])
 
     for length in pad_multiple_of:
         print(f'Making predictions for padding to multiple of {length}...')
         X, overhead = pad_sizes(X, 'round', length)
 
-        pred = model.predict(X) 
-        acc = accuracy_score(pred, y)
+        pred = model.predict(X)
+
+        with open(args['label_file'], 'r') as fh:
+            labels = [line.strip() for line in fh.readlines()]
+     
+        acc = accuracy_score(y, pred)
+        f1 = f1_score(y, pred, average='weighted')
+        modified_acc = modified_accuracy_score(y, pred, labels)
 
         # add values to output dataframe
-        df.loc[len(df)] = [length, acc, overhead]
+        df.loc[len(df)] = [length, acc, f1, modified_acc, overhead]
 
     print(tabulate(df, headers=df.columns))
+    return df
 
 def time_delay_predictions(args):
-    data, labels, model = load_data_and_model(args)
+    '''
+    Makes predictions with random delay added to times.
+
+    args: command line arguments
+    '''
+    data, y, model = load_data_and_model(args)
 
     X, overhead, base_times, delayed_times = add_time_delay(data, args['delay'], args['direction'])
 
     print('Making predictions...')
     pred = model.predict(X)
 
-    acc = accuracy_score(labels, pred)
+    with open(args['label_file'], 'r') as fh:
+        labels = [line.strip() for line in fh.readlines()]
+
+    acc = accuracy_score(y, pred)
+    f1 = f1_score(y, pred, average='weighted')
+    modified_acc = modified_accuracy_score(y, pred, labels)
+    
     print(f'Accuracy: {acc}')
+    print(f'F1-Score: {f1}')
+    print(f'Modified accuracy: {modified_acc}')
 
     if overhead:
         print(f'Latency increase from base: {overhead * 100:.2f}%')
@@ -215,26 +264,41 @@ def time_delay_predictions(args):
     ax.set_ylabel('count')
 
     plt.show()
-
+ 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    
     parser.add_argument('--data', type=str, required=True, help='Pickle file containing the data')
     parser.add_argument('--model', type=str, required=True, \
         help="Path to serialized model saved by classifier. DON'T include the '.zip'! ")
+
+    parser.add_argument('--label_file', type=str, required=False, default='collection_scripts/top-1k-curated', \
+        help='File containing list of labels')
+
     parser.add_argument('--padding', type=str, choices=['max', 'round', 'none'], default='none',
         help='Padding strategy for padding size. Default is no padding')
+
     parser.add_argument('--delay', type=float, default=None,
         help='Maximum delay (in seconds) to add to each packet. Default is no delay')
+
     parser.add_argument('--direction', type=int, choices=[1, -1], default=None,
-        help='Packet direction to apply transformations to. -1 is incoming, 1 is outgoing. Default is both')
+        help='Packet direction to apply transformations to. -1 is incoming, 1 is outgoing. Default is both. Only implemented for time delay so far.')
+    
+    parser.add_argument('--filename', type=str, required=False, help='File to save output data to.')
     args = vars(parser.parse_args())
 
+    # Make predictions with desired modifications
+    df = None
     if args['padding'] == 'max':
-        max_padded_predictions(args)
+        df = max_padded_predictions(args)
     elif args['padding'] == 'round':
-        rounded_predictions(args)
+        df = rounded_predictions(args)
     elif args['delay'] is not None:
         time_delay_predictions(args)
     else:
         predict(args)
+
+    # Save output
+    if df is not None and args['filename']:
+        df.to_csv(args['filename'])

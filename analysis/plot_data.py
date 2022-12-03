@@ -11,6 +11,7 @@ import dtw
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import seaborn as sns
 from statsmodels import robust
 from statsmodels.distributions.empirical_distribution import ECDF
 
@@ -18,6 +19,8 @@ from statsmodels.distributions.empirical_distribution import ECDF
 collection_path = os.path.join(os.path.dirname(__file__), '../collection_scripts')
 sys.path.append(collection_path)
 import dataset_utils
+
+DPI = 200
 
 def get_color(i):
     colors = list(sns.color_palette('deep'))
@@ -44,11 +47,12 @@ def load_data(data_dir):
 
 def align_with_dtw(data, filename, labels=['google.com', 'amazon.com', 'youtube.com']):
     sns.set_theme(style='darkgrid')
+    sns.set(font_scale=0.8)
 
     # create figure and subplots
     num_cols = 3
     num_rows = math.ceil(len(labels) / 3)
-    fig, axes = plt.subplots(num_rows, num_cols, squeeze=False, figsize=(num_cols * 6, num_rows * 4))
+    fig, axes = plt.subplots(num_rows, num_cols, squeeze=False, figsize=(num_cols * 6, num_rows * 4.5))
 
     for label_idx, label in enumerate(labels):
         # get axes for index
@@ -100,10 +104,10 @@ def align_with_dtw(data, filename, labels=['google.com', 'amazon.com', 'youtube.
         ax.fill_between(reference_df['time'], under_line, over_line, alpha=0.125, color=color)
 
         ax.set_title(label)
-        ax.set_xlabel('time (s)', fontsize=8)
-        ax.set_ylabel('packet size (bytes)', fontsize=8)
+        ax.set_xlabel('Time (s)')
+        ax.set_ylabel('Packet size (bytes)')
 
-    plt.savefig(filename)
+    plt.savefig(filename, bbox_inches='tight', dpi=DPI)
     plt.show()
 
 def lengths_cdf(data, filename):
@@ -144,33 +148,46 @@ def sizes_cdf(data, filename):
 
     data: data dictionary from load_data
     '''
+    sns.set_theme(style='darkgrid', palette='deep')
+    sns.set(font_scale=0.8)
     fig, ax = plt.subplots(1, 2, figsize=(14, 6))
+
+    # Extract packet size from data
     sizes=[]
     for sample in data:
         for _, datum in sample.items():
             sizes.append(datum[0])
+    sizes = np.array(sizes)
 
-    ax[0].hist(sizes, bins=500)
-    ax[0].set_xlabel('size (bytes)')
-    ax[0].set_ylabel('count')
+    # Plot histogram of packet sizes on first axes
+    sns.histplot(sizes, log_scale=True, ax=ax[0])
+    ticks = [72, 78, 125, 166, 311, np.max(sizes)]
 
-    cdf = ECDF(sizes)
-    x = np.arange(max(sizes))
-    y = cdf(x)
+    # Plot empirical CDF on second axes
+    sns.histplot(
+        data=sizes, log_scale=True, element="step", fill=False,
+        cumulative=True, stat="density", common_norm=False,
+        ax=ax[1]
+    )
 
-    ax[1].plot(x, y)
-    ax[1].set_xlabel('size (bytes)')
-    ax[1].set_ylabel('cdf')
+    # Labels and stuff
+    ax[0].set_ylabel('Count')
+    ax[1].set_ylabel('CDF')
+    for axes in ax:
+        axes.set_xlabel('size (bytes)')
+        axes.set_xticks(ticks)
+        axes.set_xticklabels(ticks)
+        axes.set_yticklabels(list(axes.get_yticklabels()))
 
-    percentiles = [0.25, 0.5, 0.75, 0.9, 0.95, 0.99]
+    # Compute the empirical CDF and get values for certain percentiles
+    # cdf = ECDF(sizes)(np.arange(max(sizes)))
+    # percentiles = [0.25, 0.5, 0.75, 0.9, 0.95, 0.99]
     
-    for ptile in percentiles:
-        val = np.where(y > ptile)[0][0]
-        print(f'{ptile}: {val}')
+    # for ptile in percentiles:
+    #     val = np.where(cdf > ptile)[0][0]
+    #     print(f'{ptile}: {val}')
 
-    ax[1].grid()
-
-    plt.savefig(filename)
+    plt.savefig(filename, bbox_inches='tight', dpi=DPI)
     plt.show()
 
 def times_cdf(data, filename, max_delay=0.1):
@@ -224,7 +241,7 @@ if __name__=='__main__':
 
     parser = argparse.ArgumentParser()
     choices = ['compare_traces', 'compare_google', 'length_cdf', 'sizes_cdf', 'times_cdf']
-    parser.add_argument('mode', type=str, required=True, choices=choices)
+    parser.add_argument('mode', type=str, choices=choices)
     args = parser.parse_args()
 
     # Plot average traces for different classes

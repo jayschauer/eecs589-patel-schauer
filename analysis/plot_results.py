@@ -1,21 +1,21 @@
-import argparse
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import pickle
-import seaborn as sns
 import os
+import pickle
 import sys
 
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import ConfusionMatrixDisplay
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+import pandas as pd
+import seaborn as sns
 from sklearn.metrics import accuracy_score, f1_score
-from tabulate import tabulate
 
-# Add collection_scripts folder to path to import from dataset_utils
+# Add classification folder to path to import functions from scripts
 classification_path = os.path.join(os.path.dirname(__file__), '../classification')
 sys.path.append(classification_path)
 from analyze_results import modified_accuracy_score
+from make_predictions import max_padded_predictions
+
+DPI = 200
 
 def plot_estimator_comparison():
     '''
@@ -23,6 +23,7 @@ def plot_estimator_comparison():
     for different estimator types.
     '''
     sns.set_theme(style='darkgrid')
+    sns.set(font_scale=0.8)
 
     # Get list of labels
     with open('collection_scripts/top-1k-curated', 'r') as fh:
@@ -49,20 +50,23 @@ def plot_estimator_comparison():
     # reshape dataframe
     df = pd.melt(df, id_vars='estimator', var_name='metric', value_name='value')
 
-    # plot
+    # Plot bar graph for each estimator with each metric
     with sns.color_palette('deep', n_colors=3):
         ax = sns.barplot(df, x='estimator', y='value', hue='metric', alpha=0.8)
     
+    # Add value to top of each bar
     for container in ax.containers:
         for rect in container.patches:
             height = rect.get_height()
             val = f'{height:.3f}'
             ax.text(rect.get_x() + rect.get_width() / 2, height, val, ha='center', va='bottom', fontsize=8)
     
-    plt.title('MINIROCKET estimator comparison', fontsize=12)
-    plt.tick_params(axis='both', which='major', labelsize=10)
-    plt.legend(bbox_to_anchor=(1, 0.5), loc='center left', fontsize=10)
-    plt.savefig('figs/compare_estimators.png', bbox_inches='tight')
+    # Labels and stuff
+    ax.set_xlabel('Estimator')
+    ax.set_ylabel('Value')
+    plt.tick_params(axis='both', which='major')
+    sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
+    plt.savefig('figs/compare_estimators.png', bbox_inches='tight', dpi=DPI)
     plt.show()
 
 def plot_classifier_comparison():
@@ -71,6 +75,7 @@ def plot_classifier_comparison():
     for different transforms.
     '''
     sns.set_theme(style='darkgrid')
+    sns.set(font_scale=0.8)
 
     # Get list of labels
     with open('collection_scripts/top-1k-curated', 'r') as fh:
@@ -100,20 +105,23 @@ def plot_classifier_comparison():
     # reshape dataframe
     df = pd.melt(df, id_vars='classifier', var_name='metric', value_name='value')
 
-    # plot
+    # Create bar graph for each classifier with each metric
     with sns.color_palette('deep', n_colors=3):
         ax = sns.barplot(df, x='classifier', y='value', hue='metric', alpha=0.8)
     
+    # Add value to top of each bar
     for container in ax.containers:
         for rect in container.patches:
             height = rect.get_height()
             val = f'{height:.3f}'
             ax.text(rect.get_x() + rect.get_width() / 2, height, val, ha='center', va='bottom', fontsize=8)
     
-    plt.title('Classifier comparison', fontsize=12)
-    plt.tick_params(axis='both', which='major', labelsize=10)
-    plt.legend(bbox_to_anchor=(1, 0.5), loc='center left', fontsize=10)
-    plt.savefig('figs/compare_classifiers.png', bbox_inches='tight')
+    # Labels and stuff
+    ax.set_xlabel('Classifier')
+    ax.set_ylabel('Value')
+    plt.tick_params(axis='both', which='major')
+    sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
+    plt.savefig('figs/compare_classifiers.png', bbox_inches='tight', dpi=DPI)
     plt.show()
 
 def plot_kernel_comparison():
@@ -122,6 +130,7 @@ def plot_kernel_comparison():
     for different number of convolutional kernels with ROCKET.
     '''
     sns.set_theme(style='darkgrid')
+    sns.set(font_scale=0.8)
 
     # Get list of labels
     with open('collection_scripts/top-1k-curated', 'r') as fh:
@@ -155,18 +164,61 @@ def plot_kernel_comparison():
 
     # plot
     with sns.color_palette('deep', n_colors=3):
-        ax = sns.lineplot(df, x='kernel_size', y='value', hue='metric')
-    
-    plt.title('ROCKET performance with different kernel sizes', fontsize=12)
-    plt.tick_params(axis='both', which='major', labelsize=10)
-    plt.legend(bbox_to_anchor=(1, 0.5), loc='center left', fontsize=10)
-    plt.savefig('figs/compare_kernels.png', bbox_inches='tight')
+        ax = sns.lineplot(df, x='kernel_size', y='value', hue='metric', marker='o')
+
+    # Labels and stuff
+    ax.set_xlabel('Kernel size')
+    ax.set_ylabel('Value')
+    plt.tick_params(axis='both', which='major')
+    sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
+    plt.savefig('figs/compare_kernels.png', bbox_inches='tight', dpi=DPI)
     plt.show()
 
-def plot_padding():
-    pass
+def plot_max_padding():
+    '''
+    Creates a chart showing the accuracy for different sizes of max padding.
+    '''
+    df = pd.read_csv('classification/max_pad.csv')
+
+    sns.set_theme(style='darkgrid')
+    sns.set(font_scale=0.8)
+    fig, ax1 = plt.subplots()
+    ax2 = ax1.twinx()
+
+    palette = sns.color_palette('deep', n_colors=2)
+
+    # Plot modified accuracy vs pad size on one graph
+    sns.lineplot(df, x='size', y='modified_acc', ax=ax1, marker='o', color=palette[0])
+
+    # Plot overhead vs pad size on other graph
+    sns.lineplot(df, x='size', y='overhead', ax=ax2, marker='o', color=palette[1])
+
+    handles=[Line2D([], [], marker='o', color=palette[0], label='Modified Accuracy'), Line2D([], [], marker='o', color=palette[1], label='Overhead')]
+
+    # Labels and stuff
+    ax1.set_xlabel('Pad size (bytes)')
+    ax1.set_ylabel('Accuracy')
+    ax2.set_ylabel('Overhead (%)')
+
+    ticks = [0, 0.2, 0.4, 0.6, 0.8, 1.0]
+    ax1.set_ylim(-0.02, 1.02)
+    ax2.set_ylim(-0.04, 2.04)
+    ax1.set_yticks(ticks)
+    ax1.set_yticklabels(ticks)
+    ax2.set_yticks([tick * 2 for tick in ticks])
+    ax2.set_yticklabels([f'{tick * 200:.0f}' for tick in ticks])
+
+    ax1.legend(handles=handles)
+    sns.move_legend(ax1, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=2, title=None, frameon=False)
+
+    fig.tight_layout()
+    plt.savefig('figs/max_padding.png', bbox_inches='tight', dpi=DPI)
+    plt.show()
+
 
 if __name__=='__main__':
     plot_estimator_comparison()
     plot_kernel_comparison()
     plot_classifier_comparison()
+
+    plot_max_padding()
