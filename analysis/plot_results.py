@@ -17,6 +17,7 @@ from make_predictions import max_padded_predictions
 
 DPI = 200
 
+
 def plot_estimator_comparison():
     '''
     Creates a bar chart comparing accuracy, F1-score, and modified accuracy
@@ -28,7 +29,7 @@ def plot_estimator_comparison():
     # Get list of labels
     with open('collection_scripts/top-1k-curated', 'r') as fh:
         labels = [line.strip() for line in fh.readlines()]
-    
+
     classifiers = ['ridge', 'logisticreg', 'sgd']
 
     df = pd.DataFrame([], columns=['estimator', 'accuracy', 'f1-score', 'modified_accuracy'])
@@ -39,7 +40,7 @@ def plot_estimator_comparison():
             d = pickle.load(fh)
             y_pred = d['pred']
             y_true = d['gt']
-        
+
         df.loc[len(df.index)] = [
             classifier,
             accuracy_score(y_true, y_pred),
@@ -53,14 +54,14 @@ def plot_estimator_comparison():
     # Plot bar graph for each estimator with each metric
     with sns.color_palette('deep', n_colors=3):
         ax = sns.barplot(df, x='estimator', y='value', hue='metric', alpha=0.8)
-    
+
     # Add value to top of each bar
     for container in ax.containers:
         for rect in container.patches:
             height = rect.get_height()
             val = f'{height:.3f}'
             ax.text(rect.get_x() + rect.get_width() / 2, height, val, ha='center', va='bottom', fontsize=8)
-    
+
     # Labels and stuff
     ax.set_xlabel('Estimator')
     ax.set_ylabel('Value')
@@ -68,6 +69,7 @@ def plot_estimator_comparison():
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
     plt.savefig('figs/compare_estimators.png', bbox_inches='tight', dpi=DPI)
     plt.show()
+
 
 def plot_classifier_comparison():
     '''
@@ -80,7 +82,7 @@ def plot_classifier_comparison():
     # Get list of labels
     with open('collection_scripts/top-1k-curated', 'r') as fh:
         labels = [line.strip() for line in fh.readlines()]
-    
+
     classifiers = {
         'rocket': 'classification/rocket_full_default/predictions.pkl',
         'catch-22': 'classification/predictions/predictions_200-class_100-samples_catch22.pkl',
@@ -94,7 +96,7 @@ def plot_classifier_comparison():
             d = pickle.load(fh)
             y_pred = d['pred']
             y_true = d['gt']
-        
+
         df.loc[len(df.index)] = [
             classifier,
             accuracy_score(y_true, y_pred),
@@ -108,14 +110,14 @@ def plot_classifier_comparison():
     # Create bar graph for each classifier with each metric
     with sns.color_palette('deep', n_colors=3):
         ax = sns.barplot(df, x='classifier', y='value', hue='metric', alpha=0.8)
-    
+
     # Add value to top of each bar
     for container in ax.containers:
         for rect in container.patches:
             height = rect.get_height()
             val = f'{height:.3f}'
             ax.text(rect.get_x() + rect.get_width() / 2, height, val, ha='center', va='bottom', fontsize=8)
-    
+
     # Labels and stuff
     ax.set_xlabel('Classifier')
     ax.set_ylabel('Value')
@@ -123,6 +125,7 @@ def plot_classifier_comparison():
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
     plt.savefig('figs/compare_classifiers.png', bbox_inches='tight', dpi=DPI)
     plt.show()
+
 
 def plot_kernel_comparison():
     '''
@@ -135,7 +138,7 @@ def plot_kernel_comparison():
     # Get list of labels
     with open('collection_scripts/top-1k-curated', 'r') as fh:
         labels = [line.strip() for line in fh.readlines()]
-    
+
     kernels = {
         10000: 'classification/rocket_full_default',
         5000: 'classification/rocket_full_5000-kernels',
@@ -151,7 +154,7 @@ def plot_kernel_comparison():
             d = pickle.load(fh)
             y_pred = d['pred']
             y_true = d['gt']
-        
+
         df.loc[len(df.index)] = [
             kernel_size,
             accuracy_score(y_true, y_pred),
@@ -174,6 +177,68 @@ def plot_kernel_comparison():
     plt.savefig('figs/compare_kernels.png', bbox_inches='tight', dpi=DPI)
     plt.show()
 
+def plot_feature_comparison_by_direction():
+    '''
+    Creates a bar chart comparing accuracy, across different features
+    '''
+    # features/direction/accuracy
+    data = {
+        'time, size': {
+            'both': 0.928,
+            'outgoing': 0.913,
+            'incoming': 0.932,
+            'none': 0.943,
+        },
+        'time': {
+            'both': 0.876,
+            'outgoing': 0.869,
+            'incoming': 0.842,
+            'none': 0.889,
+        },
+        'size': {
+            'both': 0.906,
+            'outgoing': 0.849,
+            'incoming': 0.901,
+            'none': 0.922,
+        },
+        'direction': {
+            'both': 0.673,
+        },
+    }
+    data_lists = []
+    for feature, directions in data.items():
+        for direction, accuracy in directions.items():
+            data_lists.append([
+                direction,
+                feature,
+                accuracy
+            ])
+
+    sns.set_theme(style='darkgrid')
+    sns.set(font_scale=0.8)
+
+    df = pd.DataFrame(data_lists, columns=['direction', 'feature', 'accuracy', ])
+
+    # Create bar graph for each feature with each direction
+    with sns.color_palette('deep', n_colors=4):
+        ax = sns.barplot(df, x='direction', y='accuracy', hue='feature', alpha=0.8)
+
+    # Add value to top of each bar
+    for container in ax.containers:
+        for rect in container.patches:
+            height = rect.get_height()
+            val = f'{height:.3f}'
+            ax.text(rect.get_x() + rect.get_width() / 2, height, val, ha='center', va='bottom', fontsize=6)
+
+    # Labels and stuff
+    ax.set_xlabel('Direction')
+    ax.set_ylabel('Accuracy')
+    plt.tick_params(axis='both', which='major')
+    sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=4, title=None, frameon=False)
+    plt.savefig('../figs/compare_features_by_direction.png', bbox_inches='tight', dpi=DPI)
+    plt.show()
+
+
 def plot_max_padding():
     '''
     Creates a chart showing the accuracy for different sizes of max padding.
@@ -193,7 +258,8 @@ def plot_max_padding():
     # Plot overhead vs pad size on other graph
     sns.lineplot(df, x='size', y='overhead', ax=ax2, marker='o', color=palette[1])
 
-    handles=[Line2D([], [], marker='o', color=palette[0], label='Modified Accuracy'), Line2D([], [], marker='o', color=palette[1], label='Overhead')]
+    handles = [Line2D([], [], marker='o', color=palette[0], label='Modified Accuracy'),
+               Line2D([], [], marker='o', color=palette[1], label='Overhead')]
 
     # Labels and stuff
     ax1.set_xlabel('Pad size (bytes)')
@@ -216,9 +282,9 @@ def plot_max_padding():
     plt.show()
 
 
-if __name__=='__main__':
-    plot_estimator_comparison()
-    plot_kernel_comparison()
-    plot_classifier_comparison()
-
-    plot_max_padding()
+if __name__ == '__main__':
+    # plot_estimator_comparison()
+    # plot_kernel_comparison()
+    # plot_classifier_comparison()
+    plot_feature_comparison_by_direction()
+    # plot_max_padding()
