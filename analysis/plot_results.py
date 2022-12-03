@@ -215,10 +215,52 @@ def plot_max_padding():
     plt.savefig('figs/max_padding.png', bbox_inches='tight', dpi=DPI)
     plt.show()
 
+def plot_adaptive_padding():
+    '''
+    Creates a chart showing the accuracy for different sizes of adaptive padding.
+    '''
+    df = pd.read_csv('classification/adaptive_pad.csv')
+
+    sns.set_theme(style='darkgrid')
+    sns.set(font_scale=0.8)
+    fig, ax1 = plt.subplots()
+    ax2 = ax1.twinx()
+
+    palette = sns.color_palette('deep', n_colors=2)
+
+    # Plot modified accuracy vs pad size on one graph
+    sns.lineplot(df, x='multiple', y='modified_accuracy', ax=ax1, marker='o', color=palette[0])
+
+    # Plot overhead vs pad size on other graph
+    sns.lineplot(df, x='multiple', y='overhead', ax=ax2, marker='o', color=palette[1])
+
+    handles=[Line2D([], [], marker='o', color=palette[0], label='Modified Accuracy'), Line2D([], [], marker='o', color=palette[1], label='Overhead')]
+
+    # Labels and stuff
+    ax1.set_xlabel('Padding multiple (bytes)')
+    ax1.set_ylabel('Accuracy')
+    ax2.set_ylabel('Overhead (%)')
+
+    ticks = [0, 0.2, 0.4, 0.6, 0.8, 1.0]
+    ax1.set_ylim(-0.02, 1.02)
+    ax2.set_ylim(-0.04, 2.04)
+    ax1.set_yticks(ticks)
+    ax1.set_yticklabels(ticks)
+    ax2.set_yticks([tick * 2 for tick in ticks])
+    ax2.set_yticklabels([f'{tick * 200:.0f}' for tick in ticks])
+
+    ax1.legend(handles=handles)
+    sns.move_legend(ax1, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=2, title=None, frameon=False)
+
+    fig.tight_layout()
+    plt.savefig('figs/adaptive_padding.png', bbox_inches='tight', dpi=DPI)
+    plt.show()
+
 
 if __name__=='__main__':
-    plot_estimator_comparison()
-    plot_kernel_comparison()
-    plot_classifier_comparison()
+    # plot_estimator_comparison()
+    # plot_kernel_comparison()
+    # plot_classifier_comparison()
 
-    plot_max_padding()
+    # plot_max_padding()
+    plot_adaptive_padding()

@@ -204,7 +204,7 @@ def rounded_predictions(args):
 
     Returns: df - dataframe with size padded to, eval metrics, and % overhead
     '''
-    X, y, model = load_data_and_model(args)
+    data, y, model = load_data_and_model(args)
 
     pad_multiple_of = [1, 16, 32, 48, 64, 96, 128]
 
@@ -213,7 +213,7 @@ def rounded_predictions(args):
 
     for length in pad_multiple_of:
         print(f'Making predictions for padding to multiple of {length}...')
-        X, overhead = pad_sizes(X, 'round', length)
+        X, overhead = pad_sizes(data, 'round', length)
 
         pred = model.predict(X)
 
