@@ -30,7 +30,7 @@ def plot_estimator_comparison():
     
     classifiers = ['ridge', 'logisticreg', 'sgd']
 
-    df = pd.DataFrame([], columns=['classifier', 'accuracy', 'f1-score', 'modified_accuracy'])
+    df = pd.DataFrame([], columns=['estimator', 'accuracy', 'f1-score', 'modified_accuracy'])
 
     for classifier in classifiers:
         pred_file = f'classification/minirocket_full_{classifier}/predictions.pkl'
@@ -47,11 +47,11 @@ def plot_estimator_comparison():
         ]
 
     # reshape dataframe
-    df = pd.melt(df, id_vars='classifier', var_name='metric', value_name='value')
+    df = pd.melt(df, id_vars='estimator', var_name='metric', value_name='value')
 
     # plot
     with sns.color_palette('deep', n_colors=3):
-        ax = sns.barplot(df, x='classifier', y='value', hue='metric', alpha=0.8)
+        ax = sns.barplot(df, x='estimator', y='value', hue='metric', alpha=0.8)
     
     for container in ax.containers:
         for rect in container.patches:
@@ -59,10 +59,10 @@ def plot_estimator_comparison():
             val = f'{height:.3f}'
             ax.text(rect.get_x() + rect.get_width() / 2, height, val, ha='center', va='bottom', fontsize=8)
     
-    plt.title('MINIROCKET classifier performance', fontsize=12)
+    plt.title('MINIROCKET estimator comparison', fontsize=12)
     plt.tick_params(axis='both', which='major', labelsize=10)
     plt.legend(bbox_to_anchor=(1, 0.5), loc='center left', fontsize=10)
-    plt.savefig('figs/compare_classifiers.png', bbox_inches='tight')
+    plt.savefig('figs/compare_estimators.png', bbox_inches='tight')
     plt.show()
 
 def plot_classifier_comparison():
@@ -130,6 +130,7 @@ def plot_kernel_comparison():
     kernels = {
         10000: 'classification/rocket_full_default',
         5000: 'classification/rocket_full_5000-kernels',
+        8000: 'classification/rocket_full_8000-kernels',
         11000: 'classification/rocket_full_11000-kernels'
     }
 
@@ -166,6 +167,6 @@ def plot_padding():
     pass
 
 if __name__=='__main__':
-    #plot_estimator_comparison()
-    #plot_kernel_comparison()
+    plot_estimator_comparison()
+    plot_kernel_comparison()
     plot_classifier_comparison()
