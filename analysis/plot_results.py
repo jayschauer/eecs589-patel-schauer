@@ -1,6 +1,7 @@
 import os
 import pickle
 import sys
+import argparse
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,7 +17,8 @@ from analyze_results import modified_accuracy_score
 from make_predictions import max_padded_predictions
 
 DPI = 200
-
+CHOICES = ['estimators', 'transforms', 'kernels', 'features', 'max_padding', 'adaptive_padding']
+FIGS_DIR = os.path.join(os.path.dirname(__file__), '../figs')
 
 def plot_estimator_comparison():
     '''
@@ -67,11 +69,11 @@ def plot_estimator_comparison():
     ax.set_ylabel('Value')
     plt.tick_params(axis='both', which='major')
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
-    plt.savefig('figs/compare_estimators.png', bbox_inches='tight', dpi=DPI)
+    plt.savefig(os.path.join(FIGS_DIR, 'compare_estimators.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
 
-def plot_classifier_comparison():
+def plot_transform_comparison():
     '''
     Creates a bar chart comparing accuracy, F1-score, and modified accuracy
     for different transforms.
@@ -119,11 +121,11 @@ def plot_classifier_comparison():
             ax.text(rect.get_x() + rect.get_width() / 2, height, val, ha='center', va='bottom', fontsize=8)
 
     # Labels and stuff
-    ax.set_xlabel('Classifier')
+    ax.set_xlabel('Transform')
     ax.set_ylabel('Value')
     plt.tick_params(axis='both', which='major')
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
-    plt.savefig('figs/compare_classifiers.png', bbox_inches='tight', dpi=DPI)
+    plt.savefig(os.path.join(FIGS_DIR, 'compare_transforms.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
 
@@ -174,7 +176,7 @@ def plot_kernel_comparison():
     ax.set_ylabel('Value')
     plt.tick_params(axis='both', which='major')
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
-    plt.savefig('figs/compare_kernels.png', bbox_inches='tight', dpi=DPI)
+    plt.savefig(os.path.join(FIGS_DIR, 'compare_kernels.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
 def plot_feature_comparison_by_direction():
@@ -235,7 +237,7 @@ def plot_feature_comparison_by_direction():
     ax.set_ylabel('Accuracy')
     plt.tick_params(axis='both', which='major')
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=4, title=None, frameon=False)
-    plt.savefig('../figs/compare_features_by_direction.png', bbox_inches='tight', dpi=DPI)
+    plt.savefig(os.path.join(FIGS_DIR, 'compare_features_by_direction.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
 
@@ -278,7 +280,7 @@ def plot_max_padding():
     sns.move_legend(ax1, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=2, title=None, frameon=False)
 
     fig.tight_layout()
-    plt.savefig('figs/max_padding.png', bbox_inches='tight', dpi=DPI)
+    plt.savefig(os.path.join(FIGS_DIR, 'max_padding.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
 def plot_adaptive_padding():
@@ -319,16 +321,34 @@ def plot_adaptive_padding():
     sns.move_legend(ax1, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=2, title=None, frameon=False)
 
     fig.tight_layout()
-    plt.savefig('figs/adaptive_padding.png', bbox_inches='tight', dpi=DPI)
+    plt.savefig(os.path.join(FIGS_DIR, 'adaptive_padding.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
+
+def plot(plot_type):
+    if plot_type=='transforms':
+        print('Plotting transforms...')
+        plot_transform_comparison()
+    elif plot_type=='estimators':
+        print('Plotting estimators...')
+        plot_estimator_comparison()
+    elif plot_type=='features':
+        print('Plotting features...')
+        plot_feature_comparison_by_direction()
+    elif plot_type=='max_padding':
+        print('Plotting max padding...')
+        plot_max_padding()
+    elif plot_type=='adaptive_padding':
+        print('Plotting adaptive padding...')
+        plot_adaptive_padding()
 
 
 if __name__ == '__main__':
-    # # plot_estimator_comparison()
-    # # plot_kernel_comparison()
-    # # plot_classifier_comparison()
-    plot_feature_comparison_by_direction()
-    # plot_max_padding()
 
-    # plot_max_padding()
-    plot_adaptive_padding()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('plot_type', choices=CHOICES, nargs='+', type=str,
+        help='List of plots to generate. Can specify multiple options. See help for list of \
+              possible plots.')
+    args = parser.parse_args()
+
+    for plot_type in args.plot_type:
+        plot(plot_type)
