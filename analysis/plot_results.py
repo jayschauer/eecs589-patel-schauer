@@ -32,7 +32,7 @@ def plot_estimator_comparison():
     with open('collection_scripts/top-1k-curated', 'r') as fh:
         labels = [line.strip() for line in fh.readlines()]
 
-    classifiers = ['ridge', 'logisticreg', 'sgd']
+    classifiers = ['ridge', 'logisticreg', 'SVM']
 
     df = pd.DataFrame([], columns=['estimator', 'accuracy', 'f1-score', 'modified_accuracy'])
 
