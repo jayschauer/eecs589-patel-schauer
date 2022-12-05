@@ -1,4 +1,4 @@
-,percentile,size,accuracy,f1-score,modified_acc,overhead
+,percentile,size,accuracy,f1-score,modified_accuracy,overhead
 0,25,72,0.950273,0.949266,0.97736,0.0101491
 1,50,78,0.939761,0.938816,0.974328,0.031752
 2,75,125,0.613099,0.594172,0.66606,0.295074

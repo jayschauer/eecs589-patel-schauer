@@ -55,7 +55,9 @@ def pad_sizes(data, strategy, length):
     data: list of samples where each sample is a dictionary of time: size pairs
     strategy: padding method (either 'max' or 'round')
     length: length to pad to if max padding, or value to pad to multiple of if rounding 
-            (e.g. if 32, pads to nearest multiple of 32)
+            (e.g. if 32, pads to nearest multiple of 32). If given as a tuple, pads 
+            outgoing (i.e. query) packets with first value and incoming (i.e. response)
+            packets with second value.
 
     Returns: (df, overhead) - df is pd-multiindex dataframe, overhead is percent
     overhead compared to base
@@ -69,14 +71,23 @@ def pad_sizes(data, strategy, length):
     padded, base = 0, 0
     Xlist = []
 
-    # max or round padding
     for series in data:
         val_list = []
         for time, datum in series.items():
-            if strategy == 'max':
-                padded_val = max(length, datum[0]) # higher of length and existing value
+            # If tuple provided, pad incoming and outgoing packets differently
+            if type(length) is tuple:
+                if int(datum[1]) == 1:
+                    pad_length = length[0] # query
+                else:
+                    pad_length = length[1] # response
             else:
-                padded_val = math.ceil(datum[0] / length) * length  # round up to nearest multiple of length
+                pad_length = length  # otherwise pad both the same
+
+            # Apply strategy
+            if strategy == 'max':
+                padded_val = max(pad_length, datum[0]) # higher of length and existing value
+            else:
+                padded_val = math.ceil(datum[0] / pad_length) * pad_length  # round up to nearest multiple of length
 
             val_list.append([time, padded_val])
             base += datum[0]
@@ -195,7 +206,7 @@ def max_padded_predictions(args):
     print(tabulate(df, headers=df.columns))
     return df
 
-def rounded_predictions(args):
+def block_padding_predictions(args):
     '''
     Makes predictions with sizes rounded up to multiples of various powers of 2.
     of sizes in data.
@@ -226,6 +237,41 @@ def rounded_predictions(args):
 
         # add values to output dataframe
         df.loc[len(df)] = [length, acc, f1, modified_acc, overhead]
+
+    print(tabulate(df, headers=df.columns))
+    return df
+
+def directional_padded_predictions(args):
+    '''
+    Makes predictions with query sizes padded to nearest multiple of 128 bytes
+    and response predictions padded to nearest multiple of 468 bytes.
+    Based on RFC 8467: https://www.rfc-editor.org/rfc/rfc8467#ref-NDSS-PADDING.
+
+    args: command line arguments
+
+    Returns: df - dataframe with pad size, eval metrics, and % overhead
+    '''
+    data, y, model = load_data_and_model(args)
+
+    # dataframe to store output info
+    df = pd.DataFrame([], columns=['length', 'accuracy', 'f1-score', 'modified_accuracy', 'overhead'])
+
+    sizes = [(128, 256), (128, 468), (128, 512), (256, 468), (256, 512)]
+    for size_pair in sizes:
+        print(f'Making predictions for padding to {size_pair}...')
+        X, overhead = pad_sizes(data, 'round', size_pair)
+
+        pred = model.predict(X)
+
+        with open(args['label_file'], 'r') as fh:
+            labels = [line.strip() for line in fh.readlines()]
+        
+        acc = accuracy_score(y, pred)
+        f1 = f1_score(y, pred, average='weighted')
+        modified_acc = modified_accuracy_score(y, pred, labels)
+
+        # add values to output dataframe
+        df.loc[len(df)] = [f'{size_pair}', acc, f1, modified_acc, overhead]
 
     print(tabulate(df, headers=df.columns))
     return df
@@ -276,7 +322,7 @@ if __name__ == '__main__':
     parser.add_argument('--label_file', type=str, required=False, default='collection_scripts/top-1k-curated', \
         help='File containing list of labels')
 
-    parser.add_argument('--padding', type=str, choices=['max', 'round', 'none'], default='none',
+    parser.add_argument('--padding', type=str, choices=['max', 'round', 'directional', 'none'], default='none',
         help='Padding strategy for padding size. Default is no padding')
 
     parser.add_argument('--delay', type=float, default=None,
@@ -293,7 +339,9 @@ if __name__ == '__main__':
     if args['padding'] == 'max':
         df = max_padded_predictions(args)
     elif args['padding'] == 'round':
-        df = rounded_predictions(args)
+        df = block_padding_predictions(args)
+    elif args['padding'] == 'directional':
+        df = directional_padded_predictions(args)
     elif args['delay'] is not None:
         time_delay_predictions(args)
     else:

@@ -9,6 +9,7 @@ from matplotlib.lines import Line2D
 import pandas as pd
 import seaborn as sns
 from sklearn.metrics import accuracy_score, f1_score
+from adjustText import adjust_text
 
 # Add classification folder to path to import functions from scripts
 classification_path = os.path.join(os.path.dirname(__file__), '../classification')
@@ -17,7 +18,9 @@ from analyze_results import modified_accuracy_score
 from make_predictions import max_padded_predictions
 
 DPI = 200
-CHOICES = ['estimators', 'transforms', 'kernels', 'features', 'max_padding', 'adaptive_padding']
+CHOICES = [ 'estimators', 'transforms', 'kernels', 'features',
+            'max_padding', 'adaptive_padding', 'pad_comparison'
+          ]
 FIGS_DIR = os.path.join(os.path.dirname(__file__), '../figs')
 
 def plot_estimator_comparison():
@@ -71,7 +74,6 @@ def plot_estimator_comparison():
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
     plt.savefig(os.path.join(FIGS_DIR, 'compare_estimators.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
-
 
 def plot_transform_comparison():
     '''
@@ -127,7 +129,6 @@ def plot_transform_comparison():
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
     plt.savefig(os.path.join(FIGS_DIR, 'compare_transforms.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
-
 
 def plot_kernel_comparison():
     '''
@@ -240,7 +241,6 @@ def plot_feature_comparison_by_direction():
     plt.savefig(os.path.join(FIGS_DIR, 'compare_features_by_direction.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
-
 def plot_max_padding():
     '''
     Creates a chart showing the accuracy for different sizes of max padding.
@@ -324,6 +324,60 @@ def plot_adaptive_padding():
     plt.savefig(os.path.join(FIGS_DIR, 'adaptive_padding.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
+def plot_pad_scatter():
+    '''
+    Creates a scatter plot of all the different padding strategies plotting as overhead
+    vs accuracy.
+    '''
+
+    # Load data
+    adaptive_df = pd.read_csv('classification/adaptive_pad.csv')
+    max_df = pd.read_csv('classification/max_pad.csv')
+    directional_df = pd.read_csv('classification/directional_pad.csv')
+
+    # Rename columns to make it easier to join
+    adaptive_df.rename(columns={'multiple': 'pad'}, inplace=True)
+    max_df.rename(columns={'size': 'pad'}, inplace=True)
+    directional_df.rename(columns={'length': 'pad'}, inplace=True)
+
+    # Add type column to differentiate once combined
+    adaptive_df['type'] = 'block'
+    max_df['type'] = 'max'
+    directional_df['type'] = 'directional (query, response)'
+
+    # Merge with inner join to drop unneeded columns
+    merged_df = pd.concat([max_df, adaptive_df, directional_df])
+    merged_df = merged_df[['pad', 'modified_accuracy', 'overhead', 'type']]
+    merged_df = merged_df.reset_index(drop=True)
+
+    sns.set_theme(style='darkgrid')
+    sns.set(font_scale=0.8)
+    palette = sns.color_palette('deep', n_colors=2)
+
+    # Plot overhead vs modified accuracy
+    ax = sns.scatterplot(merged_df, x='overhead', y='modified_accuracy', hue='type', style='type')
+
+    # Add labels to points and adjust so they don't overlap
+    texts = []
+    for index in merged_df.index:
+        label = merged_df["pad"][index]
+        texts.append(ax.text(
+            merged_df['overhead'][index], merged_df['modified_accuracy'][index], label, fontsize=6
+        ))
+    adjust_text(texts)
+
+    # Labels and stuff
+    ax.set_xlabel('Overhead')
+    ax.set_ylabel('Modified Accuracy')
+    ax.set_xticks([0, 0.5, 1, 1.5, 2, 2.5])
+    ax.set_xticklabels([f'{i}%' for i in [0, 50, 100, 150, 200, 250]])
+
+    sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
+
+    plt.gcf().tight_layout()
+    plt.savefig(os.path.join(FIGS_DIR, 'compare_padding_scatter.png'), bbox_inches='tight', dpi=DPI)
+    plt.show()
+
 def plot(plot_type):
     if plot_type=='transforms':
         print('Plotting transforms...')
@@ -340,6 +394,9 @@ def plot(plot_type):
     elif plot_type=='adaptive_padding':
         print('Plotting adaptive padding...')
         plot_adaptive_padding()
+    elif plot_type=='pad_comparison':
+        print('Plotting comparison of all padding methods...')
+        plot_pad_scatter()
 
 
 if __name__ == '__main__':
