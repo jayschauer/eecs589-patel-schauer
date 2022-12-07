@@ -28,7 +28,8 @@ def make_dataframe(data):
 
     data: list of samples where each sample is a dictionary of time: size pairs
 
-    Returns: pd-multiindex dataframe where first index is instance and second index is time point.
+    Returns: pd-multiindex dataframe where first index is instance of timeseries (sample) and second index is time point
+        (index into the sample).
     """
     cols = ['time', 'packet_size']
 
@@ -62,26 +63,29 @@ def make_directional_dataframe(data):
     return datatypes.convert_to(Xlist, to_type='pd-multiindex')
 
 
-def make_iat_dataframe(data):
+def make_iat_dataframe(data, with_direction=False):
     """
     Convert the data from the list of time/series representation to a multiindex dataframe
     with inter-arrival time and size as the features.
 
     data: list of samples where each sample is a dictionary of time: size pairs
 
-    Returns: pd-multiindex dataframe where first index is instance and second index is
-             inter-arrival time from previous packet.
+    Returns: pd-multiindex dataframe where first index is instance of timeseries (sample) and second index is index
+    into the sample
     """
-    cols = ['time', 'packet_size']
+    cols = ['time', 'packet_size', 'direction']
 
     # make a list of dataframes where each frame has rows (interval, size) for row index in data
     Xlist = []
     for series in data:
         times = list(series.keys())
-        intervals = [ 0 if i == 0 else times[i] - times[i - 1] for i in range(len(times)) ]
-        sizes = [ datum[0] for _, datum in series.items() ]
+        intervals = [0 if i == 0 else times[i] - times[i - 1] for i in range(len(times))]
+        sizes = [datum[0] for _, datum in series.items()]
+        directions = [datum[1] for _, datum in series.items()]
 
-        df = pd.DataFrame([ [interval, size] for interval, size in zip(intervals, sizes) ], columns=cols)
+        df = pd.DataFrame(
+            [[interval, size, direction] for interval, size, direction in zip(intervals, sizes, directions)],
+            columns=cols)
         Xlist.append(df)
 
     # convert to sktime panel
@@ -89,7 +93,10 @@ def make_iat_dataframe(data):
     X = datatypes.convert_to(Xlist, to_type='pd-multiindex')
 
     # pd_multi-index support not great in skitime code, even though it is the recommended way to format data
-    return X
+    if with_direction:
+        return X
+    else:
+        return X[['time', 'packet_size']]
 
 
 def get_classifier(method, max_length):
