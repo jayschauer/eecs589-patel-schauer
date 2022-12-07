@@ -237,10 +237,31 @@ def times_cdf(data, filename, max_delay=0.1):
     latency = (delay_sum - base_sum) / base_sum
     print(f'Latency increase from base: {latency * 100:.2f}%')
     
+def direction_counts(data, labels):
+    cols = ['incoming', 'outgoing', 'label']
+    df = pd.DataFrame([], columns = cols)
+
+    for series, label in zip(data, labels):
+        if label not in [0, 1, 2, 3, 4, 5]:
+            continue
+
+        directions = np.array([ datum[1] for _, datum in series.items() ])
+        outgoing = len(np.where(directions > 0)[0])
+        incoming = len(directions) - outgoing
+        df.loc[len(df.index)] = [incoming, outgoing, label]
+
+    sns.set_theme(style='darkgrid', palette='deep')
+    sns.set(font_scale=0.8)
+
+    df = pd.melt(df, id_vars='label', var_name='direction', value_name='count')
+    sns.barplot(df, x='label', y='count', hue='direction')
+
+    plt.show()
+
 if __name__=='__main__':
 
     parser = argparse.ArgumentParser()
-    choices = ['compare_traces', 'compare_google', 'length_cdf', 'sizes_cdf', 'times_cdf']
+    choices = ['compare_traces', 'compare_google', 'length_cdf', 'sizes_cdf', 'times_cdf', 'counts']
     parser.add_argument('mode', type=str, choices=choices)
     args = parser.parse_args()
 
@@ -269,3 +290,7 @@ if __name__=='__main__':
     elif args.mode == 'times_cdf':
         data, labels = dataset_utils.load_data('datasets/data_directional_200-class_100-samples.pkl')
         times_cdf(data, 'figs/times_cdf.png')
+
+    elif args.mode == 'counts':
+        data, labels = dataset_utils.load_data('datasets/data_directional_200-class_100-samples.pkl')
+        direction_counts(data, labels)

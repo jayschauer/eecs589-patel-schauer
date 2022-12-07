@@ -62,6 +62,36 @@ def make_directional_dataframe(data):
     return datatypes.convert_to(Xlist, to_type='pd-multiindex')
 
 
+def make_iat_dataframe(data):
+    """
+    Convert the data from the list of time/series representation to a multiindex dataframe
+    with inter-arrival time and size as the features.
+
+    data: list of samples where each sample is a dictionary of time: size pairs
+
+    Returns: pd-multiindex dataframe where first index is instance and second index is
+             inter-arrival time from previous packet.
+    """
+    cols = ['time', 'packet_size']
+
+    # make a list of dataframes where each frame has rows (interval, size) for row index in data
+    Xlist = []
+    for series in data:
+        times = list(series.keys())
+        intervals = [ 0 if i == 0 else times[i] - times[i - 1] for i in range(len(times)) ]
+        sizes = [ datum[0] for _, datum in series.items() ]
+
+        df = pd.DataFrame([ [interval, size] for interval, size in zip(intervals, sizes) ], columns=cols)
+        Xlist.append(df)
+
+    # convert to sktime panel
+    # basically does X = pd.concat(obj, axis=0, keys=range(len(Xlist)), names=["instances", "timepoints"])
+    X = datatypes.convert_to(Xlist, to_type='pd-multiindex')
+
+    # pd_multi-index support not great in skitime code, even though it is the recommended way to format data
+    return X
+
+
 def get_classifier(method, max_length):
     '''
     Selects classifier to use based on command line arguments.
@@ -84,16 +114,15 @@ def get_classifier(method, max_length):
         from sktime.transformations.panel.rocket import MiniRocketMultivariate
         if estimator == 'logreg':
             from sklearn.linear_model import LogisticRegression
-            est = LogisticRegression(verbose=1)
+            est = LogisticRegression(verbose=1, multi_class='ovr', tol=0.01, n_jobs=-1)
         elif estimator == 'ridge':
-            from sklearn.linear_model import RidgeClassifier
-            est = RidgeClassifier()
+            from sklearn.linear_model import RidgeClassifierCV
+            est = RidgeClassifierCV(alphas=np.logspace(-3, 3, 6))
         elif estimator == 'sgd':
             from sklearn.linear_model import SGDClassifier
             est = SGDClassifier(verbose=1)
 
-        clf = padder * MiniRocketMultivariate(n_jobs=-1) * StandardScaler() \
-            * est
+        clf = padder * MiniRocketMultivariate(n_jobs=-1) * StandardScaler() * est
 
     elif method == 'knn':
         print('Using KNN time series classifier.')
@@ -132,7 +161,7 @@ def classify(args):
     X_train, X_test, y_train, y_test = train_test_split(
         data, labels, random_state=589, test_size=args['test_size'], shuffle=True
     )
-    X_train, X_test = make_dataframe(X_train), make_dataframe(X_test)
+    X_train, X_test = make_iat_dataframe(X_train), make_iat_dataframe(X_test)
     y_train = pd.Series(y_train)
 
     # maximum-length padding
