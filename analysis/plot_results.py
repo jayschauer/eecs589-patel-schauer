@@ -206,6 +206,8 @@ def plot_feature_comparison_by_direction():
         },
         'direction': {
             'both': 0.707,
+            'outgoing': 0.136,
+            'incoming': 0.114,
         },
     }
     data_lists = []
