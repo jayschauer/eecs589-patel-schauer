@@ -391,45 +391,31 @@ def plot_pad_scatter():
     plt.show()
 
 
-def plot_inter_arrival_timing_experiments():
+def plot_timing_experiments():
     '''
     Creates a chart showing the accuracy for different delays and different classifiers,
     using inter-arrival times.
     '''
-    results = {'minirocket_logreg': {0.001: (0.9809985850010107,
-                                             0.005813797957205733),
-                                     0.002: (0.9801900141499899,
-                                             0.01163254912067527),
-                                     0.005: (0.977360016171417,
-                                             0.029067545189505335),
-                                     0.01: (0.9747321609055993,
-                                            0.0582239104902823),
-                                     0.02: (0.9690721649484536,
-                                            0.11647031055941481),
-                                     0.05: (0.8960986456438246,
-                                            0.29118420384986077),
+    results = {'minirocket_logreg': {0.001: (0.9809985850010107, 0.005813797957205733),
+                                     0.002: (0.9801900141499899, 0.01163254912067527),
+                                     0.005: (0.977360016171417, 0.029067545189505335),
+                                     0.01: (0.9747321609055993, 0.0582239104902823),
+                                     0.02: (0.9690721649484536, 0.11647031055941481),
+                                     0.05: (0.8960986456438246, 0.29118420384986077),
                                      0.1: (0.615726703052355, 0.5815019385913974),
-                                     0.2: (0.39336971902162926,
-                                           1.164152119013465),
-                                     0.5: (0.10713563776025874,
-                                           2.905587409118061),
+                                     0.2: (0.39336971902162926, 1.164152119013465),
+                                     0.5: (0.10713563776025874, 2.905587409118061),
                                      1: (0.05134424903982211, 5.831649081899804)},
-               'minirocket_ridge': {0.001: (0.9803921568627451,
-                                            0.005817870896784802),
-                                    0.002: (0.9801900141499899,
-                                            0.011641915020025581),
-                                    0.005: (0.979381443298969,
-                                            0.029084436937573042),
-                                    0.01: (0.9777643015969274,
-                                           0.05818997246555567),
-                                    0.02: (0.9759450171821306,
-                                           0.1163810281831414),
-                                    0.05: (0.9593693147362038,
-                                           0.2908634263795022),
-                                    0.1: (0.9241964827167981, 0.5820073333732103),
-                                    0.2: (0.8122094198504144, 1.162904889062114),
-                                    0.5: (0.4633110976349303, 2.907873630694599),
-                                    1: (0.15868202951283605, 5.8162823401888195)},
+               # 'minirocket_ridge': {0.001: (0.9803921568627451, 0.005817870896784802),
+               #                      0.002: (0.9801900141499899,0.011641915020025581),
+               #                      0.005: (0.979381443298969,0.029084436937573042),
+               #                      0.01: (0.9777643015969274,0.05818997246555567),
+               #                      0.02: (0.9759450171821306, 0.1163810281831414),
+               #                      0.05: (0.9593693147362038, 0.2908634263795022),
+               #                      0.1: (0.9241964827167981, 0.5820073333732103),
+               #                      0.2: (0.8122094198504144, 1.162904889062114),
+               #                      0.5: (0.4633110976349303, 2.907873630694599),
+               #                      1: (0.15868202951283605, 5.8162823401888195)},
                'minirocket_ridgecv': {0.001: (0.9765514453203962, 0.005833190595642735),
                                       0.002: (0.9751364463311097, 0.01163769728382304),
                                       0.005: (0.9749343036183545, 0.029110271933818262),
@@ -439,28 +425,49 @@ def plot_inter_arrival_timing_experiments():
                                       0.1: (0.9114614918132201, 0.5819290117475253),
                                       0.2: (0.7531837477258945, 1.1643259203077596),
                                       0.5: (0.40327471194663433, 2.912192424253857),
-                                      1: (0.1170406306852638, 5.812480068120125)}}
+                                      1: (0.1170406306852638, 5.812480068120125)},
+               'minirocket-logreg-absolute': {0.001: (0.08166565595310289, 0.0058169659320072105),
+                                              0.002: (0.08105922781483728, 0.011603246730667972),
+                                              0.005: (0.0820699413786133, 0.029101477690262254),
+                                              0.01: (0.08348494036789973, 0.05812604018749166),
+                                              0.02: (0.08409136850616536, 0.11636996932266251),
+                                              0.05: (0.08328279765514453, 0.2916948758846483),
+                                              0.1: (0.08510208206994138, 0.582003609409159),
+                                              0.2: (0.08469779664443097, 1.164273943291468),
+                                              0.5: (0.08409136850616536,  2.9026709406979445),
+                                              1: (0.0780270871235092, 5.812151847199914)},
+               'minirocket_ridgecv-absolute': {0.001: (0.09278350515463918, 0.0058093668770057725),
+                                               0.002: (0.09338993329290479,  0.011636789542876006),
+                                               0.005: (0.0939963614311704,  0.02907116362515401),
+                                               0.01: (0.09460278956943602,  0.05811011839201763),
+                                               0.02: (0.09520921770770163,  0.11656478825987929),
+                                               0.05: (0.10066707095209218, 0.29048687803948164),
+                                               0.1: (0.11016777845158682, 0.5817312101337733),
+                                               0.2: (0.11683848797250859, 1.1629172147775306),
+                                               0.5: (0.11400848999393572, 2.9112696967026133),
+                                               1: (0.16110774206589853, 5.809203108815799)}}
     names = {
-        'minirocket_logreg': 'logreg',
-        'minirocket_ridge': 'ridge',
-        'minirocket_ridgecv': 'ridgecv',
+        'minirocket_logreg': 'logreg iat',
+        'minirocket_ridgecv': 'ridge iat',
+        'minirocket-logreg-absolute': 'logreg absolute',
+        'minirocket_ridgecv-absolute': 'ridge absolute',
     }
     rows = []
     columns = ['delay', 'overhead'] + [m for m in results.keys()]
-    delay_overhead = {k: v[1] for k,v in results['minirocket_logreg'].items()}
+    delay_overhead = {k: v[1] for k, v in results['minirocket_logreg'].items()}
     for d, o in delay_overhead.items():
-        row = [d, o*100]
+        row = [d, o * 100]
         for m, data in results.items():
             row.append(data[d][0])
         rows.append(row)
-    df = pd.DataFrame(rows,columns=columns)
+    df = pd.DataFrame(rows, columns=columns)
 
     sns.set_theme(style='darkgrid')
     sns.set(font_scale=0.8)
     fig, ax_accuracy = plt.subplots()
     ax_overhead = ax_accuracy.twinx()
 
-    palette = sns.color_palette('deep', n_colors=len(results)+1)
+    palette = sns.color_palette('deep', n_colors=len(results) + 1)
     handles = []
     # Plot modified accuracy vs delay on one graph
     for idx, m in enumerate(results.keys()):
@@ -481,12 +488,12 @@ def plot_inter_arrival_timing_experiments():
     ax_accuracy.set_yticklabels(acc_ticks)
 
     over_ticks = [tick * 600 for tick in acc_ticks]
-    ax_overhead.set_ylim(-0.02*600, 1.02*600)
+    ax_overhead.set_ylim(-0.02 * 600, 1.02 * 600)
     ax_overhead.set_yticks(over_ticks)
     ax_overhead.set_yticklabels([f'{tick:.0f}' for tick in over_ticks])
 
     ax_accuracy.legend(handles=handles)
-    sns.move_legend(ax_accuracy, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=4, title=None, frameon=False)
+    sns.move_legend(ax_accuracy, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=len(handles), title=None, frameon=False)
 
     fig.tight_layout()
     plt.savefig(os.path.join(FIGS_DIR, 'timing_results.png'), bbox_inches='tight', dpi=DPI)
@@ -514,7 +521,7 @@ def plot(plot_type):
         plot_pad_scatter()
     elif plot_type == 'timing':
         print('Plotting timing results...')
-        plot_inter_arrival_timing_experiments()
+        plot_timing_experiments()
 
 
 if __name__ == '__main__':
