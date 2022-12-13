@@ -365,6 +365,8 @@ def time_delay_predictions(args):
 
     plt.show()
 
+    return modified_acc, overhead
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

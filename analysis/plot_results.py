@@ -18,10 +18,13 @@ from analyze_results import modified_accuracy_score
 from make_predictions import max_padded_predictions
 
 DPI = 200
-CHOICES = [ 'estimators', 'transforms', 'kernels', 'features',
-            'max_padding', 'adaptive_padding', 'pad_comparison'
-          ]
+CHOICES = ['estimators', 'transforms', 'kernels', 'features',
+           'max_padding', 'adaptive_padding', 'pad_comparison', 'timing'
+           ]
 FIGS_DIR = os.path.join(os.path.dirname(__file__), '../figs')
+
+from plot_data import get_color
+
 
 def plot_estimator_comparison():
     '''
@@ -74,6 +77,7 @@ def plot_estimator_comparison():
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
     plt.savefig(os.path.join(FIGS_DIR, 'compare_estimators.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
+
 
 def plot_transform_comparison():
     '''
@@ -130,6 +134,7 @@ def plot_transform_comparison():
     plt.savefig(os.path.join(FIGS_DIR, 'compare_transforms.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
+
 def plot_kernel_comparison():
     '''
     Creates a bar chart comparing accuracy, F1-score, and modified accuracy
@@ -179,6 +184,7 @@ def plot_kernel_comparison():
     sns.move_legend(ax, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=3, title=None, frameon=False)
     plt.savefig(os.path.join(FIGS_DIR, 'compare_kernels.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
+
 
 def plot_feature_comparison_by_direction():
     '''
@@ -243,6 +249,7 @@ def plot_feature_comparison_by_direction():
     plt.savefig(os.path.join(FIGS_DIR, 'compare_features_by_direction.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
+
 def plot_max_padding():
     '''
     Creates a chart showing the accuracy for different sizes of max padding.
@@ -285,6 +292,7 @@ def plot_max_padding():
     plt.savefig(os.path.join(FIGS_DIR, 'max_padding.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
+
 def plot_adaptive_padding():
     '''
     Creates a chart showing the accuracy for different sizes of adaptive padding.
@@ -304,7 +312,8 @@ def plot_adaptive_padding():
     # Plot overhead vs pad size on other graph
     sns.lineplot(df, x='multiple', y='overhead', ax=ax2, marker='o', color=palette[1])
 
-    handles=[Line2D([], [], marker='o', color=palette[0], label='Modified Accuracy'), Line2D([], [], marker='o', color=palette[1], label='Overhead')]
+    handles = [Line2D([], [], marker='o', color=palette[0], label='Modified Accuracy'),
+               Line2D([], [], marker='o', color=palette[1], label='Overhead')]
 
     # Labels and stuff
     ax1.set_xlabel('Padding multiple (bytes)')
@@ -325,6 +334,7 @@ def plot_adaptive_padding():
     fig.tight_layout()
     plt.savefig(os.path.join(FIGS_DIR, 'adaptive_padding.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
+
 
 def plot_pad_scatter():
     '''
@@ -380,32 +390,138 @@ def plot_pad_scatter():
     plt.savefig(os.path.join(FIGS_DIR, 'compare_padding_scatter.png'), bbox_inches='tight', dpi=DPI)
     plt.show()
 
+
+def plot_inter_arrival_timing_experiments():
+    '''
+    Creates a chart showing the accuracy for different delays and different classifiers,
+    using inter-arrival times.
+    '''
+    results = {'minirocket_logreg': {0.001: (0.9809985850010107,
+                                             0.005813797957205733),
+                                     0.002: (0.9801900141499899,
+                                             0.01163254912067527),
+                                     0.005: (0.977360016171417,
+                                             0.029067545189505335),
+                                     0.01: (0.9747321609055993,
+                                            0.0582239104902823),
+                                     0.02: (0.9690721649484536,
+                                            0.11647031055941481),
+                                     0.05: (0.8960986456438246,
+                                            0.29118420384986077),
+                                     0.1: (0.615726703052355, 0.5815019385913974),
+                                     0.2: (0.39336971902162926,
+                                           1.164152119013465),
+                                     0.5: (0.10713563776025874,
+                                           2.905587409118061),
+                                     1: (0.05134424903982211, 5.831649081899804)},
+               'minirocket_ridge': {0.001: (0.9803921568627451,
+                                            0.005817870896784802),
+                                    0.002: (0.9801900141499899,
+                                            0.011641915020025581),
+                                    0.005: (0.979381443298969,
+                                            0.029084436937573042),
+                                    0.01: (0.9777643015969274,
+                                           0.05818997246555567),
+                                    0.02: (0.9759450171821306,
+                                           0.1163810281831414),
+                                    0.05: (0.9593693147362038,
+                                           0.2908634263795022),
+                                    0.1: (0.9241964827167981, 0.5820073333732103),
+                                    0.2: (0.8122094198504144, 1.162904889062114),
+                                    0.5: (0.4633110976349303, 2.907873630694599),
+                                    1: (0.15868202951283605, 5.8162823401888195)},
+               'minirocket_ridgecv': {0.001: (0.9765514453203962, 0.005833190595642735),
+                                      0.002: (0.9751364463311097, 0.01163769728382304),
+                                      0.005: (0.9749343036183545, 0.029110271933818262),
+                                      0.01: (0.9745300181928441, 0.05808034921531257),
+                                      0.02: (0.9735193046290681, 0.11634181133271472),
+                                      0.05: (0.9619971700020215, 0.2913091049789797),
+                                      0.1: (0.9114614918132201, 0.5819290117475253),
+                                      0.2: (0.7531837477258945, 1.1643259203077596),
+                                      0.5: (0.40327471194663433, 2.912192424253857),
+                                      1: (0.1170406306852638, 5.812480068120125)}}
+    names = {
+        'minirocket_logreg': 'logreg',
+        'minirocket_ridge': 'ridge',
+        'minirocket_ridgecv': 'ridgecv',
+    }
+    rows = []
+    columns = ['delay', 'overhead'] + [m for m in results.keys()]
+    delay_overhead = {k: v[1] for k,v in results['minirocket_logreg'].items()}
+    for d, o in delay_overhead.items():
+        row = [d, o*100]
+        for m, data in results.items():
+            row.append(data[d][0])
+        rows.append(row)
+    df = pd.DataFrame(rows,columns=columns)
+
+    sns.set_theme(style='darkgrid')
+    sns.set(font_scale=0.8)
+    fig, ax_accuracy = plt.subplots()
+    ax_overhead = ax_accuracy.twinx()
+
+    palette = sns.color_palette('deep', n_colors=len(results)+1)
+    handles = []
+    # Plot modified accuracy vs delay on one graph
+    for idx, m in enumerate(results.keys()):
+        sns.lineplot(df, x='delay', y=m, ax=ax_accuracy, marker='o', color=palette[idx])
+        handles.append(Line2D([], [], marker='o', color=palette[idx], label=names[m]))
+    # Plot overhead vs delay on other graph
+    sns.lineplot(df, x='delay', y='overhead', ax=ax_overhead, marker='o', color=palette[len(results)])
+    handles.append(Line2D([], [], marker='o', color=palette[len(results)], label='Overhead'))
+
+    # Labels and stuff
+    ax_accuracy.set_xlabel('Packet Delay (s)')
+    ax_accuracy.set_ylabel('Modified Accuracy')
+    ax_overhead.set_ylabel('Overhead (%)')
+
+    acc_ticks = [0, 0.2, 0.4, 0.6, 0.8, 1.0]
+    ax_accuracy.set_ylim(-0.02, 1.02)
+    ax_accuracy.set_yticks(acc_ticks)
+    ax_accuracy.set_yticklabels(acc_ticks)
+
+    over_ticks = [tick * 600 for tick in acc_ticks]
+    ax_overhead.set_ylim(-0.02*600, 1.02*600)
+    ax_overhead.set_yticks(over_ticks)
+    ax_overhead.set_yticklabels([f'{tick:.0f}' for tick in over_ticks])
+
+    ax_accuracy.legend(handles=handles)
+    sns.move_legend(ax_accuracy, 'upper center', bbox_to_anchor=(.5, 1.1), ncol=4, title=None, frameon=False)
+
+    fig.tight_layout()
+    plt.savefig(os.path.join(FIGS_DIR, 'timing_results.png'), bbox_inches='tight', dpi=DPI)
+    plt.show()
+
+
 def plot(plot_type):
-    if plot_type=='transforms':
+    if plot_type == 'transforms':
         print('Plotting transforms...')
         plot_transform_comparison()
-    elif plot_type=='estimators':
+    elif plot_type == 'estimators':
         print('Plotting estimators...')
         plot_estimator_comparison()
-    elif plot_type=='features':
+    elif plot_type == 'features':
         print('Plotting features...')
         plot_feature_comparison_by_direction()
-    elif plot_type=='max_padding':
+    elif plot_type == 'max_padding':
         print('Plotting max padding...')
         plot_max_padding()
-    elif plot_type=='adaptive_padding':
+    elif plot_type == 'adaptive_padding':
         print('Plotting adaptive padding...')
         plot_adaptive_padding()
-    elif plot_type=='pad_comparison':
+    elif plot_type == 'pad_comparison':
         print('Plotting comparison of all padding methods...')
         plot_pad_scatter()
+    elif plot_type == 'timing':
+        print('Plotting timing results...')
+        plot_inter_arrival_timing_experiments()
 
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('plot_type', choices=CHOICES, nargs='+', type=str,
-        help='List of plots to generate. Can specify multiple options. See help for list of \
+                        help='List of plots to generate. Can specify multiple options. See help for list of \
               possible plots.')
     args = parser.parse_args()
 
